@@ -26,8 +26,11 @@ class ApplicationController < ActionController::Base
   def validate_institute_url
     # TODO remove dependency on request port
     # add another function to validate url for logged in user
-    logger.info request.host
-    institute_url = InstituteUrl.find_by_url(request.host+':'+request.port.to_s)
+    current_host = request.host
+    if !Rails.env.production?
+      current_host += ':' + request.port.to_s
+    end
+    institute_url = InstituteUrl.find_by_url(current_host)
     if institute_url.nil?
       redirect_to (GyanV1::Application.config.landing_page.to_s)
     end

@@ -12,7 +12,7 @@ role :db,  application, :primary => true
 
 set :user, "cchq"
 set :use_sudo, false
-set :deploy_to, "/home/cchq/#{application}"
+set :deploy_to, "/home/cchq/gyan"
 ssh_options[:auth_methods] = "publickey"
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
