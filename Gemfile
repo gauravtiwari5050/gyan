@@ -12,6 +12,8 @@ gem 'carrierwave'
 gem 'rscribd'
 gem 'uuidtools'
 gem "recaptcha", :require => "recaptcha/rails"
+gem "daemons"
+gem 'delayed_job_active_record'
 
 # Use unicorn as the web server
 # gem 'unicorn'

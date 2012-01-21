@@ -24,6 +24,7 @@ class AdminController < ApplicationController
     user = create_vanilla_user(email,'TEACHER')
     begin
       user.save
+      Delayed::Job.enqueue(MailingJob.new(user.id))
     rescue Exception => e
       logger.info e.message
     end
@@ -42,6 +43,7 @@ class AdminController < ApplicationController
     user = create_vanilla_user(email,'STUDENT')
     begin
       user.save
+      Delayed::Job.enqueue(MailingJob.new(user.id))
     rescue Exception => e
       logger.info e.message
     end

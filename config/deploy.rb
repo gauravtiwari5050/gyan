@@ -26,8 +26,17 @@ ssh_options[:auth_methods] = "publickey"
    end
    task :copy_database_configuration do
      production_db_config = "/home/cchq/production.gyan.database.yml"
+     production_mail_config = "/home/cchq/production.gyan.setup_mail.rb"
      run "cp #{production_db_config} #{release_path}/config/database.yml"
+     run "cp #{production_mail_config} #{release_path}/config/initializers/setup_mail.rb"
    end
 
-   after "deploy:update_code" , "deploy:copy_database_configuration"
+   after "deploy:update_code" , "deploy:copy_database_configuration" ,"delayed_job:restart"
  end
+ namespace :delayed_job do 
+    desc "Restart the delayed_job process"
+    task :restart, :roles => :app do
+        run "cd #{current_path}; RAILS_ENV=#{rails_env} script/delayed_job restart"
+    end
+ end
+

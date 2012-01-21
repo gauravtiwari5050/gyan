@@ -35,6 +35,12 @@ GEM
     builder (2.1.2)
     carrierwave (0.5.8)
       activesupport (~> 3.0)
+    daemons (1.1.0)
+    delayed_job (3.0.0)
+      activesupport (~> 3.0)
+    delayed_job_active_record (0.3.1)
+      activerecord (> 2.1.0)
+      delayed_job (~> 3.0.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     i18n (0.5.0)
@@ -86,6 +92,8 @@ PLATFORMS
 DEPENDENCIES
   authlogic
   carrierwave
+  daemons
+  delayed_job_active_record
   mysql2 (< 0.3)
   rails
   recaptcha
