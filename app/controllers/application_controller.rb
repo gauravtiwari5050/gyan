@@ -24,7 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   def validate_institute_url
-    # TODO remove dependency on request port
     # add another function to validate url for logged in user
     current_host = request.host
     if !Rails.env.production?
@@ -56,7 +55,11 @@ class ApplicationController < ActionController::Base
     #will throw excpetion if institute url is null
     #should be called only if url is valid
     #bad TODO change this 
-    institute_url = InstituteUrl.find_by_url(request.host+':'+request.port.to_s)
+    current_host = request.host
+    if !Rails.env.production?
+      current_host += ':' + request.port.to_s
+    end
+    institute_url = InstituteUrl.find_by_url(current_host)
     return institute_url.institute_id
   end
 
