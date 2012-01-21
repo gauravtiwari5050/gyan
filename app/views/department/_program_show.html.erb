@@ -4,3 +4,4 @@
   <%= @program.term_type  %></br>
   <%= @program.total_terms  %></br>
 
+  <%= link_to "Add a course",'/programs/'+@program.id.to_s+'/courses/new' %>
