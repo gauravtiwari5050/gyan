@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  institute_id: 1
+  username: MyString
+  email: MyString
+  password_crypt: MyString
+  user_type: MyString
+  one_time_login: MyString
+  is_validated: false
+
+two:
+  institute_id: 1
+  username: MyString
+  email: MyString
+  password_crypt: MyString
+  user_type: MyString
+  one_time_login: MyString
+  is_validated: false

@@ -1,0 +1,9 @@
+<h2> Please select your branch and term</h2>
+<% form_tag('profile_update',:method => :put) do -%>
+  <%=select  "program","program" ,options_for_select(get_programs_hash_for_institute) %>
+  <br>
+  </p>
+  <%= select 'term' ,'term',options_for_select([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"]])%>
+  </p>
+  <%= submit_tag %>
+<% end -%>

@@ -1,0 +1,35 @@
+    <div class="topbar" data-dropdown="dropdown">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">CloudClass</a>
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+	    <li class="menu">
+                      <a href="#" class="menu">Courses</a>
+                       <% courses = get_all_courses_for_institute %>
+                      <ul class="menu-dropdown">
+                        <% for course in courses -%>
+                          <li><%= link_to course.name, '/courses/'+course.id.to_s+'/home' %></li>
+                        <% end -%>
+                        <li class="divider"></li>
+                        <li><a href="/courses">All Courses</a></li>
+                      </ul>
+            </li>  
+	    <li class="menu">
+                      <a href="#" class="menu">Groups</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="#">Automate----Theory----Group</a></li>
+                        <li><a href="#">Algorithms Groups</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">All Courses Group</a></li>
+                      </ul>
+            </li>  
+            <li><a href="#about">Assignments</a></li>
+            <li><a href="#about">Grades</a></li>
+            <li><a href="#contact">Calendar</a></li>
+          </ul>
+          <p class="pull-right">Logged in as <a href="#">logged user</a></p>
+        </div>
+      </div>
+    </div>
+  

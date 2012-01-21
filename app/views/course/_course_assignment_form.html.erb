@@ -1,0 +1,41 @@
+<%= form_for(@assignment,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+  <% if @assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h2>
+
+      <ul>
+      <% @assignment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  </br>
+  <div class="field">
+    <%= f.label :detail %>
+    <%= f.text_area :detail %>
+  </div>
+  </br>
+  <div class="field">
+    <%= f.label :total_marks %>
+    <%= f.text_field :total_marks %>
+  </div>
+  </br>
+  <div class="field">
+    <%= f.file_field :assignment_file %>
+  </div>
+  </br>
+  <div class="field">
+    <%= f.label :deadline %>
+    <%= f.date_select :deadline %>
+  </div>
+  </br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

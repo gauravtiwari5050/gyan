@@ -1,0 +1,10 @@
+<% for program in @programs -%>
+<h2> Program details </h2>
+  <%= program.branch  %></br>
+  <%= program.degree  %></br>
+  <%= program.term_type  %></br>
+  <%= program.total_terms  %></br>
+  <%= link_to "Program home", '/programs/'+program.id.to_s %>
+  
+<% end -%>
+

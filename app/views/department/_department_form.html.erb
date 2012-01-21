@@ -1,0 +1,29 @@
+<h2> Create New Department </h2>
+<%= form_for(@department,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+  <% if @department.errors.any? %>
+    <div id="error_explanation" class = "alert-message error">
+      <h2><%= pluralize(@department.errors.count, "error") %> prohibited this department from being saved:</h2>
+
+      <ul>
+      <% @department.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="field">
+  <%= f.label :name, 'name' %>
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  <%= f.label :about, 'name' %>
+  <%= f.text_area :about  %>
+</div>
+
+
+<div class="actions">
+ <%= f.submit "submit" %>
+</div>
+  
+<% end -%>

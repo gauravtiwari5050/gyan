@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  course_id: 1
+  title: MyString
+  detail: MyText
+  total_marks: 1
+  assignment_file: MyString
+  scribd_id: MyString
+  scribd_key: MyString
+
+two:
+  course_id: 1
+  title: MyString
+  detail: MyText
+  total_marks: 1
+  assignment_file: MyString
+  scribd_id: MyString
+  scribd_key: MyString

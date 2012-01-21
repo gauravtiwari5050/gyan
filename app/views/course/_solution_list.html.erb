@@ -1,0 +1,11 @@
+<% content_for :left_bar do %>
+        <div class="well">
+          <% for solution in @assignment.assignment_solutions -%>
+          <div id="bold-box-big">
+            <%= link_to solution.user.username, '/courses/'+@course.id.to_s+'/assignments/'+@assignment.id.to_s+'/solutions/'+solution.id.to_s+'/evaluate' %>
+          </div>
+          <div class="clearfix"></div>
+            
+          <% end -%>
+        </div>
+<% end -%>

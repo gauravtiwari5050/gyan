@@ -1,0 +1,27 @@
+    <div class="topbar" data-dropdown="dropdown">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="<%=get_home_for_user%>">CloudClass</a>
+          <ul class="nav">
+	    <li class="menu">
+                      <a href="#" class="menu">Courses</a>
+                       <% courses = get_all_courses_for_user %>
+                      <ul class="menu-dropdown">
+                        <% for course in courses -%>
+                          <li><%= link_to course.name, '/courses/'+course.id.to_s+'/home' %></li>
+                        <% end -%>
+                        <li class="divider"></li>
+                        <li><a href="/courses">All Courses</a></li>
+                      </ul>
+            </li>
+            <%= render :template => 'shared/groups' %>
+            <li><a href="#about">Assignments</a></li>
+            <li><a href="#about">Grades</a></li>
+            <li><a href="#contact">Calendar</a></li>
+          </ul>
+          <p class="pull-right"> <a href="/logout"> Log out </a></p>
+          <p class="pull-right">Logged in as <a href="#"><%= session[:user_name]+'    .'  %></a></p>
+        </div>
+      </div>
+    </div>
+  

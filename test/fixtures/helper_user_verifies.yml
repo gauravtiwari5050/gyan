@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  username: MyString
+  pass: MyString
+  pass_repeat: MyString
+
+two:
+  username: MyString
+  pass: MyString
+  pass_repeat: MyString

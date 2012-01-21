@@ -1,0 +1,15 @@
+<h2> All Departments </h2>
+<% if !@departments.nil? %>
+  <% for department in @departments -%>
+    <div id="bold-box-big">
+      <%= link_to department.name, '/departments/'+department.id.to_s %>
+    </div>
+    <div class="clearfix"></div>
+
+  <% end -%>
+<% else %>
+  <b>No departments added yet for this institution</b>
+  <br>
+  <%= link_to "Add a department", '/departments/new' %>
+
+<% end %>

@@ -1,0 +1,9 @@
+<h2> Department Details </h2>
+<%=@department.name%>
+</br>
+<pre>
+<%= @department.about%>
+</pre>
+</br>
+<%= link_to 'Destroy', '/departments/'+@department.id.to_s+'/destroy', :confirm => 'Are you sure?' %> <br>
+<%= link_to 'Edit', '/departments/'+@department.id.to_s+'/edit', :confirm => 'Are you sure?' %>

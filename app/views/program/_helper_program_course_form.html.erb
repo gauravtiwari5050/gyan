@@ -1,0 +1,38 @@
+<%= form_for(@helper_program_course,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+  <% if @helper_program_course.errors.any? %>
+    <div id="error_explanation" class = "alert-message error">
+      <h2><%= pluralize(@helper_program_course.errors.count, "error") %> prohibited this helper_program_course from being saved:</h2>
+
+      <ul>
+      <% @helper_program_course.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="field">
+  <%= f.label :course_name, 'Course Name' %>
+  <%= f.text_field :course_name %>
+</div>
+<div class="field">
+  <%= f.label :course_code, 'Course Code' %>
+  <%= f.text_field :course_code %>
+</div>
+<div class="field">
+  <%= f.label :course_about, 'About the Course' %>
+  <%= f.text_area :course_about %>
+</div>
+
+<div class="field">
+  <%= f.label :course_term, 'Course Term' %>
+  <%= f.select :course_term ,options_for_select([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"]])%>
+</div>
+
+
+<div class="actions">
+ <%= f.submit "submit" %>
+</div>
+  
+<% end -%>
+  

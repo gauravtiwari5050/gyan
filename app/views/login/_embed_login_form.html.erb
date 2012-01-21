@@ -1,0 +1,31 @@
+<% content_for :embed_login_form do -%>
+<%= form_for(@login,:html =>{:class => 'form-stacked',:multipart => true},:url => 'loguser' ,:method => :post) do |f| %>
+  <% if @login.errors.any? %>
+    <div id="error_explanation" class = "alert-message error">
+      <h2><%= pluralize(@login.errors.count, "error") %> prohibited this login from being saved:</h2>
+
+      <ul>
+      <% @login.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="field">
+  <%= f.label :email, 'email' %>
+  <%= f.text_field :email %>
+</div>
+
+<div class="field">
+  <%= f.label :password,'password' %>
+  <%= f.password_field :password %>
+</div>
+
+<div class="actions">
+ <%= f.submit "submit" %>
+</div>
+  
+<% end -%>
+  
+<% end -%>

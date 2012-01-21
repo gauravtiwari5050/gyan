@@ -1,0 +1,12 @@
+<% content_for :left_bar do %>
+        <div class="well">
+          <div id="bold-box-big">
+          <%= @program.branch %>
+          </div>
+          <div class="clearfix"></div>
+          <div id="bold-box-big">
+            <%= link_to "All Courses", '/programs/'+@program.id.to_s+'/courses' %>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+<% end -%>

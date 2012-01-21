@@ -1,0 +1,6 @@
+
+<% @course.assignments.each do |assignment| %>
+  
+   <li> <%= link_to assignment.title, "/courses/"+@course.id.to_s+"/assignments/"+assignment.id.to_s %></li>
+<% end %>
+<%= link_to "Add assignments", "/courses/"+@course.id.to_s+"/assignments/new" %>

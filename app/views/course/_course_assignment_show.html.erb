@@ -1,0 +1,51 @@
+<p>
+  <b>Title:</b>
+  <%= @assignment.title %>
+</p>
+
+<p>
+  <b>Detail:</b>
+  <%= @assignment.detail %>
+</p>
+
+<p>
+  <b>Course:</b>
+  <%= @assignment.course_id %>
+</p>
+
+<p>
+  <b>Total marks:</b>
+  <%= @assignment.total_marks %>
+</p>
+
+<p>
+  <b>Deadline:</b>
+  <%= @assignment.deadline %>
+</p>
+
+<p>
+  <b>Assignment file:</b>
+  <% if @assignment.scribd_id.length > 0 %>
+  <% content_for :embed_scribd_js do -%>
+    <script>
+    window.onload = function() {
+    load_file(<%="'"+@assignment.scribd_id.to_s+"','"+@assignment.scribd_key.to_s+"'"%>);
+    }
+    </script> 
+  <% end -%>
+      <li><%= link_to_function "View File","load_file('"+@assignment.scribd_id.to_s+"','"+ @assignment.scribd_key.to_s+"')" %></li>
+      <div id='embedded_flash'>
+      <a>File Viewer</a>
+      </div>
+    
+  <% else %>
+    <%= link_to "Download", @assignment.assignment_file_url %>
+  <% end %>
+</p>
+<p>
+  <%= link_to "Submit solution", '/courses/'+@course.id.to_s+'/assignments/'+@assignment.id.to_s+'/solve' %>
+</p>
+<p>
+  <%= link_to "Evaluate this assignment", '/courses/'+@course.id.to_s+'/assignments/'+@assignment.id.to_s+'/evaluate' %>
+</p>
+

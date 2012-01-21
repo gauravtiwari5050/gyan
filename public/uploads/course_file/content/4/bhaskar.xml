@@ -1,0 +1,20 @@
+<feeds>
+	<feed>
+		<type>SPORTS</type>
+		<url>http://rss.indiainfo.com/bhaskar_sports.xml<url/>
+		<xpaths>
+			<xpath>
+				<key>heading</key>
+				<value>//body/div[3]/div[11]/div/div/h1</value>
+			</xpath>
+			<xpath>
+				<key>source</key>
+				<value>//body/div[3]/div[11]/div/div[3]/div</value>
+			</xpath>
+			<xpath>
+				<key>story</key>
+				<value>//body/div[3]/div[11]/div/div[6]/div[2]/span</value>
+			</xpath>
+		<xpaths>
+	</feed>
+</feeds>

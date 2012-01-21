@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  department_id: 1
+  term_type: MyString
+  total_terms: 1
+  branch: MyString
+  degree: MyString
+
+two:
+  department_id: 1
+  term_type: MyString
+  total_terms: 1
+  branch: MyString
+  degree: MyString

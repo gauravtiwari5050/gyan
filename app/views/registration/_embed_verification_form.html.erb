@@ -1,0 +1,42 @@
+<% content_for :main_content do -%>
+<% if !@user.nil? %>
+ <h2>Welcome <%= @user.email %><h2> 
+ <h3> Please complete the details </h3>
+<%= form_for(@helper_user_verify,:html =>{:class => 'form-stacked',:multipart => true},:url => ''+@user.one_time_login.to_s+'/update' ,:method => :post) do |f| %>
+  <% if @helper_user_verify.errors.any? %>
+    <div id="error_explanation" class = "alert-message error">
+      <h2><%= pluralize(@helper_user_verify.errors.count, "error") %> prohibited this helper_user_verify from being saved:</h2>
+
+      <ul>
+      <% @helper_user_verify.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="field">
+  <%= f.label :username, 'user name' %>
+  <%= f.text_field :username %>
+</div>
+
+<div class="field">
+  <%= f.label :pass, 'password' %>
+  <%= f.password_field :pass %>
+</div>
+<div class="field">
+  <%= f.label :pass_repeat, 'password confirm' %>
+  <%= f.password_field :pass_repeat %>
+</div>
+
+<div class="actions">
+ <%= f.submit "submit" %>
+</div>
+  
+<% end -%>
+<% else %>
+<p>Something went wrong.This url has already expired,or is invalid</p>
+
+<% end %>
+  
+<% end -%>

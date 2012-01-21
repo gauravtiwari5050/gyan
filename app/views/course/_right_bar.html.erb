@@ -1,0 +1,24 @@
+<% content_for :right_bar do -%>
+  
+            <div class="hero-unit">
+              <p>Quick Links</p>
+
+              <div class="clearfix"></div>
+              <div id="bold-box-big">
+                <%= link_to "New Announcement", '/courses/'+@course.id.to_s+'/announcements/new' %>
+              </div>
+              <div class="clearfix"></div>
+              <div id="bold-box-big">
+                <%= link_to "New Assignment", '/courses/'+@course.id.to_s+'/assignments/new' %>
+              </div>
+              <div class="clearfix"></div>
+              <div id="bold-box-big">
+                <%= link_to "New File", '/courses/'+@course.id.to_s+'/files/new' %>
+              </div>
+              <div class="clearfix"></div>
+              <div id="bold-box-big">
+                <%= link_to "Assign instructor", '/courses/'+@course.id.to_s+'/assign/teacher' %>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+<% end -%>

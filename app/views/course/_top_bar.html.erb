@@ -1,0 +1,35 @@
+<% content_for :top_bar do -%>
+    <div class="topbar" data-dropdown="dropdown">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">CloudClass</a>
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+	    <li class="menu">
+                      <a href="#" class="menu">Courses</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="#">Automate Theory</a></li>
+                        <li><a href="#">Algorithms</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">All Courses</a></li>
+                      </ul>
+            </li>  
+	    <li class="menu">
+                      <a href="#" class="menu">Groups</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="#">Automate----Theory----Group</a></li>
+                        <li><a href="#">Algorithms Groups</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">All Courses Group</a></li>
+                      </ul>
+            </li>  
+            <li><a href="#about">Assignments</a></li>
+            <li><a href="#about">Grades</a></li>
+            <li><a href="#contact">Calendar</a></li>
+          </ul>
+          <p class="pull-right">Logged in as <a href="#">logged user</a></p>
+        </div>
+      </div>
+    </div>
+  
+<% end -%>

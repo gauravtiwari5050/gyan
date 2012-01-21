@@ -1,0 +1,28 @@
+<%= form_for(@course_file,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+  <% if @course_file.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@course_file.errors.count, "error") %> prohibited this course_file from being saved:</h2>
+
+      <ul>
+      <% @course_file.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field" style="visibility:hidden">
+    <%= f.text_field :course_id,:value => @course_file.course_id %>
+  </div>
+  <p>
+    <%= f.file_field :content  %>
+  </p>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
