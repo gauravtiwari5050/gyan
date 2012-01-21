@@ -66,12 +66,14 @@ class ApplicationController < ActionController::Base
   def get_teachers_for_institute
     teachers = []
     users = User.find(:all ,:conditions => {:institute_id => get_institute_id,:user_type => 'TEACHER'})
+    logger.info users.inspect
     for user in users
       tmp = []
       tmp.push(user.email)
       tmp.push(user.id)
       teachers.push(tmp) 
     end
+    logger.info teachers.inspect
     return teachers
   end
 
