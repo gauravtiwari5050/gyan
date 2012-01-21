@@ -1,4 +1,5 @@
 require "bundler/capistrano"
+require "delayed/recipes"
 
 set :application, "gauravtiwari.net"
 set :repository, "git://github.com/gauravtiwari5050/gyan.git"
@@ -31,12 +32,9 @@ ssh_options[:auth_methods] = "publickey"
      run "cp #{production_mail_config} #{release_path}/config/initializers/setup_mail.rb"
    end
 
-   after "deploy:update_code" , "deploy:copy_database_configuration" ,"delayed_job:restart"
+   after "deploy:update_code" , "deploy:copy_database_configuration" 
  end
- namespace :delayed_job do 
-    desc "Restart the delayed_job process"
-    task :restart, :roles => :app do
-        run "cd #{current_path}; RAILS_ENV=#{rails_env} script/delayed_job restart"
-    end
- end
-
+before "deploy:restart", "delayed_job:stop"
+after  "deploy:restart", "delayed_job:start"
+after "deploy:stop",  "delayed_job:stop"
+after "deploy:start", "delayed_job:start"
