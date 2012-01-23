@@ -94,6 +94,8 @@ GyanV1::Application.routes.draw do
   match 'register/success' => 'registration#success'
   match 'register/verify/:one_time_id/update' => 'registration#verify_update' ,:via => :post
   match 'register/verify/:one_time_id' => 'registration#verify'
+  match 'register/forgot/new' => 'registration#forgotpass_new'
+  match 'register/forgot/create' => 'registration#forgotpass_create' ,:via => :post
 
   
 

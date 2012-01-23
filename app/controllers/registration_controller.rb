@@ -5,6 +5,39 @@ class RegistrationController < ApplicationController
   def student_new
     @helper_registration = HelperRegistration.new
   end
+  def forgotpass_new
+    @helper_registration = HelperRegistration.new
+  end
+
+  def forgotpass_create
+    @helper_registration = HelperRegistration.new(params[:helper_registration])
+    success = verify_recaptcha(@helper_registration)
+    if success == true
+      user = User.find_by_email(@helper_registration.email)
+      if user.nil?
+        success =  false
+        @helper_registration.errors.add('email','no such user exists')
+      else
+         if !user.update_attribute(:one_time_login,unique_id(''))
+          success =  false
+          @helper_registration.errors.add('email','error updating attributes')
+         else
+            Delayed::Job.enqueue(MailingJob.new(user.id))
+         end
+      end
+    end
+      
+      if success == true
+        respond_to do |format|
+          format.html {redirect_to('/register/success')}
+        end
+      else
+        respond_to do |format|
+          format.html {render :action => 'teacher_new'}
+        end
+      end
+    
+  end
   def teacher_create
     @helper_registration = HelperRegistration.new(params[:helper_registration])
     success = verify_recaptcha(@helper_registration)
