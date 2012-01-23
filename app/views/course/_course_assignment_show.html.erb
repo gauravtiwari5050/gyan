@@ -25,7 +25,7 @@
 
 <p>
   <b>Assignment file:</b>
-  <% if @assignment.scribd_id.length > 0 %>
+  <% if !@assignment.scribd_id.nil? && @assignment.scribd_id.length > 0 %>
   <% content_for :embed_scribd_js do -%>
     <script>
     window.onload = function() {

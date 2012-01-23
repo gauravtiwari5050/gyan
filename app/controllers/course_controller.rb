@@ -51,12 +51,14 @@ class CourseController < ApplicationController
     @assignment = Assignment.new(params[:assignment])
     @course = Course.find(params[:id])
     @assignment.course_id = @course.id
-    id,key =  upload_to_scribd(@assignment.assignment_file)
-    @assignment.scribd_id = id.to_s
-    @assignment.scribd_key = key.to_s
+    #id,key =  upload_to_scribd(@assignment.assignment_file)
+    #@assignment.scribd_id = id.to_s
+    #@assignment.scribd_key = key.to_s
+
 
     respond_to do |format|
       if @assignment.save
+        Delayed::Job.enqueue(ScribdUploader.new(@assignment,@assignment.assignment_file))
         format.html { redirect_to('/courses/' + @course.id.to_s + '/assignments', :notice => 'Course file was successfully created.') }
       else
         @assignment.errors.add('detail','Error in uploading your assignment kindly try again')
@@ -95,11 +97,12 @@ class CourseController < ApplicationController
     @course = Course.find(params[:id])
     @course_file = CourseFile.new(params[:course_file])
     @course_file.course_id = @course.id
-    id,key =  upload_to_scribd(@course_file.content)
-    @course_file.scribd_id = id.to_s
-    @course_file.scribd_key = key.to_s
+    #id,key =  upload_to_scribd(@course_file.content)
+    #@course_file.scribd_id = id.to_s
+    #@course_file.scribd_key = key.to_s
     respond_to do |format|
       if @course_file.save
+        Delayed::Job.enqueue(ScribdUploader.new(@course_file,@course_file.content))
         format.html { redirect_to('/courses/' + @course.id.to_s + '/files', :notice => 'Course file was successfully created.') }
       else
         format.html { render :action => "new" }

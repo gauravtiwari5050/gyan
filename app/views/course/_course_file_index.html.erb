@@ -1,7 +1,7 @@
 
 <% content_for :embed_file_index do %>
 <% @course.course_files.each do |course_file| %>
-    <% if course_file.scribd_id.length > 0  %>
+    <% if !course_file.scribd_key.nil? && course_file.scribd_id.length > 0  %>
       <li><%= link_to_function course_file.name,"load_file('"+course_file.scribd_id.to_s+"','"+ course_file.scribd_key.to_s+"')" %></li>
     <% else %>
       <li><%= link_to course_file.name, course_file.content_url.to_s %></li>
