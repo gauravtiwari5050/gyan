@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute
+  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel
 
   def md5_hash(content)
   require 'digest/md5'
@@ -254,6 +254,30 @@ class ApplicationController < ActionController::Base
       redirect_to (GyanV1::Application.config.landing_page.to_s)
   end
 
+  end
+  
+  def join_channel(bbb)
+    username =  session[:user_name]
+    type = session[:user_type]
+    params = 'fullName='+username.delete(' ')
+    params += '&'
+    params += 'meetingID='+bbb.meeting_id
+    params += '&'
+    if type == 'STUDENT'
+      params += 'password='+bbb.attendee_pw
+    else
+      params += 'password='+bbb.moderator_pw
+    end
+
+    logger.info 'JOIN CHANNEL PARAMS - ' + params
+
+    checksum_input = 'join' + params + '77d3ed90b49520239acf9eb2dccd0a04'
+    logger.info 'JOIN CHANNEL CHECKSUM INPUT - ' + checksum_input
+    checksum = Digest::SHA1.hexdigest checksum_input
+    logger.info 'JOIN CHANNEL CHECKSUM - ' + checksum
+    join_url ='http://178.79.183.87/bigbluebutton/api/join?'+params+'&checksum='+checksum
+    logger.info 'JOIN CHANNEL JOIN URL - ' + join_url
+    return join_url
   end
 
 end

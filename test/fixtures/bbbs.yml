@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  course_id: 1
+  name: MyString
+  meeting_id: MyString
+  attendee_pw: MyString
+  moderator_pw: MyString
+  status: MyString
+
+two:
+  course_id: 1
+  name: MyString
+  meeting_id: MyString
+  attendee_pw: MyString
+  moderator_pw: MyString
+  status: MyString

@@ -6,6 +6,8 @@ class CourseController < ApplicationController
   def choose_layout
    if action_name == 'file_index'
     return 'course-fileviewer'
+   elsif action_name.start_with?'channel'
+    return 'channel'
    else
     return 'course'
    end     
@@ -159,7 +161,7 @@ class CourseController < ApplicationController
     @assignment_solution.scribd_id = id.to_s
     @assignment_solution.scribd_key = key.to_s
     @current_assignment_solution = AssignmentSolution.find(:first,:limit => 1 ,:conditions => {:assignment_id => @assignment.id,:user_id => session[:user_id]})
-    ##bad bad way what a waste
+    ##bad bad way what a waste TODO
     if !@current_assignment_solution.nil?
       @current_assignment_solution.destroy
     end
@@ -183,6 +185,26 @@ class CourseController < ApplicationController
     @course = Course.find(params[:id])
     @assignment = Assignment.find(params[:ass_id])
     @assignment_solution = AssignmentSolution.find(params[:sol_id])
+  end
+
+  def channel_show
+    @course = Course.find(params[:id])
+  end
+  def channel_new
+    @course = Course.find(params[:id])
+    bbb = Bbb.new
+    bbb.course_id = @course.id
+    bbb.name = @course.name.delete(' ') ##what if @course name is nill ? TODO
+    bbb.meeting_id = unique_id('').delete('-') 
+    bbb.attendee_pw = unique_id('').delete('-') 
+    bbb.moderator_pw = unique_id('').delete('-') 
+    bbb.status = 'CREATING'
+    bbb.save ##TODO what if this fails
+    Delayed::Job.enqueue(ChannelCreator.new(bbb.id))
+    respond_to do |format|
+     format.html{redirect_to('/courses/'+@course.id.to_s+'/channel')}  
+    end
+
   end
 
 end

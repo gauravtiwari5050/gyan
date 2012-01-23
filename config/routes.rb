@@ -66,7 +66,8 @@ GyanV1::Application.routes.draw do
 
   ##courses routes
   match 'courses/:id/home'  => 'course#show'
-  match 'courses/:id/channel'  => 'course#channel'
+  match 'courses/:id/channel'  => 'course#channel_show'
+  match 'courses/:id/channel/new'  => 'course#channel_new'
   match 'courses/:id/files/new' => 'course#file_new'
   match 'courses/:id/files/create' => 'course#file_create' ,:via => :post
   match 'courses/:id/files' => 'course#file_index'

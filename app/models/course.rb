@@ -3,4 +3,5 @@ class Course < ActiveRecord::Base
   has_many :course_announcements
   has_many :assignments
   has_many :course_files
+  has_one :bbb
 end
