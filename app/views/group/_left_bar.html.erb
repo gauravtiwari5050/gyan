@@ -1,0 +1,14 @@
+        <div class="well">
+          <div id="bold-box-big">
+            <%= link_to "Group Home", '/groups/' + @group.id.to_s %>
+          </div>
+          <div class="clearfix"></div>
+          <div id="bold-box-big">
+            <%= link_to "People", '/groups/' + @group.id.to_s + '/people' %>
+          </div>
+          <div class="clearfix"></div>
+          <div id="bold-box-big">
+            <%= link_to "Collaborate", '/groups/' + @group.id.to_s + '/collaborate' %>
+          </div>
+          <div class="clearfix"></div>
+        </div>

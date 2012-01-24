@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120123074607) do
+ActiveRecord::Schema.define(:version => 20120124115316) do
 
   create_table "assignment_solutions", :force => true do |t|
     t.integer  "assignment_id"
@@ -75,6 +75,13 @@ ActiveRecord::Schema.define(:version => 20120123074607) do
     t.string   "scribd_key"
   end
 
+  create_table "course_groups", :force => true do |t|
+    t.integer  "course_id"
+    t.string   "group_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "courses", :force => true do |t|
     t.integer  "institute_id"
     t.string   "name"
@@ -106,6 +113,22 @@ ActiveRecord::Schema.define(:version => 20120123074607) do
     t.integer  "institute_id"
     t.string   "name"
     t.text     "about"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "etherpads", :force => true do |t|
+    t.integer  "course_group_id"
+    t.string   "name"
+    t.string   "server"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "status"
+  end
+
+  create_table "group_students", :force => true do |t|
+    t.integer  "course_group_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

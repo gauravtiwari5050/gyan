@@ -117,6 +117,21 @@ class CourseController < ApplicationController
     @course = Course.find(params[:id])
   end
 
+  def group_index
+    @course = Course.find(params[:id])
+    @unassigned_students = get_unassigned_students_for_course(@course.id)
+  end
+
+  ##TODO requires rigorous testing
+  def group_assign
+    @course = Course.find(params[:id])
+    group_unassigned_students(@course.id) 
+    respond_to do |format|
+     format.html{redirect_to('/courses/'+@course.id.to_s+'/groups')}
+    end
+
+  end
+
   ##for assigning teacher to a course
   def teacher_assign
     @course_allocation = CourseAllocation.find_by_course_id(params[:id])

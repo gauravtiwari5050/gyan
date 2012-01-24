@@ -1,0 +1,14 @@
+<% if !@unassigned_students.nil? && @unassigned_students.count > 0 %>
+<h2>Students without any groups assigned<h2>
+<% for student in @unassigned_students -%>
+  <p> <%= student.username   %>   <p>
+<% end -%>
+
+<%= link_to "Assign these students a group", '/courses/'+@course.id.to_s+'/groups/assign' %>
+<% end %>
+<h2> Course Groups </h2>
+<% for group in @course.course_groups -%>
+  </p>
+  <%= link_to group.group_name, '/groups/'+group.id.to_s %>
+  </p>
+<% end -%>

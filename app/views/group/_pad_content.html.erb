@@ -1,0 +1,11 @@
+<% if @group.etherpad.nil? %>
+<h2>There is currently no collaboration availbale for this group</h2>
+<%= link_to "Create a new collaboration", '/groups/'+@group.id.to_s+'/collaborate/new' %>
+<% else %>
+  <% if @group.etherpad.status  == 'CREATING' %>
+    <h2>The collaborationn for this group is currently being created</h2>
+  <% else %>
+    <iframe width="100%" height="1200px" src="<%=join_collaboration(@group.etherpad)%>"></iframe>
+  <% end %>
+  
+<% end %>

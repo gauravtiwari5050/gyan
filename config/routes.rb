@@ -1,5 +1,7 @@
 GyanV1::Application.routes.draw do
 
+  get "group/home"
+
   resources :samples
 
   get "student/home"
@@ -71,6 +73,8 @@ GyanV1::Application.routes.draw do
   match 'courses/:id/files/new' => 'course#file_new'
   match 'courses/:id/files/create' => 'course#file_create' ,:via => :post
   match 'courses/:id/files' => 'course#file_index'
+  match 'courses/:id/groups' => 'course#group_index'
+  match 'courses/:id/groups/assign' => 'course#group_assign'
   match 'courses/:id/announcements/new' => 'course#announcement_new'
   match 'courses/:id/announcements/create' => 'course#announcement_create' ,:via => :post
   match 'courses/:id/announcements' => 'course#announcement_index'
@@ -97,6 +101,12 @@ GyanV1::Application.routes.draw do
   match 'register/verify/:one_time_id' => 'registration#verify'
   match 'register/forgot/new' => 'registration#forgotpass_new'
   match 'register/forgot/create' => 'registration#forgotpass_create' ,:via => :post
+
+  #group routes
+  match 'groups/:group_id' => 'group#home'
+  match 'groups/:group_id/people' => 'group#people'
+  match 'groups/:group_id/collaborate' => 'group#pads'
+  match 'groups/:group_id/collaborate/new' => 'group#pads_new'
 
   
 

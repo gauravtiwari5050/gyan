@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel
+  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration
 
   def md5_hash(content)
   require 'digest/md5'
@@ -280,4 +280,98 @@ class ApplicationController < ActionController::Base
     return join_url
   end
 
+  def join_collaboration(etherpad)
+    url = 'http://'+etherpad.server+'/p/'+etherpad.name
+    return url
+  end
+  
+  def get_students_for_course(course_id)
+   student_ids = []
+   course_allocations = CourseAllocation.find(:all,:conditions =>{:course_id =>course_id})
+   if !course_allocations.nil? 
+    for course_allocation in course_allocations
+      student_program_details = StudentProgramDetail.find(:all,:conditions => {:program_id => course_allocation.program_id,:term => course_allocation.term})
+
+      if !student_program_details.nil?
+        for student_program_detail in student_program_details
+          student_ids.push(student_program_detail.student_id)
+        end
+      end
+
+    end
+   end
+
+   users = User.find(:all,:conditions => {:id => student_ids})
+   return users
+
+  end
+
+  def get_unassigned_students_for_course(course_id)
+   unassigned_students = []
+   students = get_students_for_course(course_id)
+   if !students.nil?
+    for student in students
+      groups = student.course_groups
+      if !groups.nil?
+        #loops through all the student groups to find out whether ant groups exist for the given course
+        exists = false
+        for group in groups
+          if group.course_id == course_id
+            exists = true
+            break
+          end
+        end
+        
+        if exists == false
+          unassigned_students.push(student)
+        end
+
+
+      end
+    end
+   end
+
+   return unassigned_students
+   
+  end
+
+  def group_unassigned_students(course_id)
+    unassigned_students = get_unassigned_students_for_course(course_id)
+    if !unassigned_students.nil?  
+      for student in unassigned_students
+        assign_group_to_student(course_id,student) 
+      end
+    end
+  end
+
+  def assign_group_to_student(course_id,student)
+
+  course = Course.find(course_id)
+  if course.nil?
+    raise 'couldnt find a course with that id'
+  end
+  course_group = nil
+  if !course.course_groups.nil?
+    for group in course.course_groups
+      if group.users.count < 5
+        course_group = group
+        break
+      end
+    end
+  end
+
+  if course_group.nil?
+    course_group = CourseGroup.new
+    course_group.course_id = course.id
+    course_group.group_name = course.name + ' ' + (course.course_groups.count + 1).to_s
+    course_group.save
+  end
+
+  group_student = GroupStudent.new
+  group_student.course_group_id = course_group.id
+  group_student.user_id = student.id
+  group_student.save
+
+
+  end
 end
