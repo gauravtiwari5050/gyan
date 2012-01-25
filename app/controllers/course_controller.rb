@@ -222,4 +222,70 @@ class CourseController < ApplicationController
 
   end
 
+  def forum
+    @course = Course.find(params[:id])
+  end
+
+  def forum_new
+    @course = Course.find(params[:id])
+    if @course.forum.nil?
+      forum = Forum.new
+      forum.course_id = @course.id
+      forum.name  = @course.name + ' Forum'  
+      forum.description  = 'A forum for discussions on the course ' + @course.name
+      forum.save ##TODO what if thje save fails
+    end
+
+    respond_to do |format|
+      format.html{redirect_to('/courses/'+@course.id.to_s+'/forum')}
+    end
+
+  end
+
+  def forum_topics_new
+    @course = Course.find(params[:id])
+    @topic = Topic.new  
+  end
+
+  def forum_topics_create
+    @course = Course.find(params[:id])
+    @topic = Topic.new(params[:topic])
+    @topic.user_id = session[:user_id]
+    @topic.forum_id = @course.forum.id
+
+    respond_to do |format|
+      if @topic.save
+       format.html {redirect_to('/courses/'+@course.id.to_s+'/forum/topics/'+@topic.id.to_s)}
+      else
+       format.html {render :action => "forum_topics_new"}
+      end
+    end
+
+  end
+
+  def forum_topics_show
+    @course = Course.find(params[:id])
+    #TODO verify this topic is part of this forum only
+    @topic = Topic.find(params[:topic_id])
+    @post = Post.new
+    
+  end
+
+  def forum_topics_create_post
+    @course = Course.find(params[:id])
+    #TODO verify this topic is part of this forum only
+    @topic = Topic.find(params[:topic_id])
+    @post = Post.new(params[:post])
+    @post.user_id = session[:user_id]
+    @post.topic_id = @topic.id
+    respond_to do |format|
+      if @post.save
+       format.html {redirect_to('/courses/'+@course.id.to_s+'/forum/topics/'+@topic.id.to_s)}
+      else
+       format.html {render :action => "forum_topics_show"}
+      end
+    end
+    
+  end
+
 end

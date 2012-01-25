@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125083111) do
+ActiveRecord::Schema.define(:version => 20120125162417) do
 
   create_table "assignment_solutions", :force => true do |t|
     t.integer  "assignment_id"
@@ -139,6 +139,15 @@ ActiveRecord::Schema.define(:version => 20120125083111) do
     t.integer  "user_id"
   end
 
+  create_table "forums", :force => true do |t|
+    t.integer  "course_id"
+    t.string   "name"
+    t.string   "description"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "group_students", :force => true do |t|
     t.integer  "course_group_id"
     t.integer  "user_id"
@@ -194,6 +203,14 @@ ActiveRecord::Schema.define(:version => 20120125083111) do
     t.datetime "updated_at"
   end
 
+  create_table "posts", :force => true do |t|
+    t.integer  "topic_id"
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "programs", :force => true do |t|
     t.integer  "department_id"
     t.string   "term_type"
@@ -218,6 +235,15 @@ ActiveRecord::Schema.define(:version => 20120125083111) do
     t.integer  "student_id"
     t.integer  "program_id"
     t.integer  "term"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "topics", :force => true do |t|
+    t.integer  "forum_id"
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

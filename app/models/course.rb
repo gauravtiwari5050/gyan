@@ -5,4 +5,5 @@ class Course < ActiveRecord::Base
   has_many :course_files
   has_one :bbb
   has_many :course_groups
+  has_one :forum
 end

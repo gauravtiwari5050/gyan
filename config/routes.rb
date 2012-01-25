@@ -92,6 +92,12 @@ GyanV1::Application.routes.draw do
   match 'courses/:id/assignments/:ass_id/solutions/:sol_id/evaluate' => 'course#assignment_solution_evaluate' 
   match 'courses/:id/assign/teacher' => 'course#teacher_assign'
   match 'courses/:id/assign/create' => 'course#teacher_assign_create' ,:via => :put
+  match 'courses/:id/forum' => 'course#forum'
+  match 'courses/:id/forum/new' => 'course#forum_new'
+  match 'courses/:id/forum/topics/new' => 'course#forum_topics_new'
+  match 'courses/:id/forum/topics/create' => 'course#forum_topics_create' ,:via => :post 
+  match 'courses/:id/forum/topics/:topic_id' => 'course#forum_topics_show'  
+  match 'courses/:id/forum/topics/:topic_id/create_post' => 'course#forum_topics_create_post' ,:via => :post  
 
   #regsitration routes
   match 'register/teacher/new' => 'registration#teacher_new'
