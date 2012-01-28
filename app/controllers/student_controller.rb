@@ -45,4 +45,15 @@ class StudentController < ApplicationController
 
   end
 
+  def course_index
+    @courses = get_all_courses_for_user
+  end
+  
+  def users_index
+  end
+  
+  def department_index
+    @departments = Department.find(:all,:conditions => {:institute_id => get_institute_id})
+  end
+
 end

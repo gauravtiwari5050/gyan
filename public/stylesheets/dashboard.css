@@ -1,0 +1,37 @@
+
+      #user_options {
+      padding:0px;
+      margin:0px;
+       margin-top:15px;
+      height:400px;
+      }
+    #user_options .option_buttons {
+        display:block;
+        float:left;
+        height:175px;width:175px;
+        margin-left:10px;
+        margin-top:20px;
+        outline:none;
+        text-align: center;
+    }
+    #users_button {background:#f5f5f5 url(../images/human.jpg) 0 0 no-repeat;}
+    #users_button:hover {background:#fff url(../images/human.jpg) -175px 0 no-repeat;}
+    #settings_button {background:#fff url(../images/settings.jpg) 0 0 no-repeat;}
+    #settiongs_button:hover {background:#fff url(../images/settings.jpg) -175px 0 no-repeat;}
+    #calendar_button {background:#fff url(../images/calendar.jpg) 0 0 no-repeat;}
+    #calendar_button:hover {background:#fff url(../images/calendar.jpg) -175px 0 no-repeat;}
+    #reports_button {background:#fff url(../images/reports.jpg) 0 0 no-repeat;}
+    #reports_button:hover {background:#fff url(../images/reports.jpg) -175px 0 no-repeat;}
+    #announcements_button {background:#fff url(../images/announcements.jpg) 0 0 no-repeat;}
+    #announcements_button:hover {background:#fff url(../images/announcements.jpg) -175px 0 no-repeat;}
+    #courses_button {background:#fff url(../images/book.png) 0 0 no-repeat;}
+    #departments_button {background:#f5f5f5 url(../images/human.jpg) 0 0 no-repeat;}
+    #departments_button:hover {background:#fff url(../images/human.jpg) -175px 0 no-repeat;}
+
+      .button-box{
+        position: relative;
+        overflow: hidden;
+        float:left;
+        width: 190px;
+      }
+

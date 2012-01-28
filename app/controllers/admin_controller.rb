@@ -53,4 +53,12 @@ class AdminController < ApplicationController
   end
   end
 
+  def users_index
+
+  end
+
+  def course_index
+    @courses = get_all_courses_for_user
+  end
+
 end

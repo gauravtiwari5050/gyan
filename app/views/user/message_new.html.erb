@@ -2,11 +2,11 @@
   <%= render 'left_bar' %>
 <% end -%>
 <% content_for :right_bar do -%>
-  <%= render :template => 'shared/top_bar' %>
+  <%= render :template => "shared/top_bar" %>
 <% end -%>
 <% content_for :right_bar do -%>
   <%= render 'right_bar' %>
 <% end -%>
 <% content_for :main_content do -%>
- <%= render 'student_dashboard' %>
+  <%= render 'message_form' %>
 <% end -%>

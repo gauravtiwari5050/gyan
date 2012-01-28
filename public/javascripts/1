@@ -27,13 +27,11 @@ jQuery(document).ready(function() {
     function (response) {
       var html = '<h3> No users found with that name </h3>';
       if(response.length != 0) {
-         html = '<table>';
-         html += '<tr><th>User Name</th> <th>email</th> </tr>';
+         html = '<tr><th>User Name</th><th>email</th>';
         for(var i = 0;i<response.length;i++) {
-         var link_to_user = '<a href="/users/'+ response[i].user.id +'/profile">' + response[i].user.username  +' </a>'
-         html += '<tr><td>' + link_to_user + '</td> <td>' + response[i].user.email + '</td> </tr>';
+            html +='<li>'+ response[i].user.username + '</li>';
         }
-         html += '</table>';
+        html += '</ul>';
       }
     jQuery("#user-search-results").html(html);
 

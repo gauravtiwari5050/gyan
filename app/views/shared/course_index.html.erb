@@ -1,0 +1,10 @@
+<ul>
+<% for course in @courses -%>
+<li>
+  <div id="bold-box-big">
+    <%= link_to course.name, '/courses/'+course.id.to_s+'/home' %>
+  </div>
+</li>
+  
+<% end -%>
+</ul>

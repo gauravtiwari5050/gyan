@@ -1,6 +1,17 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration
+  before_filter :correct_safari_and_ie_accept_headers
+  after_filter :set_xhr_flash
+  def set_xhr_flash
+    flash.discard if request.xhr?
+  end
+
+  def correct_safari_and_ie_accept_headers
+    ajax_request_types = ['text/javascript', 'application/json', 'text/xml']
+    request.accepts.sort! { |x, y| ajax_request_types.include?(y.to_s) ? 1 : -1 } if request.xhr?
+  end
+
+  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user
 
   def md5_hash(content)
   require 'digest/md5'
@@ -35,6 +46,13 @@ class ApplicationController < ActionController::Base
     end
 
   end
+
+  def validate_logged_in_status
+    if !is_logged_in
+      redirect_to (GyanV1::Application.config.landing_page.to_s)
+    end
+  end
+
   def get_user_type
     return session[:user_type]
   end
@@ -169,6 +187,10 @@ class ApplicationController < ActionController::Base
       session[:is_logged_in] = false 
       return session[:is_logged_in]
     end
+  end
+
+  def current_user
+    return User.find(session[:user_id])
   end
   
   def upload_to_scribd(content_url)

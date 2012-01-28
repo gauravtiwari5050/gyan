@@ -1,0 +1,12 @@
+        <div class="well">
+          <div id="bold-box-big">
+            <%= link_to @user.username, '/users/' + @user.id.to_s + '/profile' %>
+          </div>
+          <div class="clearfix"></div>
+          <% if current_user.user_type == 'ADMIN' || current_user.id == @user.id %>
+            <div id="bold-box-big">
+              <%= link_to "Reset pass", '/users/' + @user.id.to_s + '/profile/resetpass' %>
+            </div>
+            <div class="clearfix"></div>
+          <% end %>
+        </div>

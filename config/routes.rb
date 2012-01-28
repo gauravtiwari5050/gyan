@@ -1,5 +1,7 @@
 GyanV1::Application.routes.draw do
 
+  get "user/search"
+
   get "calendar/home"
 
   get "group/home"
@@ -34,16 +36,24 @@ GyanV1::Application.routes.draw do
 
   #teacher routes
   match 'teacher' => 'teacher#home'
+  match 'teacher/users' => 'teacher#users_index'
+  match 'teacher/departments' => 'teacher#department_index'
+  match 'teacher/courses' => 'teacher#course_index'
 
   #student routes
   match 'student' => 'student#home'
   match 'student/profile' => 'student#profile_edit'
   match 'student/profile_update' => 'student#profile_update' ,:via => :put
+  match 'student/users' => 'student#users_index'
+  match 'student/departments' => 'student#department_index'
+  match 'student/courses' => 'student#course_index'
 
 
   #admin routes
   match 'admin' => 'admin#home'
+  match 'admin/users' => 'admin#users_index'
   match 'admin/departments' => 'admin#department_index'
+  match 'admin/courses' => 'admin#course_index'
   match 'admin/teachers/new' => 'admin#teachers_new'
   match 'admin/teachers/add' => 'admin#teachers_add' ,:via => :post
   match 'admin/students/new' => 'admin#teachers_new'
@@ -122,6 +132,15 @@ GyanV1::Application.routes.draw do
   match 'calendar/events/new' => 'calendar#events_new'
   match 'calendar/events/create' => 'calendar#events_create'
   match 'calendar/events/:event_id' => 'calendar#events_show'
+
+  #helper routes
+  match 'search/users' => 'user#search_json'
+  match 'users/:user_id/profile' => 'user#profile' 
+  match 'users/:user_id/message/new' => 'user#message_new' 
+  match 'users/:user_id/message/create' => 'user#message_create' ,:via => :post 
+  match 'users/:user_id/message/done' => 'user#message_done' 
+  match 'users/:user_id/profile/resetpass' => 'user#resetpass'  
+  match 'users/:user_id/profile/resetpass_update' => 'user#resetpass_update' ,:via => :post 
 
 
 end
