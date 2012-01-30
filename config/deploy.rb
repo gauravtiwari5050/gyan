@@ -40,3 +40,7 @@ before "deploy:restart", "delayed_job:stop"
 after  "deploy:restart", "delayed_job:start"
 after "deploy:stop",  "delayed_job:stop"
 after "deploy:start", "delayed_job:start"
+
+after 'deploy:update_code' do
+  run "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
+end
