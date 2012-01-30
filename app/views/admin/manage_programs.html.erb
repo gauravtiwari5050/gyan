@@ -1,0 +1,26 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+ <h3> Please select a program to manage it </h3>
+ <% for department in @departments -%>
+    <p>Department --<b> <%= department.name %></b></p> 
+    <% for program in department.programs -%>
+      <div id="bold-box">
+
+      <p>
+      <% program_name = program.degree + '-' + program.branch%>
+      <%= link_to program_name , "/programs/"+program.id.to_s %>
+      </p>
+        
+      </div>
+    <% end -%>
+ <% end -%>
+
+<% end -%>

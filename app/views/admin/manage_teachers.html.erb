@@ -1,0 +1,18 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+  <h3> Please select the faculty to manage his/her settings</h3>
+  <% for user in @users -%>
+    <p>
+    <%= link_to user.username, '/users/'+user.id.to_s+'/profile' %> 
+    </p>
+  <% end -%>
+
+<% end -%>

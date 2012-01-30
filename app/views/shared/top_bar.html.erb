@@ -14,9 +14,10 @@
                         <li><a href="/courses">All Courses</a></li>
                       </ul>
             </li>
+            <% if current_user.user_type == 'ADMIN' %>
+              <%= render :template => 'shared/admin_nav' %>
+            <% end %>
             <%= render :template => 'shared/groups' %>
-            <li><a href="#about">Assignments</a></li>
-            <li><a href="#about">Grades</a></li>
             <li><a href="/calendar">Calendar</a></li>
           </ul>
           <p class="pull-right"> <a href="/logout"> Log out </a></p>

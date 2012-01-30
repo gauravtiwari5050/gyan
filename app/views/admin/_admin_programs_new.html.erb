@@ -1,0 +1,4 @@
+<h3> Please select the department for adding a program <h3>
+<% for department in @departments -%>
+  <%= link_to department.name,'/departments/'+department.id.to_s+"/programs/new"  %></br>
+<% end -%>

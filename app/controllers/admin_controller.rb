@@ -9,6 +9,10 @@ class AdminController < ApplicationController
     @departments = Department.find(:all,:conditions => {:institute_id => get_institute_id})
   end
 
+  def programs_new
+    @departments = Department.find(:all,:conditions => {:institute_id => get_institute_id})
+  end
+
   ##functions to add teachers,students
   def teachers_new
   end
@@ -59,6 +63,18 @@ class AdminController < ApplicationController
 
   def course_index
     @courses = get_all_courses_for_user
+  end
+
+  def manage_students
+    @users = User.find(:all,:conditions => {:user_type => 'STUDENT',:institute_id => get_institute_id })
+  end
+  
+  def manage_teachers
+    @users = User.find(:all,:conditions => {:user_type => 'TEACHER',:institute_id => get_institute_id })
+  end
+  
+  def manage_programs
+    @departments = Department.find(:all,:conditions => {:institute_id => get_institute_id})
   end
 
 end
