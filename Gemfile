@@ -23,6 +23,8 @@ group :assets do
 end  
 
 gem 'jquery-rails', '>= 1.0.12'
+gem 'execjs'
+gem 'therubyracer'
 
 # Use unicorn as the web server
 # gem 'unicorn'
