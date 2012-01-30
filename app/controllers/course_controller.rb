@@ -1,4 +1,5 @@
 class CourseController < ApplicationController
+  impressionist
   layout :choose_layout
   before_filter :validate_institute_url
   before_filter {|role| role.validate_course_access params[:id]}

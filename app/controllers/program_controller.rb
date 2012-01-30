@@ -1,4 +1,5 @@
 class ProgramController < ApplicationController
+    impressionist  :message => 'haha'
   # validation of all these is remaining TODO
   def show
     @program = Program.find(params[:id])

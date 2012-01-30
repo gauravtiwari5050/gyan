@@ -1,5 +1,7 @@
 GyanV1::Application.routes.draw do
 
+  get "course_group/home"
+
   get "user/search"
 
   get "calendar/home"
@@ -126,10 +128,10 @@ GyanV1::Application.routes.draw do
   match 'register/forgot/create' => 'registration#forgotpass_create' ,:via => :post
 
   #group routes
-  match 'groups/:group_id' => 'group#home'
-  match 'groups/:group_id/people' => 'group#people'
-  match 'groups/:group_id/collaborate' => 'group#pads'
-  match 'groups/:group_id/collaborate/new' => 'group#pads_new'
+  match 'groups/:id' => 'course_group#home'
+  match 'groups/:id/people' => 'course_group#people'
+  match 'groups/:id/collaborate' => 'course_group#pads'
+  match 'groups/:id/collaborate/new' => 'course_group#pads_new'
 
   #calendar routes
   match 'calendar' => 'calendar#home'

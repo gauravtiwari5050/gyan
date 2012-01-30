@@ -50,5 +50,14 @@ GyanV1::Application.configure do
   #application url suffix
   config.url_suffix = '.gauravtiwari.net'
   config.landing_page = 'http://gauravtiwari.net'
+  
+  # Compress JavaScripts and CSS
+  config.assets.compress = true
+
+  # Don't fallback to assets pipeline if a precompiled asset is missed
+  config.assets.compile = false
+
+  # Generate digests for assets URLs
+  config.assets.digest = true
 
 end

@@ -1,4 +1,5 @@
 class DepartmentController < ApplicationController
+  impressionist
   before_filter :validate_institute_url
   layout :choose_layout
 

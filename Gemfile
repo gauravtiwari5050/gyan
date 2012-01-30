@@ -7,13 +7,22 @@ gem 'rails'
 
 gem 'sqlite3'
 gem 'authlogic'
-gem 'mysql2','<0.3'
+gem 'mysql2','~>0.3.11'
 gem 'carrierwave'
 gem 'rscribd'
 gem 'uuidtools'
 gem "recaptcha", :require => "recaptcha/rails"
 gem "daemons"
 gem 'delayed_job_active_record'
+gem 'impressionist' ,:git => 'git://github.com/gauravtiwari5050/impressionist.git'
+
+group :assets do  
+  gem 'sass-rails', " ~> 3.1.0"  
+  gem 'coffee-rails', " ~> 3.1.0"  
+  gem 'uglifier'  
+end  
+
+gem 'jquery-rails', '>= 1.0.12'
 
 # Use unicorn as the web server
 # gem 'unicorn'
