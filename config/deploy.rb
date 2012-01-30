@@ -5,6 +5,8 @@ set :application, "gauravtiwari.net"
 set :repository, "git://github.com/gauravtiwari5050/gyan.git"
 
 set :scm, "git"
+set :branch, "rails_upgrade"
+
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 role :app, application

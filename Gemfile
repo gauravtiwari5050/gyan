@@ -17,8 +17,8 @@ gem 'delayed_job_active_record'
 gem 'impressionist' ,:git => 'git://github.com/gauravtiwari5050/impressionist.git'
 
 group :assets do  
-  gem 'sass-rails', " ~> 3.1.0"  
-  gem 'coffee-rails', " ~> 3.1.0"  
+  gem 'sass-rails'  
+  gem 'coffee-rails'
   gem 'uglifier'  
 end  
 
