@@ -1,0 +1,80 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+<% content_for :report_javascript do -%>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['corechart']});
+    </script>
+    <script type="text/javascript">
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var sections = [];
+        <% for section in @page_views.keys -%>
+          <% if section == '%' %>
+            sections.push(<%="'" + "Total Page views" + "'"%>)
+          <% else %>
+            sections.push(<%="'"+section+"'"%>)
+          <% end %>
+        <% end -%>
+        var dates = [];
+        <% for i in 0..4 -%>
+          dates.push(<%="'"+(Date.today-i).to_s+"'"%>)
+        <% end -%>
+        var page_view_by_section = [];
+        var tmp_arr = [];
+        <% for section_key in @page_views.keys -%>
+          <%section = @page_views[section_key]%>
+          tmp_arr=[];   
+          <% for i in 0..4 -%>
+            tmp_arr.push(<%=section[(Date.today-i).to_s]%>)
+          <% end -%>
+
+          page_view_by_section.push(tmp_arr);
+
+        <% end -%>
+      
+        // Create and populate the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Month');
+        for (var i = 0; i < sections.length; ++i) {
+          data.addColumn('number', sections[i]);
+        }
+        data.addRows(dates.length);
+        for (var i = 0; i < dates.length; ++i) {
+          data.setCell(i, 0, dates[i]);
+        }
+        for (var i = 0; i < sections.length; ++i) {
+          var country = page_view_by_section[i];
+          for (var month = 0; month < dates.length; ++month) {
+            data.setCell(month, i + 1, country[month]);
+          }
+        }
+        // Create and draw the visualization.
+        var ac = new google.visualization.AreaChart(document.getElementById('visualization'));
+        ac.draw(data, {
+          title : 'Traffic indexed by sections on the website',
+          isStacked: true,
+          width: 600,
+          height: 400,
+          vAxis: {title: "PageViews"},
+          hAxis: {title: "Date"}
+        });
+      }
+      
+
+      google.setOnLoadCallback(drawVisualization);
+    </script>
+  
+<% end -%>
+
+
+ <div id="visualization" style="width: 500px; height: 400px;"></div>
+<% end -%>

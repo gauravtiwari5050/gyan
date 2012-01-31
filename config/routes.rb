@@ -65,6 +65,7 @@ GyanV1::Application.routes.draw do
   match 'admin/manage/teachers' => 'admin#manage_teachers'
   match 'admin/manage/departments' => 'admin#department_index'
   match 'admin/manage/programs' => 'admin#manage_programs'
+  match 'admin/traffic' => 'admin#report_traffic'
 
   #department routes
   match 'departments' => 'department#index'

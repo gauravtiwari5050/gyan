@@ -77,4 +77,21 @@ class AdminController < ApplicationController
     @departments = Department.find(:all,:conditions => {:institute_id => get_institute_id})
   end
 
+  def report_traffic
+    @page_views = Hash.new  
+    sections = ['%','Program','Course','Department','CourseGroup']
+    institute_id = get_institute_id
+    for section in sections 
+      for i in 0..4
+        date = (Date.today-i).to_s
+        count = Impression.where('DATE(updated_at) = ? and institute_id = ? and impressionable_type like ?',Date.today-i,institute_id,section).count
+        if @page_views[section].nil?
+          @page_views[section] = Hash.new
+        end
+        @page_views[section][date] = count
+      end
+    end
+    logger.info @page_views.inspect
+  end
+
 end
