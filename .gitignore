@@ -7,3 +7,4 @@ config/initializers/setup_mail.rb
 public/uploads/*
 .sass-cache/
 vendor/bundle/
+config/environments/
