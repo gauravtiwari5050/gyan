@@ -57,9 +57,13 @@ GyanV1::Application.routes.draw do
   match 'admin/departments' => 'admin#department_index'
   match 'admin/courses' => 'admin#course_index'
   match 'admin/teachers/new' => 'admin#teachers_new'
+  match 'admin/teachers/bulk/new' => 'admin#teachers_new_bulk'
   match 'admin/teachers/add' => 'admin#teachers_add' ,:via => :post
-  match 'admin/students/new' => 'admin#teachers_new'
+  match 'admin/teachers/bulk/add' => 'admin#teachers_bulk_add' ,:via => :post
+  match 'admin/students/new' => 'admin#students_new'
+  match 'admin/students/bulk/new' => 'admin#students_new_bulk'
   match 'admin/students/add' => 'admin#students_add' ,:via => :post
+  match 'admin/students/bulk/add' => 'admin#students_bulk_add' ,:via => :post
   match 'admin/programs/new' => 'admin#programs_new'
   match 'admin/manage/students' => 'admin#manage_students'
   match 'admin/manage/teachers' => 'admin#manage_teachers'
