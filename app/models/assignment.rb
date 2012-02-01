@@ -3,4 +3,5 @@ class Assignment < ActiveRecord::Base
   belongs_to :course
   mount_uploader :assignment_file, FileUploader
   has_many :assignment_solutions
+  has_one :s3object ,:as => :s3able
 end

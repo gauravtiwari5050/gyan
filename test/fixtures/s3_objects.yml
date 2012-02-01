@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  bucket: MyString
+  key: MyString
+  url: MyString
+
+two:
+  bucket: MyString
+  key: MyString
+  url: MyString

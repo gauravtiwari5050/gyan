@@ -4,7 +4,11 @@
     <% if !course_file.scribd_key.nil? && course_file.scribd_id.length > 0  %>
       <li><%= link_to_function course_file.name,"load_file('"+course_file.scribd_id.to_s+"','"+ course_file.scribd_key.to_s+"')" %></li>
     <% else %>
-      <li><%= link_to course_file.name, course_file.content_url.to_s %></li>
+       <% if !course_file.s3_object.nil? && !course_file.s3_object.url.nil?%>
+          <li><%= link_to course_file.name, course_file.s3_object.url %></li>
+       <% else %>
+        <li><%= link_to course_file.name, course_file.content_url.to_s %></li>
+       <% end %>
     <% end %>
 <% end %>
 <%= link_to "Create file", "/courses/"+@course.id.to_s+"/files/new" %>
