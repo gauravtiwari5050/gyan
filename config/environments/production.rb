@@ -51,6 +51,14 @@ GyanV1::Application.configure do
   config.url_suffix = '.gauravtiwari.net'
   config.landing_page = 'http://gauravtiwari.net'
   
+  config.aws_access_key_id = 'AKIAIL6JEVUDWEVR2DVA'
+  config.aws_secret_access_key  = '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'
+  config.aws_bucket = 'cloudclasshq1'
+  config.scribd_api_key = '4txwgemkqbmavpeam3eas'
+  config.scribd_api_secret = 'sec-46jrulbuqetj2squ1046miv9sg'
+  config.scribd_user = 'gauravtiwari5050'
+  config.scribd_pass = 'harekrsna1!'
+  
   # Compress JavaScripts and CSS
   config.assets.compress = true
 

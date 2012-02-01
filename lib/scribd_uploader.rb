@@ -10,7 +10,7 @@ class ScribdUploader < Struct.new(:obj,:location)
     url = 'public/' + content_url.to_s
     Delayed::Worker.logger.info url
     
-    s3_bucket = 'cloudclasshq1'
+    s3_bucket = GyanV1::Application.config.aws_bucket
     s3_key = unique_id('cchqfile') + '-' + File.basename(url)
     if !obj.s3_object.nil?  && !obj.s3_object.key.nil?
       s3_key = obj.s3_object.key
@@ -19,8 +19,8 @@ class ScribdUploader < Struct.new(:obj,:location)
     # create a connection
     connection = Fog::Storage.new(
       :provider               => 'AWS',       # required
-      :aws_access_key_id      => 'AKIAIL6JEVUDWEVR2DVA',       # required
-      :aws_secret_access_key  => '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'       # required
+      :aws_access_key_id      => GyanV1::Application.config.aws_access_key_id,       # required
+      :aws_secret_access_key  => GyanV1::Application.config.aws_secret_access_key       # required
     )
 
     # First, a place to contain the glorious details
@@ -69,14 +69,14 @@ class ScribdUploader < Struct.new(:obj,:location)
 
     # Use your API key / secret here
  
-    api_key = '4txwgemkqbmavpeam3eas'
-    api_secret = 'sec-46jrulbuqetj2squ1046miv9sg'
+    api_key = GyanV1::Application.config.scribd_api_key
+    api_secret = GyanV1::Application.config.scribd_api_secret
     # Create a scribd object
     Scribd::API.instance.key = api_key
     Scribd::API.instance.secret = api_secret
-    #TODO security ?
+
     url = 'public/' + content_url.to_s
-    Scribd::User.login 'gauravtiwari5050', 'harekrsna1!'
+    Scribd::User.login GyanV1::Application.config.scribd_user,GyanV1::Application.config.scribd_pass
     # Upload the document from a file
     puts "Uploading a document ... "
 

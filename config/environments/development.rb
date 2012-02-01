@@ -25,6 +25,14 @@ GyanV1::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
   config.url_suffix = '.lvh.me:3000'
   config.landing_page = 'http://lvh.me:3000'
+  config.aws_access_key_id = 'AKIAIL6JEVUDWEVR2DVA'
+  config.aws_secret_access_key  = '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'
+  config.aws_bucket = 'cloudclasshq1'
+  config.scribd_api_key = '4txwgemkqbmavpeam3eas'
+  config.scribd_api_secret = 'sec-46jrulbuqetj2squ1046miv9sg'
+  config.scribd_user = 'gauravtiwari5050'
+  config.scribd_pass = 'harekrsna1!'
+
   # Do not compress assets
   config.assets.compress = false
 
