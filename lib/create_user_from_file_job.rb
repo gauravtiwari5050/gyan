@@ -25,31 +25,42 @@ class CreateUserFromFileJob < Struct.new(:file_url,:task_id,:user_type,:institut
   end
   def perform
   Delayed::Worker.logger.info 'Creating emails from file : ' + file_url 
-  @workbook = Spreadsheet.open file_url
   invalid_emails = []
   valid_but_errored_emails = []
-  for worksheet in @workbook.worksheets
-    worksheet.each do |row|
-      row.each do |element|
-        if validate_email_domain(element) == true
-          Delayed::Worker.logger.info element + 'is a valid email'
-          user = create_vanilla_user(element,user_type,institute_id)
-          begin
-            user.save
-            UserMailer.registration_confirmation(user).deliver
-          rescue
-            Delayed::Worker.logger.info 'error creating user with email ' + element
-            valid_but_errored_emails.push(element)
+  success =  true
+  begin
+    @workbook = Spreadsheet.open file_url
+    for worksheet in @workbook.worksheets
+      worksheet.each do |row|
+        row.each do |element|
+          if validate_email_domain(element) == true
+            Delayed::Worker.logger.info element + 'is a valid email'
+            user = create_vanilla_user(element,user_type,institute_id)
+            begin
+              user.save
+              UserMailer.registration_confirmation(user).deliver
+            rescue
+              Delayed::Worker.logger.info 'error creating user with email ' + element
+              valid_but_errored_emails.push(element)
+            end
+          else
+            Delayed::Worker.logger.info element + 'is a invalid email'
+            invalid_emails.push(element)
           end
-        else
-          Delayed::Worker.logger.info element + 'is a invalid email'
-          invalid_emails.push(element)
         end
       end
     end
+
+  rescue Exception => e
+   success = false 
+   Delayed::Worker.logger.info e.message
+   Delayed::Worker.logger.info e.backtrace.inspect
+
   end
   task_obj = Task.find(task_id)
-  if invalid_emails.length == 0 && valid_but_errored_emails.length == 0
+  if success == false
+    task_obj.update_attributes(:completion_status => 'COMPLETE',:execution_status => 'FAILED',:output => 'Invalid File format/structure') 
+  elsif invalid_emails.length == 0 && valid_but_errored_emails.length == 0
     task_obj.update_attributes(:completion_status => 'COMPLETE',:execution_status => 'SUCCESS') 
   else
     error_message = '<p> The following emails were invalid </p>';
