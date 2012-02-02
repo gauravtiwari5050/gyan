@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type: 
+  description: MyString
+  completion_status: MyString
+  execution_status: MyString
+  output: MyText
+
+two:
+  type: 
+  description: MyString
+  completion_status: MyString
+  execution_status: MyString
+  output: MyText

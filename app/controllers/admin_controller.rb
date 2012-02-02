@@ -19,8 +19,10 @@ class AdminController < ApplicationController
   def students_new
   end
   def teachers_new_bulk
+  @helper_file = HelperFile.new
   end
   def students_new_bulk
+  @helper_file = HelperFile.new
   end
 
   def teachers_add
@@ -65,13 +67,14 @@ class AdminController < ApplicationController
 
   end
 
-  def teachers_bulk_add
-   user_list = params[:user_list]
-   user_list = user_list 
+  def add_users_from_list(user_type,user_list)
+   if user_list.nil? || user_list.length == 0
+    return false,'the list of email you provided is not valid'
+   end
    user_emails = user_list.split(/[\n ,]+/)
    for email in user_emails
     email = email.strip! || email
-    user = create_vanilla_user(email,'TEACHER')
+    user = create_vanilla_user(email,user_type)
     begin
       
       user.save
@@ -80,9 +83,52 @@ class AdminController < ApplicationController
       logger.info e.message
     end
    end
-  respond_to do |format|
-    format.html {redirect_to('/admin')}
+
+   return true,'The list of users has been queued for processing.Emails will be sent out to the users soon'
+    
   end
+
+  def add_users_from_file(user_type,helper_file)
+    if helper_file.nil?
+      return false,'No file added'
+    end
+    @helper_file = HelperFile.new(helper_file)
+    file_url = 'public' + @helper_file.file.url.to_s;
+    logger.info  file_url
+    task = Task.new
+    task.type = 'CREATE_USER_FROM_FILE'
+    task.description = 'creates users from uploaded file'
+    task.completion_status = 'RUNNING'
+    task.execution_status = 'PENDING'
+    task.output = ''
+    task.user_id = current_user.id
+    task.save
+
+    Delayed::Job.enqueue(CreateUserFromFileJob.new(file_url,task,user_type,get_institute_id),:run_at => 10.seconds.from_now)
+  end
+
+  def teachers_bulk_add
+   success =  true
+   status_message = ''
+   if !params[:user_list].nil?
+    #bulk add users using the list sent in text
+    success,status_message = add_users_from_list('TEACHER',params[:user_list])
+   elsif !params[:helper_file].nil?
+     success,status_message = add_users_from_file('TEACHER',params[:helper_file])
+   else
+     success = false
+     status_message = 'Please upload a file or give a list of emails in the box'
+   end
+  
+   respond_to do |format|
+    if success == true
+      flash[:notice] =  status_message
+    else
+      flash[:alert] =  status_message
+    end
+    format.html {redirect_to('/admin/teachers/bulk/new')}
+   end
+
   end
 
   def students_add
@@ -141,22 +187,26 @@ class AdminController < ApplicationController
   end
 
   def students_bulk_add
-   user_list = params[:user_list]
-   user_list = user_list 
-   user_emails = user_list.split(/[\n ,]+/)
-   for email in user_emails
-    email = email.strip! || email
-    user = create_vanilla_user(email,'STUDENT')
-    begin
-      user.save
-      Delayed::Job.enqueue(MailingJob.new(user.id))
-    rescue Exception => e
-      logger.info e.message
-    end
+   success =  true
+   status_message = ''
+   if !params[:user_list].nil?
+    #bulk add users using the list sent in text
+    success,status_message = add_users_from_list('STUDENT',params[:user_list])
+   elsif !params[:helper_file].nil?
+     success,status_message = add_users_from_file('STUDENT',params[:helper_file])
+   else
+     success = false
+     status_message = 'Please upload a file or give a list of emails in the box'
    end
-  respond_to do |format|
-    format.html {redirect_to('/admin')}
-  end
+  
+   respond_to do |format|
+    if success == true
+      flash[:notice] =  status_message
+    else
+      flash[:alert] =  status_message
+    end
+    format.html {redirect_to('/admin/students/bulk/new')}
+   end
   end
 
   def users_index

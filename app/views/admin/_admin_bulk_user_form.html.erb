@@ -1,7 +1,40 @@
 <h2> Please give a comma seperated list of emails</h2>
+  <% if  !flash[:alert].nil?%>
+    <div class="alert-message error">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+  <% if  !flash[:notice].nil?%>
+    <div class="alert-message success">
+      <%= flash[:notice] %>
+    </div>
+  <% end -%>
+
 <%= form_tag('add',:method => :post) do -%>
   <%= text_area_tag 'user_list' ,nil,:rows => 20  %>
   <br>
 
   <%= submit_tag %>
 <% end -%>
+
+<h2> Or  Upload a csv/excel file containing the list</h2>
+<%= form_for(@helper_file,:html =>{:class => 'form-stacked',:multipart => true},:url => 'add' ,:method => :post) do |f| %>
+  <% if @helper_file.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@helper_file.errors.count, "error") %> prohibited this helper_file from being saved:</h2>
+
+      <ul>
+      <% @helper_file.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+   <div class="field">
+    <%= f.label :file %>
+    <%= f.file_field :file  %>
+   </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
