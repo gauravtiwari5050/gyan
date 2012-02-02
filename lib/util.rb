@@ -8,4 +8,9 @@ module Util
     user.is_validated = false
     return user
   end
+  
+  def unique_id(prefix)
+  require 'uuidtools'
+    return  prefix.to_s + UUIDTools::UUID.timestamp_create.to_s
+  end
 end

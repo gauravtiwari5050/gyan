@@ -96,7 +96,7 @@ class AdminController < ApplicationController
     file_url = 'public' + @helper_file.file.url.to_s;
     logger.info  file_url
     task = Task.new
-    task.type = 'CREATE_USER_FROM_FILE'
+    task.task_type = 'CREATE_USER_FROM_FILE'
     task.description = 'creates users from uploaded file'
     task.completion_status = 'RUNNING'
     task.execution_status = 'PENDING'
@@ -104,7 +104,7 @@ class AdminController < ApplicationController
     task.user_id = current_user.id
     task.save
 
-    Delayed::Job.enqueue(CreateUserFromFileJob.new(file_url,task,user_type,get_institute_id),:run_at => 10.seconds.from_now)
+    Delayed::Job.enqueue(CreateUserFromFileJob.new(file_url,task.id,user_type,get_institute_id))
   end
 
   def teachers_bulk_add

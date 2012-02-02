@@ -5,7 +5,7 @@ require 'resolv'
 
 include Util
 
-class CreateUserFromFileJob < Struct.new(:file_url,:task_obj,:user_type,:institute_id)
+class CreateUserFromFileJob < Struct.new(:file_url,:task_id,:user_type,:institute_id)
   def validate_email_domain(email)
       p email
       status = true
@@ -24,7 +24,7 @@ class CreateUserFromFileJob < Struct.new(:file_url,:task_obj,:user_type,:institu
       return status
   end
   def perform
-  
+  Delayed::Worker.logger.info 'Creating emails from file : ' + file_url 
   @workbook = Spreadsheet.open file_url
   invalid_emails = []
   valid_but_errored_emails = []
@@ -32,21 +32,23 @@ class CreateUserFromFileJob < Struct.new(:file_url,:task_obj,:user_type,:institu
     worksheet.each do |row|
       row.each do |element|
         if validate_email_domain(element) == true
-          p element + 'is a valid email'
+          Delayed::Worker.logger.info element + 'is a valid email'
           user = create_vanilla_user(element,user_type,institute_id)
           begin
             user.save
+            UserMailer.registration_confirmation(user).deliver
           rescue
-            valid_but_errored_emails.push(emails)
+            Delayed::Worker.logger.info 'error creating user with email ' + element
+            valid_but_errored_emails.push(element)
           end
         else
-          p element + 'is a invalid email'
+          Delayed::Worker.logger.info element + 'is a invalid email'
           invalid_emails.push(element)
         end
       end
     end
   end
-
+  task_obj = Task.find(task_id)
   if invalid_emails.length == 0 && valid_but_errored_emails.length == 0
     task_obj.update_attributes(:completion_status => 'COMPLETE',:execution_status => 'SUCCESS') 
   else
@@ -67,6 +69,5 @@ class CreateUserFromFileJob < Struct.new(:file_url,:task_obj,:user_type,:institu
 
     task_obj.update_attributes(:completion_status => 'COMPLETE',:execution_status => 'WARN',:output => error_message) 
   end
-    
   end
 end
