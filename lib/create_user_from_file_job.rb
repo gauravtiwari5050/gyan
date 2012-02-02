@@ -69,5 +69,6 @@ class CreateUserFromFileJob < Struct.new(:file_url,:task_id,:user_type,:institut
 
     task_obj.update_attributes(:completion_status => 'COMPLETE',:execution_status => 'WARN',:output => error_message) 
   end
+  Delayed::Job.enqueue(ObjectDestroyJob.new(task_obj.class.to_s,task_obj.id),:run_at => 30.seconds.from_now)
   end
 end

@@ -246,4 +246,8 @@ class AdminController < ApplicationController
     logger.info @page_views.inspect
   end
 
+  def task_show
+    @task = Task.find(params[:task_id])
+  end
+
 end

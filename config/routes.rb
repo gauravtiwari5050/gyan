@@ -1,5 +1,7 @@
 GyanV1::Application.routes.draw do
 
+  get "task/search"
+
   get "course_group/home"
 
   get "user/search"
@@ -70,6 +72,7 @@ GyanV1::Application.routes.draw do
   match 'admin/manage/departments' => 'admin#department_index'
   match 'admin/manage/programs' => 'admin#manage_programs'
   match 'admin/traffic' => 'admin#report_traffic'
+  match 'admin/tasks/:task_id' => 'admin#task_show'
 
   #department routes
   match 'departments' => 'department#index'
@@ -153,6 +156,9 @@ GyanV1::Application.routes.draw do
   match 'users/:user_id/message/done' => 'user#message_done' 
   match 'users/:user_id/profile/resetpass' => 'user#resetpass'  
   match 'users/:user_id/profile/resetpass_update' => 'user#resetpass_update' ,:via => :post 
+
+  #tasks route
+  match 'tasks/:task_type' => 'task#search'
 
 
 end

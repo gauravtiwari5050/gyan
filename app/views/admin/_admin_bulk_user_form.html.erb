@@ -1,3 +1,35 @@
+<% content_for :task_status_check_javascript do -%>
+<script type="text/javascript">
+$(document).ready(function(){
+  $.read(
+  '/tasks/CREATE_USER_FROM_FILE',
+  function(response) {
+    if(response != null && response.length > 0) {
+      html_message = '<h3> There are already tasks queued for creating users by you </h3>';
+      for(var i = 0;i<response.length;i++) {
+        var alert_class = '';
+        if(response[i].task.execution_status == 'SUCCESS') {
+          alert_class = 'alert-message success';
+        } else if(response[i].task.execution_status == 'PENDING'){
+          alert_class = 'alert-message info';
+        } else {
+          alert_class = 'alert-message error';
+        }
+
+        html_message += '<div class="'+ alert_class +'">';
+        html_message += '<a href="/admin/tasks/'+ response[i].task.id + '"> Click here for more details of this task </a>'
+        html_message += '</div>';
+      }
+      $('#task-status').html(html_message);
+    }
+  }
+  );
+});
+</script>
+  
+<% end -%>
+<div id="task-status">
+</div>
 <h2> Please give a comma seperated list of emails</h2>
   <% if  !flash[:alert].nil?%>
     <div class="alert-message error">
@@ -35,6 +67,6 @@
     <%= f.file_field :file  %>
    </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Upload file'%>
   </div>
 <% end %>
