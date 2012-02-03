@@ -58,6 +58,9 @@ GyanV1::Application.configure do
   config.scribd_api_secret = 'sec-46jrulbuqetj2squ1046miv9sg'
   config.scribd_user = 'gauravtiwari5050'
   config.scribd_pass = 'harekrsna1!'
+  config.mvayoo_user = 'gaurav2gaurav@gmail.com'
+  config.mvayoo_pass = 'Allahabad1!'
+  config.mvayoo_id = 'TEST SMS'
   
   # Compress JavaScripts and CSS
   config.assets.compress = true

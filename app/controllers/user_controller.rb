@@ -18,6 +18,10 @@ class UserController < ApplicationController
   def message_new
     @user = User.find(:first,:conditions => {:id => params[:user_id],:institute_id => get_institute_id})
     @message = Message.new
+    @message.email =  true
+    @message.sms =  false
+    @message.twitter = false
+    @message.facebook = false
   end
 
   def message_create
@@ -69,6 +73,30 @@ class UserController < ApplicationController
         format.html{render :action => 'resetpass'}
       end
     end
+  end
+  def edit_contact
+    @user = User.find(:first,:conditions => {:id => params[:user_id],:institute_id => get_institute_id})
+    @contact_detail = @user.contact_detail
+    if @contact_detail.nil?
+      @contact_detail = ContactDetail.new
+      @contact_detail.user_id = @user.id
+      @contact_detail.save
+    end
     
   end
+
+  def update_contact
+    @user = User.find(:first,:conditions => {:id => params[:user_id],:institute_id => get_institute_id})
+    @contact_detail = @user.contact_detail
+    respond_to do |format|
+      if @contact_detail.update_attributes(params[:contact_detail]) == true
+        format.html{redirect_to('/users/'+@user.id.to_s+'/contact/edit', :notice => 'Contact details were successfully  updated.')}
+      else
+        formt.html {render :action => edit_contact}
+      end
+    end
+    
+    
+  end
+
 end

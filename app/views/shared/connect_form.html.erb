@@ -1,0 +1,32 @@
+<h3> Please enter your message to connect with users </h3>
+<%= form_tag('add',:method => :post,:class => 'form-stacked') do -%>
+  <div class="field">
+   <%= label_tag 'Subject'%> 
+   <%= text_field_tag 'subject'%>
+  </div>
+   <%= label_tag 'Message'%> 
+  <%= text_area_tag 'message' ,nil,:rows => 20  %>
+  </br>
+
+  <div class="field">
+   <%= label_tag 'Email'%> 
+   <%= check_box_tag 'email',nil ,true%>
+  </div>
+
+  <div class="field">
+   <%= label_tag 'SMS'%> 
+   <%= check_box_tag 'sms' %>
+  </div>
+
+  <div class="field">
+   <%= label_tag 'Facebook'%> 
+   <%= check_box_tag 'facebook'%>
+  </div>
+
+  <div class="field">
+   <%= label_tag 'Twitter'%> 
+   <%= check_box_tag 'twitter'%>
+  </div>
+
+  <%= submit_tag %>
+<% end -%>

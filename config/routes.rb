@@ -73,6 +73,7 @@ GyanV1::Application.routes.draw do
   match 'admin/manage/programs' => 'admin#manage_programs'
   match 'admin/traffic' => 'admin#report_traffic'
   match 'admin/tasks/:task_id' => 'admin#task_show'
+  match 'admin/connect/students' => 'admin#connect_students_new'
 
   #department routes
   match 'departments' => 'department#index'
@@ -156,6 +157,8 @@ GyanV1::Application.routes.draw do
   match 'users/:user_id/message/done' => 'user#message_done' 
   match 'users/:user_id/profile/resetpass' => 'user#resetpass'  
   match 'users/:user_id/profile/resetpass_update' => 'user#resetpass_update' ,:via => :post 
+  match 'users/:user_id/contact/edit' => 'user#edit_contact'  
+  match 'users/:user_id/contact/update' => 'user#update_contact' ,:via => :put 
 
   #tasks route
   match 'tasks/:task_type' => 'task#search'

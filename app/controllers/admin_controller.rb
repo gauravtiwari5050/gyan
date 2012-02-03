@@ -250,4 +250,7 @@ class AdminController < ApplicationController
     @task = Task.find(params[:task_id])
   end
 
+  def connect_students_new
+  end
+
 end
