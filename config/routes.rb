@@ -75,6 +75,7 @@ GyanV1::Application.routes.draw do
   match 'admin/tasks/:task_id' => 'admin#task_show'
   match 'admin/ivrs/edit' => 'admin#ivrs_edit'
   match 'admin/ivrs/update' => 'admin#ivrs_update' ,:via => :put
+  match 'admin/ivrs/upload_result' => 'admin#ivrs_result_upload' ,:via => :post
   match 'admin/connect/students' => 'admin#connect_students_new'
 
   #department routes

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ivrs_info_id: 1
+  serial_number: 
+  score: MyString
+
+two:
+  ivrs_info_id: 1
+  serial_number: 
+  score: MyString

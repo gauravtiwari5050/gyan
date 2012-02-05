@@ -254,6 +254,7 @@ class AdminController < ApplicationController
   end
 
   def ivrs_edit
+    @helper_file = HelperFile.new  
     institute = Institute.find(get_institute_id)
     @ivrs_info = institute.ivrs_info
     if @ivrs_info.nil?
@@ -275,6 +276,28 @@ class AdminController < ApplicationController
       end
     end
      
+  end
+
+  def ivrs_result_upload
+    institute = Institute.find(get_institute_id)
+    @ivrs_info = institute.ivrs_info
+    @helper_file = HelperFile.new(params[:helper_file])
+    file_url = 'public' + @helper_file.file.url.to_s;
+    logger.info  file_url
+    task = Task.new
+    task.task_type = 'CREATE_IVRS_RESULTS_FROM_FILE'
+    task.description = 'creating results to be accessed using IVRS system'
+    task.completion_status = 'RUNNING'
+    task.execution_status = 'PENDING'
+    task.output = ''
+    task.user_id = current_user.id
+    task.save
+
+    Delayed::Job.enqueue(CreateIvrsResultsFromFileJob.new(file_url,task.id,@ivrs_info.id))
+
+    respond_to do |format|
+      format.html { redirect_to('/admin/ivrs/edit') }
+    end
   end
 
 end

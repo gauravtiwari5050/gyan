@@ -1,3 +1,35 @@
+
+<% content_for :task_status_check_javascript do -%>
+<script type="text/javascript">
+$(document).ready(function(){
+  $.read(
+  '/tasks/CREATE_IVRS_RESULTS_FROM_FILE',
+  function(response) {
+    if(response != null && response.length > 0) {
+      html_message = '<h3> There are already tasks queued for creating users by you </h3>';
+      for(var i = 0;i<response.length;i++) {
+        var alert_class = '';
+        if(response[i].task.execution_status == 'SUCCESS') {
+          alert_class = 'alert-message success';
+        } else if(response[i].task.execution_status == 'PENDING'){
+          alert_class = 'alert-message info';
+        } else {
+          alert_class = 'alert-message error';
+        }
+
+        html_message += '<div class="'+ alert_class +'">';
+        html_message += '<a href="/admin/tasks/'+ response[i].task.id + '"> Click here for more details of this task </a>'
+        html_message += '</div>';
+      }
+      $('#task-status').html(html_message);
+    }
+  }
+  );
+});
+</script>
+  
+<% end -%>
+
 <h3> Please add your message for students for using IVRS </h3>
 <%= form_for(@ivrs_info,:html =>{:class => 'form-stacked',:multipart => true},:url => 'update' ,:method => :put) do |f| %>
   <% if @ivrs_info.errors.any? %>
@@ -31,3 +63,26 @@
   </div>
 <% end %>
 
+<h2> Upload the list of results to be accessed from the IVRS</h2>
+<div id="task-status">
+</div>
+<%= form_for(@helper_file,:html =>{:class => 'form-stacked',:multipart => true},:url => 'upload_result' ,:method => :post) do |f| %>
+  <% if @helper_file.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@helper_file.errors.count, "error") %> prohibited this helper_file from being saved:</h2>
+
+      <ul>
+      <% @helper_file.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+   <div class="field">
+    <%= f.label :file %>
+    <%= f.file_field :file  %>
+   </div>
+  <div class="actions">
+    <%= f.submit 'Upload file'%>
+  </div>
+<% end %>
