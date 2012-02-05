@@ -139,7 +139,11 @@ class IvrsController < ApplicationController
   def get_institute_name_from_id(institute_id)
     institute =  Institute.find_by_id(institute_id)
     session[:ivrs_institute_id] = institute_id
-    return institute.name
+    if institute.nil?
+      return nil
+    else
+      return institute.name
+    end
   end
   
   def get_user_from_roll_number(roll_number)
