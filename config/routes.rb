@@ -73,6 +73,8 @@ GyanV1::Application.routes.draw do
   match 'admin/manage/programs' => 'admin#manage_programs'
   match 'admin/traffic' => 'admin#report_traffic'
   match 'admin/tasks/:task_id' => 'admin#task_show'
+  match 'admin/ivrs/edit' => 'admin#ivrs_edit'
+  match 'admin/ivrs/update' => 'admin#ivrs_update' ,:via => :put
   match 'admin/connect/students' => 'admin#connect_students_new'
 
   #department routes

@@ -253,4 +253,28 @@ class AdminController < ApplicationController
   def connect_students_new
   end
 
+  def ivrs_edit
+    institute = Institute.find(get_institute_id)
+    @ivrs_info = institute.ivrs_info
+    if @ivrs_info.nil?
+      @ivrs_info = IvrsInfo.new
+      @ivrs_info.institute_id = get_institute_id
+      @ivrs_info.message  = "No notice available currently"
+      @ivrs_info.save
+    end
+  end
+
+  def ivrs_update
+    institute = Institute.find(get_institute_id)
+    @ivrs_info = institute.ivrs_info
+    respond_to do |format|
+      if @ivrs_info.update_attributes(params[:ivrs_info])
+        format.html { redirect_to('/admin/ivrs/edit', :notice => 'Your IVRS message was successfully updated') }
+      else
+        format.html { render :action => "ivrs_info" }
+      end
+    end
+     
+  end
+
 end
