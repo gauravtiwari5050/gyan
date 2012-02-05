@@ -73,14 +73,15 @@ class IvrsController < ApplicationController
      ivrs_info = institute.ivrs_info
      if !ivrs_info.nil?
       message =  ivrs_info.message
-      if !message.nil?
-        message =  message.strip
-      end
       success =  true
      end
     end
-    logger.info "INSTITUE_MESSAGE ->" + message
-    return play_text(message)
+    message_chunks  =  message.split(".")
+    playable_text = ""
+    for chunk in message_chunks
+      playable_text += play_text(chunk)
+    end
+    return playable_text
   end
 
   def process_newcall
