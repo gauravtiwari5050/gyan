@@ -73,6 +73,9 @@ class IvrsController < ApplicationController
      ivrs_info = institute.ivrs_info
      if !ivrs_info.nil?
       message =  ivrs_info.message
+      if !message.nil?
+        message =  message.strip!
+      end
       success =  true
      end
     end
