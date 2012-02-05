@@ -127,12 +127,12 @@ class IvrsController < ApplicationController
 
   def process_result
    roll_number = params[:data]
-   user =  get_user_from_roll_number(params[:data])
+   score =  get_score_from_roll_number(params[:data])
    kookoo_xml = ""
-   if user.nil?
-      kookoo_xml += play_text("Sorry. The roll number is incorrect.Please try again later" )
+   if score.nil?
+      kookoo_xml += play_text("Could not find score with this roll number" )
    else
-      kookoo_xml += play_text("The results for " +  user + " are  ninety nine percent")
+      kookoo_xml += play_text("The result is " +  score)
    end
    return kookoo_xml
   end
@@ -151,11 +151,18 @@ class IvrsController < ApplicationController
     end
   end
   
-  def get_user_from_roll_number(roll_number)
-    if roll_number == '123456'
-      return 'gaurav tiwari'
-    else
+  def get_score_from_roll_number(roll_number)
+    institute = Institute.find_by_id(session[:ivrs_institute_id])
+    ivrs_info = institute.ivrs_info
+    ivrs_info_id = ""
+    if !ivrs_info.nil?
+      ivrs_info_id = ivrs_info.id 
+    end
+    ivrs_result = IvrsResult.find(:first,:conditions => {:ivrs_info_id => ivrs_info_id,:serial_number => roll_number})
+    if ivrs_result.nil?
       return nil
+    else
+      return ivrs_result.score
     end
  end
 
