@@ -165,5 +165,8 @@ GyanV1::Application.routes.draw do
   #tasks route
   match 'tasks/:task_type' => 'task#search'
 
+  #ivrs routes
+  match 'ivrs' => 'ivrs#home'
+
 
 end
