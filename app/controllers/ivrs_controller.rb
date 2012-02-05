@@ -74,11 +74,12 @@ class IvrsController < ApplicationController
      if !ivrs_info.nil?
       message =  ivrs_info.message
       if !message.nil?
-        message =  message.strip!
+        message =  message.strip
       end
       success =  true
      end
     end
+    logger.info "INSTITUE_MESSAGE ->" + message
     return play_text(message)
   end
 
