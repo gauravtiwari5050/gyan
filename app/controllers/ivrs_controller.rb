@@ -66,7 +66,7 @@ class IvrsController < ApplicationController
 
   def process_notice
     logger.info session.inspect
-    institute = Institute.find(session[:ivrs_institute_id])
+    institute = Institute.find_by_id(session[:ivrs_institute_id])
     success = false
     message  = "No notices for your institute as of now"
     if !institute.nil?
@@ -137,7 +137,7 @@ class IvrsController < ApplicationController
   end
 
   def get_institute_name_from_id(institute_id)
-    institute =  Institute.find(institute_id)
+    institute =  Institute.find_by_id(institute_id)
     session[:ivrs_institute_id] = institute_id
     return institute.name
   end
