@@ -225,7 +225,6 @@ class AdminController < ApplicationController
     is_sms = params[:sms]
     is_fb = params[:faceboook]
     is_twitter = params[:twitter]
-    #TODO validate above booleans ?
     task =  create_new_task('BULK_MESSAGE','sending message to users',current_user.id,true)
     bulk_messaging_job = BulkMessagingJob.new(task,users,from_user,bulk_message_subj,bulk_message,is_email,is_sms,is_fb,is_twitter)
     Delayed::Job.enqueue(bulk_messaging_job)
