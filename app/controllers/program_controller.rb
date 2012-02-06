@@ -2,7 +2,6 @@ class ProgramController < ApplicationController
   impressionist
   before_filter :validate_institute_url
   before_filter :validate_program_access
-  #TODO wahts up with 
   def show
     @program = Program.find(params[:id])
   end
