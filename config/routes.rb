@@ -76,7 +76,10 @@ GyanV1::Application.routes.draw do
   match 'admin/ivrs/edit' => 'admin#ivrs_edit'
   match 'admin/ivrs/update' => 'admin#ivrs_update' ,:via => :put
   match 'admin/ivrs/upload_result' => 'admin#ivrs_result_upload' ,:via => :post
-  match 'admin/connect/students' => 'admin#connect_students_new'
+  match 'admin/connect/students/new' => 'admin#connect_students_new'
+  match 'admin/connect/students/create' => 'admin#connect_students_create' ,:via => :post
+  match 'admin/connect/teachers/new' => 'admin#connect_teachers_new'
+  match 'admin/connect/teachers/create' => 'admin#connect_teachers_create' ,:via => :post
 
   #department routes
   match 'departments' => 'department#index'

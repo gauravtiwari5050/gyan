@@ -27,6 +27,10 @@ class MessageMailingJob < Struct.new(:message_id)
     mvayoo_id = GyanV1::Application.config.mvayoo_id
     user_id = message.to_user
     user = User.find(user_id)
+    if user.nil? || user.contact_detail.nil?
+      Delayed::Worker.logger.info 'No contact details found'
+      return
+    end
     phone_number = user.contact_detail.phone
     
     url = "http://api.mVaayoo.com/mvaayooapi/MessageCompose?user=" + mvayoo_user +  ":"  + mvayoo_pass +"&senderID=" + mvayoo_id + "&receipientno=" + phone_number +"&msgtxt=" + message.subject + "&state=4"

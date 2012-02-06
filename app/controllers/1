@@ -1,5 +1,3 @@
-include Util
-
 class AdminController < ApplicationController
   before_filter :validate_institute_url
   before_filter {|role| role.validate_role 'ADMIN'}
@@ -255,9 +253,8 @@ class AdminController < ApplicationController
   def connect_students_new
   end
 
-  def connect_users_create(user_type)
-    users = User.find(:all ,:conditions => {:institute_id => get_institute_id,:user_type => user_type })
-    logger.info "HYD ->" + users.class.to_s
+  def connect_students_create
+    users = User.where("institute_id = ? and user_type = ?",get_institute_id,"STUDENT")
     from_user = current_user
     bulk_message_subj = params[:subject]
     bulk_message = params[:message]
@@ -267,29 +264,9 @@ class AdminController < ApplicationController
     is_twitter = params[:twitter]
     #TODO validate above booleans ?
     task =  create_new_task('BULK_MESSAGE','sending message to users',current_user.id,true)
-    bulk_messaging_job = BulkMessagingJob.new(task,users,from_user,bulk_message_subj,bulk_message,is_email,is_sms,is_fb,is_twitter)
-    Delayed::Job.enqueue(bulk_messaging_job)
+    bul_messaging_job = BulkMessagingJob.new(task,users,from_user,bulk_message_subj,bulk_message,is_email,is_sms,is_fb,is_twitter)
+    Delayed::Job.enqueue(bul_messaging_job)
 
-    
-  end
-
-  def connect_students_create
-    connect_users_create("STUDENT")
-    respond_to do |format|
-      format.html{ redirect_to('/admin/connect/students/new')}
-    end
-  end
-
-  def connect_teachers_create
-    connect_users_create("TEACHER")
-    respond_to do |format|
-      format.html{ redirect_to('/admin/connect/teachers/new')}
-    end
-    
-  end
-
-  def connect_teachers_new
-    
   end
 
   def ivrs_edit

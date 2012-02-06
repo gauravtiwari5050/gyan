@@ -1,5 +1,16 @@
 <h3> Please enter your message to connect with users </h3>
-<%= form_tag('add',:method => :post,:class => 'form-stacked') do -%>
+<%= form_tag('create',:method => :post,:class => 'form-stacked') do -%>
+  <% if  !flash[:alert].nil?%>
+    <div class="alert-message error">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+  <% if  !flash[:notice].nil?%>
+    <div class="alert-message success">
+      <%= flash[:notice] %>
+    </div>
+  <% end -%>
+
   <div class="field">
    <%= label_tag 'Subject'%> 
    <%= text_field_tag 'subject'%>
