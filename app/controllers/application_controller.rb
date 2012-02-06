@@ -395,4 +395,24 @@ class ApplicationController < ActionController::Base
 
 
   end
+
+  def validate_program_access
+    success =  false
+    program = Program.find_by_id(params[:id])
+    if !program.nil?
+      department = program.department
+
+      if !department.nil?
+        if !department.institute_id.nil? && (department.institute_id == get_institute_id)
+          success = true
+        end
+      end
+    end
+
+    if success == false
+      logger.info 'Access denied to program'
+      redirect_to (GyanV1::Application.config.landing_page.to_s)
+    end
+    
+  end
 end
