@@ -1,4 +1,3 @@
-#TODO error messages are not clear ,make the clearer
 class SignupController < ApplicationController
   layout 'signup'
   def new
@@ -20,14 +19,14 @@ class SignupController < ApplicationController
      
         if !@institute.save
           logger.error "error saving institute information"
-          raise "error saving institute information"
+          raise "There was an error saving the information your provided"
         end
         @institute_url.institute_id = @institute.id
         @institute_url.url = @institute.code + GyanV1::Application.config.url_suffix.to_s 
 
         if !@institute_url.save
           logger.error "error saving institute  url information"
-          raise "error saving institute url information"
+          raise "The institute url you selected is not unique"
         end
         
         if @signup.admin_pass != @signup.admin_pass_confirm
@@ -61,9 +60,10 @@ class SignupController < ApplicationController
 
       end
     rescue Exception => e
-      logger.error "Something went wrong"
+      error_message = "Something went wrong.There was an error :" + e.message
+      logger.error error_message
       persist_success = false
-      @signup.errors.add("institute_url",e.to_s)
+      @signup.errors.add("institute_url","The institute code and the email id should be unique")
     end
     if persist_success
       respond_to do|format|

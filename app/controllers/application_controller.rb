@@ -58,7 +58,6 @@ class ApplicationController < ActionController::Base
   end
 
   def get_home_for_user
-    #TODO what if user type is something else
    if session[:user_type] == 'ADMIN'
       return '/admin' 
    elsif session[:user_type] == 'STUDENT'
@@ -70,14 +69,15 @@ class ApplicationController < ActionController::Base
   end
 
   def get_institute_id
-    #will throw excpetion if institute url is null
-    #should be called only if url is valid
-    #bad TODO change this 
     current_host = request.host
     if !Rails.env.production?
       current_host += ':' + request.port.to_s
     end
     institute_url = InstituteUrl.find_by_url(current_host)
+    if institute_url.nil?
+      logger.info 'institute url is nil,redirecting'
+      redirect_to (GyanV1::Application.config.landing_page.to_s)
+    end
     return institute_url.institute_id
   end
 
@@ -155,7 +155,6 @@ class ApplicationController < ActionController::Base
   end
 
   def get_all_courses_for_user
-    #TODO add stuff for student user here
     if session[:user_type] == 'ADMIN'
       return get_all_courses_for_institute
     elsif session[:user_type] == 'TEACHER'
