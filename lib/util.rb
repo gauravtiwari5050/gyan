@@ -45,4 +45,43 @@ module Util
     end
     return message
   end
+  def add_users_from_file(user_type,helper_file)
+    if helper_file.nil?
+      return false,'No file added'
+    end
+    @helper_file = HelperFile.new(helper_file)
+    file_url = 'public' + @helper_file.file.url.to_s;
+    logger.info  file_url
+    task = Task.new
+    task.task_type = 'CREATE_USER_FROM_FILE'
+    task.description = 'creates users from uploaded file'
+    task.completion_status = 'RUNNING'
+    task.execution_status = 'PENDING'
+    task.output = ''
+    task.user_id = current_user.id
+    task.save
+
+    Delayed::Job.enqueue(CreateUserFromFileJob.new(file_url,task.id,user_type,get_institute_id))
+  end
+  def add_users_from_list(user_type,user_list)
+   if user_list.nil? || user_list.length == 0
+    return false,'the list of email you provided is not valid'
+   end
+   user_emails = user_list.split(/[\n ,]+/)
+   for email in user_emails
+    email = email.strip! || email
+    user = create_vanilla_user(email,user_type)
+    begin
+      
+      user.save
+      Delayed::Job.enqueue(MailingJob.new(user.id))
+    rescue Exception => e
+      logger.info e.message
+    end
+   end
+
+   return true,'The list of users has been queued for processing.Emails will be sent out to the users soon'
+    
+  end
+
 end

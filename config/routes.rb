@@ -43,6 +43,13 @@ GyanV1::Application.routes.draw do
   match 'teacher/users' => 'teacher#users_index'
   match 'teacher/departments' => 'teacher#department_index'
   match 'teacher/courses' => 'teacher#course_index'
+  match 'teacher/students/new' => 'teacher#students_new'
+  match 'teacher/students/bulk/new' => 'teacher#students_new_bulk'
+  match 'teacher/students/bulk/add' => 'teacher#students_bulk_add' ,:via => :post
+  match 'teacher/students/add' => 'teacher#students_add' ,:via => :post
+  match 'teacher/manage/students' => 'teacher#manage_students'
+  match 'teacher/connect/students/new' => 'teacher#connect_students_new'
+  match 'teacher/connect/students/create' => 'teacher#connect_students_create' ,:via => :post
 
   #student routes
   match 'student' => 'student#home'

@@ -1,0 +1,42 @@
+
+<%= form_tag('add',:multipart => true,:class => 'form-stacked',:method => :post) do -%>
+  <% if  !flash[:alert].nil?%>
+    <div class="alert-message error">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+  <% if  !flash[:notice].nil?%>
+    <div class="alert-message success">
+      <%= flash[:notice] %>
+    </div>
+  <% end -%>
+
+  <div class="field">
+    <%= label_tag 'email' ,"User's Email *" %> 
+    <%= text_field_tag 'user_email'  %>
+  </div>
+  <div class="field">
+    <%= label_tag 'user_name' ,"User's Name" %> 
+    <%= text_field_tag 'user_name'%>
+  </div>
+  
+  <div class="field">
+    <%= label_tag 'user_dob' ,"User's Date of Birth" %> 
+    <%= text_field_tag 'user_dob' %>
+  </div>
+  
+  <div class="field">
+    <%= label_tag 'user_term' ,"User's Semester" %> 
+    <%= select 'user_term' ,'user_term',options_for_select([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"]]),{ :include_blank => true }%>
+  </div>
+
+
+  <div class="field">
+    <%= label_tag 'user_propram' ,"User's Batch" %> 
+    <%=select  "user_program","user_program" ,options_for_select(get_programs_hash_for_institute),{ :include_blank => true } %>
+  </div>
+
+  <br>
+
+  <%= submit_tag %>
+<% end -%>

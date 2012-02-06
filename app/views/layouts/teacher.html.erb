@@ -15,6 +15,8 @@
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
   <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+  <%= yield :report_javascript %>
+  <%= yield :task_status_check_javascript %>
   <%= csrf_meta_tag %>
     <style type="text/css">
       body {
