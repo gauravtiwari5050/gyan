@@ -44,4 +44,13 @@ class ActiveSupport::TestCase
     course_allocation.user_id = user
     return course_allocation
   end
+
+  def get_new_course(institute_id,name,about,code)
+    course = Course.new
+    course.institute_id = institute_id
+    course.name = name
+    course.code = code
+    course.about = about
+    return course
+  end
 end
