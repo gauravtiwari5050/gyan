@@ -53,4 +53,26 @@ class ActiveSupport::TestCase
     course.about = about
     return course
   end
+
+  def get_new_user(institute_id,username,email,password_crypt,user_type)
+    user = User.new
+    user.institute_id = institute_id
+    user.username = username
+    user.password_crypt = password_crypt
+    user.user_type = user_type
+    user.email = email
+    return user
+  end
+
+  def get_new_contact_detail(user_id,address_1,address_2,address_3,city,state,phone)
+    contact_detail = ContactDetail.new
+    contact_detail.user_id = user_id
+    contact_detail.address_1 = address_1
+    contact_detail.address_2 = address_2
+    contact_detail.address_3 = address_3
+    contact_detail.city = city
+    contact_detail.state = state
+    contact_detail.phone = phone
+    return contact_detail
+  end
 end
