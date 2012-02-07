@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  type: 
+  task_type: 
   description: MyString
   completion_status: MyString
   execution_status: MyString
   output: MyText
 
 two:
-  type: 
+  task_type: 
   description: MyString
   completion_status: MyString
   execution_status: MyString

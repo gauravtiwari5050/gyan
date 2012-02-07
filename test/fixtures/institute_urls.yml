@@ -2,8 +2,8 @@
 
 one:
   institute_id: 1
-  url: MyString
+  url: institute_1_url
 
 two:
-  institute_id: 1
-  url: MyString
+  institute_id: 2
+  url: institute_2_url

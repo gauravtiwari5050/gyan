@@ -27,6 +27,7 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'fog'
 gem 'spreadsheet'
+gem "validates_existence", ">= 0.4"
 
 # Use unicorn as the web server
 # gem 'unicorn'

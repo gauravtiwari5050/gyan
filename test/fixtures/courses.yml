@@ -2,12 +2,12 @@
 
 one:
   institute_id: 1
-  name: MyString
-  about: MyText
-  code: MyString
+  name: course 1
+  about: about course 1
+  code: COURSE_1
 
 two:
   institute_id: 1
-  name: MyString
-  about: MyText
-  code: MyString
+  name: course 2
+  about: about course 2
+  code: COURSE_2

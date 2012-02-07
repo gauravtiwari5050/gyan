@@ -2,18 +2,27 @@
 
 one:
   institute_id: 1
-  username: MyString
-  email: MyString
-  password_crypt: MyString
-  user_type: MyString
-  one_time_login: MyString
+  username: user1
+  email: user1@test.com
+  password_crypt: user1_passcrypt
+  user_type: STUDENT
+  one_time_login: one_time_login_id
   is_validated: false
 
 two:
-  institute_id: 1
-  username: MyString
-  email: MyString
-  password_crypt: MyString
-  user_type: MyString
-  one_time_login: MyString
+  institute_id: 2
+  username: user2
+  email: user2@test.com
+  password_crypt: user2_passcrypt
+  user_type: TEACHER
+  one_time_login: one_time_login_id
+  is_validated: false
+
+three:
+  institute_id: 3
+  username: user3
+  email: user3@test.com
+  password_crypt: user3_passcrypt
+  user_type: ADMIN
+  one_time_login: one_time_login_id
   is_validated: false
