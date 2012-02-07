@@ -35,4 +35,13 @@ class ActiveSupport::TestCase
     student_program_detail.term = term
     return student_program_detail
   end
+
+  def get_new_course_allocation(course_id,program_id,term,user)
+    course_allocation = CourseAllocation.new
+    course_allocation.course_id = course_id
+    course_allocation.program_id = program_id
+    course_allocation.term = term
+    course_allocation.user_id = user
+    return course_allocation
+  end
 end
