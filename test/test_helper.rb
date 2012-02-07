@@ -27,4 +27,12 @@ class ActiveSupport::TestCase
     program.degree =  degree
     return program
   end
+
+  def get_new_student_program_detail(student_id,program_id,term)
+    student_program_detail = StudentProgramDetail.new
+    student_program_detail.student_id = student_id
+    student_program_detail.program_id = program_id
+    student_program_detail.term = term
+    return student_program_detail
+  end
 end
