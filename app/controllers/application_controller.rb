@@ -38,7 +38,8 @@ class ApplicationController < ActionController::Base
     # add another function to validate url for logged in user
     current_host = request.host
     if !Rails.env.production?
-      current_host += ':' + request.port.to_s
+     #current_host += ':' + request.port.to_s TODO ?? 3000 hard code why ?
+      current_host += ':' + 3000.to_s
     end
     institute_url = InstituteUrl.find_by_url(current_host)
     if institute_url.nil?
@@ -71,7 +72,8 @@ class ApplicationController < ActionController::Base
   def get_institute_id
     current_host = request.host
     if !Rails.env.production?
-      current_host += ':' + request.port.to_s
+      #current_host += ':' + request.port.to_s TODO 3000hardcoding why?
+      current_host += ':' + 3000.to_s
     end
     institute_url = InstituteUrl.find_by_url(current_host)
     if institute_url.nil?

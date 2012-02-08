@@ -3,4 +3,7 @@ class AssignmentSolution < ActiveRecord::Base
   mount_uploader :file, FileUploader
   belongs_to :assignment
   belongs_to :user
+  validates :assignment ,:presence => true
+  validates :user,:presence => true
+  validates :content,:presence => true
 end

@@ -264,13 +264,14 @@ class AdminController < ApplicationController
   end
 
   def ivrs_update
+    @helper_file = HelperFile.new  
     institute = Institute.find(get_institute_id)
     @ivrs_info = institute.ivrs_info
     respond_to do |format|
       if @ivrs_info.update_attributes(params[:ivrs_info])
         format.html { redirect_to('/admin/ivrs/edit', :notice => 'Your IVRS message was successfully updated') }
       else
-        format.html { render :action => "ivrs_info" }
+        format.html { render :action => "ivrs_edit" }
       end
     end
      

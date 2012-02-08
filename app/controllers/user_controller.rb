@@ -79,8 +79,6 @@ class UserController < ApplicationController
     @contact_detail = @user.contact_detail
     if @contact_detail.nil?
       @contact_detail = ContactDetail.new
-      @contact_detail.user_id = @user.id
-      @contact_detail.save
     end
     
   end
@@ -88,11 +86,19 @@ class UserController < ApplicationController
   def update_contact
     @user = User.find(:first,:conditions => {:id => params[:user_id],:institute_id => get_institute_id})
     @contact_detail = @user.contact_detail
+    success =  true
+    if @contact_detail.nil?
+      @contact_detail = ContactDetail.new(params[:contact_detail])
+      @contact_detail.user_id = @user.id
+      success =  @contact_detail.save
+    else
+      success = @contact_detail.update_attributes(params[:contact_detail]) 
+    end
     respond_to do |format|
-      if @contact_detail.update_attributes(params[:contact_detail]) == true
+      if success == true
         format.html{redirect_to('/users/'+@user.id.to_s+'/contact/edit', :notice => 'Contact details were successfully  updated.')}
       else
-        formt.html {render :action => edit_contact}
+        format.html {render :action => "edit_contact"}
       end
     end
     

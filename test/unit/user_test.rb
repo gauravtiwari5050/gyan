@@ -31,8 +31,8 @@ class UserTest < ActiveSupport::TestCase
     user = get_new_user(institutes(:one).id,"username","random@random.com","pass_crypt","ADMIN")
     assert user.save
     
-    contact_detail = get_new_contact_detail(user.id,"address1","address2","address3","city","state",12345)
-    assert contact_detail.save
+    contact_detail = get_new_contact_detail(user.id,"address1","address2","address3","city","state",1234512345)
+    assert contact_detail.save,contact_detail.inspect
 
     assert_raise(ActiveRecord::DeleteRestrictionError) {
       user.destroy 

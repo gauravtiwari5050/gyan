@@ -21,4 +21,8 @@ class Event < ActiveRecord::Base
   def self.format_date(date_time)
     Time.at(date_time.to_i).to_formatted_s(:db)
   end
-end
+  belongs_to :user
+  validates :user,:presence => :true
+  validates :title,:presence => :true
+  validates :starts_at,:presence => :true
+  end
