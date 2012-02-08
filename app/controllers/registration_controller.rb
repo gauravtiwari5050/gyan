@@ -98,12 +98,14 @@ class RegistrationController < ApplicationController
 
   def verify_update
     one_time_id = params[:one_time_id]
+    verification_message = "Verification successful"
     @user = User.find_by_one_time_login(one_time_id)
     @helper_user_verify = HelperUserVerify.new(params[:helper_user_verify])
     persist_success = true
     if @helper_user_verify.pass != @helper_user_verify.pass_repeat
       @helper_user_verify.errors.add('pass','Passwords do not match')
       persist_success = false
+      verification_message = "Passwords do not match"
     end
     if persist_success
       @user.username = @helper_user_verify.username
@@ -117,6 +119,7 @@ class RegistrationController < ApplicationController
       rescue Exception => e
         @helper_user_verify.errors.add('username',e.message)
         persist_success = false
+        verification_message = e.message
       end
     end
       
@@ -126,7 +129,8 @@ class RegistrationController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html {render :action => 'verify'}
+        flash[:alert] =  verification_message
+        format.html {redirect_to('/register/verify/'+one_time_id)}
       end
     end
 

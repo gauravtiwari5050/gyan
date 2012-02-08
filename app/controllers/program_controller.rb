@@ -19,7 +19,7 @@ class ProgramController < ApplicationController
     begin
       HelperProgramCourse.transaction do
         @course.name = @helper_program_course.course_name
-        @course.code = @helper_program_course.course_code
+        @course.code = get_institute_id.to_s + "_" + @helper_program_course.course_code
         @course.about = @helper_program_course.course_about
         @course.institute_id = get_institute_id
         @course.save
