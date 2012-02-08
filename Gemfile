@@ -28,6 +28,7 @@ gem 'therubyracer'
 gem 'fog'
 gem 'spreadsheet'
 gem "validates_existence", ">= 0.4"
+gem 'exception_notification'
 
 # Use unicorn as the web server
 # gem 'unicorn'

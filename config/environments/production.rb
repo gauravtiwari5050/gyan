@@ -70,5 +70,9 @@ GyanV1::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+  config.middleware.use ExceptionNotifier,
+  :email_prefix => "[Exception] ",
+  :sender_address => %{"Exception Notifier" <gauravt@cloudclasshq.com>},
+  :exception_recipients => %w{you@me.com}
 
 end
