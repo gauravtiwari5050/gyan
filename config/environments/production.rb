@@ -73,6 +73,6 @@ GyanV1::Application.configure do
   config.middleware.use ExceptionNotifier,
   :email_prefix => "[Exception] ",
   :sender_address => %{"Exception Notifier" <gauravt@cloudclasshq.com>},
-  :exception_recipients => %w{you@me.com}
+  :exception_recipients => %w{gaurav2gaurav@gmail.com}
 
 end
