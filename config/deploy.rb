@@ -44,5 +44,5 @@ after "deploy:stop",  "delayed_job:stop"
 after "deploy:start", "delayed_job:start"
 
 after 'deploy:update_code' do
-  run "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
+  run "cd #{release_path}; RAILS_ENV=production rake assets:precompile:all"
 end
