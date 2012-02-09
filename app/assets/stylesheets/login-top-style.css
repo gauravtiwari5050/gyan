@@ -1,0 +1,56 @@
+
+/*------------ TOP SECTION STARTS -----------*/
+div.loginTopSec {
+	width:1400px;
+	margin:0 auto;
+	padding:29px 0 28px 0;
+	height:47px;
+	}
+div.loginTopSec div.topLeft {
+	width:400px;
+	float:left;
+	}
+div.loginTopSec div.topLeft a.homelogo {
+	width:293px;
+	height:47px;
+	float:left;
+	}	
+div.loginTopSec div.topRight {
+	width:auto;
+	margin:0;
+	padding:5px 0 0 0;
+	}
+div.loginTopSec div.topRight ul.topHomeLinks {
+	font-size:14px;
+	line-height:43px;
+	font-weight:bold;
+	float:right;
+	text-align:right;
+	}
+div.loginTopSec div.topRight ul.topHomeLinks li {
+	float:right;
+	margin-left:18px;
+	}
+div.loginTopSec div.topRight ul.topHomeLinks li a {
+	color:#2384C2;
+	background-color:inherit;
+	}
+div.loginTopSec div.topRight ul.topHomeLinks li a:hover,
+div.loginTopSec div.topRight ul.topHomeLinks li a.active {
+	color:#4CAD00;
+	background-color:inherit;
+	}
+div.loginTopSec span.xyz{
+	font:normal 35px/44px AllerRegular;
+	color:#221E1F;
+	background-color:inherit;
+	border-left:1px solid #E0E0E0;
+	float:left;
+	margin:0 10px 0 0;
+	}
+div.loginTopSec span.xyz span{
+	font-family:AllerBold;
+}
+div.loginTopSec img{
+	margin:5px 0 0 0;
+}

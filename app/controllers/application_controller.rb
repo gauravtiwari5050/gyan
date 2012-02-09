@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     request.accepts.sort! { |x, y| ajax_request_types.include?(y.to_s) ? 1 : -1 } if request.xhr?
   end
 
-  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user
+  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute
 
   def md5_hash(content)
   require 'digest/md5'
@@ -81,6 +81,13 @@ class ApplicationController < ActionController::Base
       redirect_to (GyanV1::Application.config.landing_page.to_s)
     end
     return institute_url.institute_id
+  end
+
+  def get_current_institute
+    #assuming that get_institute_id would redirect this to home page if the current url does not exists
+    institute_id = get_institute_id
+    #using find instead of find_by_id because this is supposed to throw exception
+    institute = Institute.find(institute_id)
   end
 
   def get_teachers_for_institute
