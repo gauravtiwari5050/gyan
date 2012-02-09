@@ -13,20 +13,20 @@ class SignupController < ApplicationController
     begin
       Signup.transaction do
 
-
         @institute.code = @signup.institute_url
         @institute.name = @signup.institute_name
      
         if !@institute.save
           logger.error "error saving institute information"
-          raise "There was an error saving the information your provided"
+          logger.error "PANDA ->" + @institute.errors.inspect #TODO this aint getting printed
+          raise "Institute url is not unique.Please select a new one"
         end
         @institute_url.institute_id = @institute.id
         @institute_url.url = @institute.code + GyanV1::Application.config.url_suffix.to_s 
 
         if !@institute_url.save
           logger.error "error saving institute  url information"
-          raise "The institute url you selected is not unique"
+          raise "The institute url you selected is not unique.Please select a new one"
         end
         
         if @signup.admin_pass != @signup.admin_pass_confirm
@@ -63,7 +63,7 @@ class SignupController < ApplicationController
       error_message = "Something went wrong.There was an error :" + e.message
       logger.error error_message
       persist_success = false
-      @signup.errors.add("institute_url","The institute code and the email id should be unique")
+      @signup.errors.add("institute_url","The institute code is")
     end
     if persist_success
       respond_to do|format|

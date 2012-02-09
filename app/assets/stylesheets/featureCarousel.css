@@ -1,0 +1,33 @@
+/********************
+ * FEATURE CAROUSEL *
+ ********************/
+#featureCarousel {
+    height: 305px;
+    width:410px;
+    position:relative;
+	left:-65px;
+}
+#featureCarousel img {
+    border:0;
+}
+#featureCarousel .feature {
+    position:absolute;
+   /* top:-1000px;
+    left:-1000px;
+    border:3px solid white;*/
+    cursor:pointer;
+}
+#featureCarousel .feature > div {
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    background-color:black;
+    width:100%;
+}
+#featureCarousel .feature > div p {
+    margin:0;
+    padding:5px;
+    font-weight:bold;
+    font-size:12px;
+    color:white;
+}

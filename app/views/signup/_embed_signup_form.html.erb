@@ -1,37 +1,41 @@
 <% content_for :embed_signup_form do -%>
 <%= form_for(@signup,:html =>{:class => 'form-stacked',:multipart => true},:url => 'register-institute' ,:method => :post) do |f| %>
   <% if @signup.errors.any? %>
-    <div id="error_explanation" class = "alert-message error">
-      <h2><%= pluralize(@signup.errors.count, "error") %> prohibited this signup from being saved:</h2>
-
+    <div id="error_explanation" class = "alert alert-error">
+      <a class="close">×</a>
+      <font color="black">
+      <strong> 
+        There were errors with your submission 
+      </strong>
       <ul>
       <% @signup.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
+      </font>
     </div>
   <% end %>
 
 <div class="field">
-  <%= f.label :institute_name, 'institute_name' %>
+  <%= f.label :institute_name, 'Institute Name' %>
   <%= f.text_field :institute_name %>
 </div>
 <div class="field">
-  <%= f.label :institute_url, 'institute_url' %>
+  <%= f.label :institute_url, 'Url for the institute' %>
   <%= f.text_field :institute_url %>
 </div>
 <div class="field">
-  <%= f.label :admin_email, 'admin email' %>
+  <%= f.label :admin_email, 'Admins Email Id' %>
   <%= f.text_field :admin_email %>
 </div>
 
 <div class="field">
-  <%= f.label :admin_pass, 'admin_pass' %>
+  <%= f.label :admin_pass, 'Admins password' %>
   <%= f.password_field :admin_pass %>
 </div>
 
 <div class="field">
-  <%= f.label :admin_pass_confirm, 'repeat_admin_pass' %>
+  <%= f.label :admin_pass_confirm, 'Confirm password' %>
   <%= f.password_field :admin_pass_confirm %>
 </div>
 
