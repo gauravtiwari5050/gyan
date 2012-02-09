@@ -15,6 +15,7 @@
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
   <script type='text/javascript' src='http://www.scribd.com/javascripts/view.js'></script>
+  <%= yield :refresh_file_link %>
   <%= csrf_meta_tag %>
     <style type="text/css">
       body {

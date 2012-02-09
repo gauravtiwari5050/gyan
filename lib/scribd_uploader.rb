@@ -102,8 +102,8 @@ class ScribdUploader < Struct.new(:obj,:location)
     doc.save
 
     return doc.id,doc.access_key
-  rescue
-    puts "couldnt upload to scribd"
+  rescue Excepion => e
+    puts "couldnt upload to scribd due to " + e.message
     return nil,nil
   end
 
@@ -114,8 +114,8 @@ class ScribdUploader < Struct.new(:obj,:location)
     s3_upload_success =  true
     begin
       upload_to_s3(obj,location)
-    rescue
-      Delayed::Worker.logger.info 'uploading to s3 failed'
+    rescue Exception => e
+      Delayed::Worker.logger.info 'uploading to s3 failed due to ' + e.message
       s3_upload_success = false
     end
 

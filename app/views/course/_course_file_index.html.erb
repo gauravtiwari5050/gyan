@@ -1,16 +1,60 @@
+<% content_for :refresh_file_link do -%>
+<script type="text/javascript">
+  
+  $(document).ready(function() {
+    setInterval(function(){
+      refresh_file_links();
+    },5000);
+  });
 
+  function refresh_file_links() {
+    var more_links_to_refresh =  false;
+    $(".refresh").each(function(index){
+      more_links_to_refresh =  true;
+      var course = $(this).attr("data-course");
+      var file = $(this).attr("data-file");
+      var current_object = $(this);
+      $.read(
+        '/courses/{id}/files/{file_id}',
+        {id : course,file_id : file},
+        function(response) {
+          if(response != null) {
+            course_file = response.course_file;
+            if (course_file != null) {
+              if(course_file.s3_url !=null) {
+                current_object.attr("href",course_file.s3_url)
+              }
+              if(course_file.scribd_id != null && course_file.scribd_id.length > 0){
+                onclick_text = "load_file('"+ course_file.scribd_id+ "','" + course_file.scribd_key + "'); return false;"
+                current_object.attr("href","#");
+                current_object.attr("onclick",onclick_text);
+
+              }
+            }
+          }
+        }
+      );
+
+     
+    });   
+  }
+</script>
+  
+<% end -%>
 <% content_for :embed_file_index do %>
+<div id = "file-index">
 <% @course.course_files.each do |course_file| %>
     <% if !course_file.scribd_key.nil? && course_file.scribd_id.length > 0  %>
       <li><%= link_to_function course_file.name,"load_file('"+course_file.scribd_id.to_s+"','"+ course_file.scribd_key.to_s+"')" %></li>
     <% else %>
        <% if !course_file.s3_object.nil? && !course_file.s3_object.url.nil?%>
-          <li><%= link_to course_file.name, course_file.s3_object.url %></li>
+          <li><%= link_to course_file.name, course_file.s3_object.url,:class => "refresh" ,"data-course" => @course.id ,"data-file" => course_file.id %></li>
        <% else %>
-        <li><%= link_to course_file.name, course_file.content_url.to_s %></li>
+        <li><%= link_to course_file.name, course_file.content_url.to_s,:class => "refresh","data-course" => @course.id ,"data-file" => course_file.id %></li>
        <% end %>
     <% end %>
 <% end %>
+</div>
 <%= link_to "Create file", "/courses/"+@course.id.to_s+"/files/new" %>
 <% end -%>
 

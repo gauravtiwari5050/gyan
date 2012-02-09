@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120205130415) do
+ActiveRecord::Schema.define(:version => 20120209071838) do
 
   create_table "assignment_solutions", :force => true do |t|
     t.integer  "assignment_id"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20120205130415) do
     t.datetime "updated_at"
     t.string   "scribd_id"
     t.string   "scribd_key"
+    t.string   "s3_url"
   end
 
   create_table "course_groups", :force => true do |t|

@@ -114,6 +114,7 @@ GyanV1::Application.routes.draw do
   match 'courses/:id/files/new' => 'course#file_new'
   match 'courses/:id/files/create' => 'course#file_create' ,:via => :post
   match 'courses/:id/files' => 'course#file_index'
+  match 'courses/:id/files/:file_id' => 'course#file_show'
   match 'courses/:id/groups' => 'course#group_index'
   match 'courses/:id/groups/assign' => 'course#group_assign'
   match 'courses/:id/announcements/new' => 'course#announcement_new'

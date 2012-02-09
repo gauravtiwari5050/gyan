@@ -118,6 +118,17 @@ class CourseController < ApplicationController
     @course = Course.find(params[:id])
   end
 
+  def file_show
+    @course = Course.find(params[:id])
+    @file = @course.course_files.find(params[:file_id])
+    if @file.s3_object != nil
+      @file.s3_url = @file.s3_object.url
+    end
+    respond_to do |format|
+     format.js {render :json => @file}
+    end
+  end
+
   def group_index
     @course = Course.find(params[:id])
     @unassigned_students = get_unassigned_students_for_course(@course.id)
