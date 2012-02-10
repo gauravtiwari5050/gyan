@@ -14,19 +14,19 @@
         outline:none;
         text-align: center;
     }
-    #users_button {background:#f5f5f5 url(image_path('human.jpg')) 0 0 no-repeat;}
-    #users_button:hover {background:#fff url(image_path('human.jpg')) -175px 0 no-repeat;}
-    #settings_button {background:#fff url(image_path('settings.jpg')) 0 0 no-repeat;}
-    #settiongs_button:hover {background:#fff url(image_path('settings.jpg')) -175px 0 no-repeat;}
-    #calendar_button {background:#fff url(image_path('calendar.jpg')) 0 0 no-repeat;}
-    #calendar_button:hover {background:#fff url(image_path('calendar.jpg')) -175px 0 no-repeat;}
-    #reports_button {background:#fff url(image_path('reports.jpg')) 0 0 no-repeat;}
-    #reports_button:hover {background:#fff url(image_path('reports.jpg')) -175px 0 no-repeat;}
-    #announcements_button {background:#fff url(image_path('announcements.jpg')) 0 0 no-repeat;}
-    #announcements_button:hover {background:#fff url(image_path('announcements.jpg')) -175px 0 no-repeat;}
-    #courses_button {background:#fff url(image_path('book.png')) 0 0 no-repeat;}
-    #departments_button {background:#f5f5f5 url(image_path('human.jpg')) 0 0 no-repeat;}
-    #departments_button:hover {background:#fff url(image_path('human.jpg')) -175px 0 no-repeat;}
+    #users_button {background:url(image_path('human.png')) 0 0 no-repeat;}
+    #users_button:hover {background:url(image_path('human.png')) -175px 0 no-repeat;}
+    #settings_button {background: url(image_path('settings.png')) 0 0 no-repeat;}
+    #settiongs_button:hover {background: url(image_path('settings.png')) -175px 0 no-repeat;}
+    #calendar_button {background: url(image_path('calendar.png')) 0 0 no-repeat;}
+    #calendar_button:hover {background: url(image_path('calendar.png')) -175px 0 no-repeat;}
+    #reports_button {background: url(image_path('reports.png')) 0 0 no-repeat;}
+    #reports_button:hover {background: url(image_path('reports.png')) -175px 0 no-repeat;}
+    #announcements_button {background:url(image_path('announcements.png')) 0 0 no-repeat;}
+    #announcements_button:hover {background:url(image_path('announcements.png')) -175px 0 no-repeat;}
+    #courses_button {background:url(image_path('book.png')) 0 0 no-repeat;}
+    #departments_button {background:url(image_path('human.png')) 0 0 no-repeat;}
+    #departments_button:hover {background:url(image_path('human.png')) -175px 0 no-repeat;}
 
       .button-box{
         position: relative;

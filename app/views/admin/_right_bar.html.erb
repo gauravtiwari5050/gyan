@@ -1,22 +1,8 @@
-  
-            <div class="hero-unit">
-              <p>Quick Links</p>
+            <p> Quick Links </p>
+            <ul>
+              <li><a href="#" title="Add an Announcement">New Announcement</a></li>
+            	<li><a href="/departments/new">New Department</a></a></li>
+              <li><%= link_to "Add Teachers", '/admin/teachers/new' %></li>
+              <li> <%= link_to "Add Student", '/admin/students/new' %> </li>
+            </ul>
 
-              <div class="clearfix"></div>
-              <div id="bold-box-big">
-                <a href="#about">New Announcement</a>
-              </div>
-              <div class="clearfix"></div>
-              <div id="bold-box-big">
-                <a href="/departments/new">Add Department</a>
-              </div>
-              <div class="clearfix"></div>
-              <div id="bold-box-big">
-                 <%= link_to "Add Teachers", '/admin/teachers/new' %>
-              </div>
-              <div class="clearfix"></div>
-              <div id="bold-box-big">
-                 <%= link_to "Add Student", '/admin/students/new' %>
-              </div>
-              <div class="clearfix"></div>
-            </div>

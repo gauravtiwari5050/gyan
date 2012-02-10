@@ -10,11 +10,11 @@ $(document).ready(function(){
       for(var i = 0;i<response.length;i++) {
         var alert_class = '';
         if(response[i].task.execution_status == 'SUCCESS') {
-          alert_class = 'alert-message success';
+          alert_class = 'alert alert-success';
         } else if(response[i].task.execution_status == 'PENDING'){
-          alert_class = 'alert-message info';
+          alert_class = 'alert alert-info';
         } else {
-          alert_class = 'alert-message error';
+          alert_class = 'alert alert-error';
         }
 
         html_message += '<div class="'+ alert_class +'">';
@@ -33,32 +33,44 @@ $(document).ready(function(){
 <h3> Please add your message for students for using IVRS </h3>
 <%= form_for(@ivrs_info,:html =>{:class => 'form-stacked',:multipart => true},:url => 'update' ,:method => :put) do |f| %>
   <% if @ivrs_info.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@ivrs_info.errors.count, "error") %> prohibited this ivrs_info from being saved:</h2>
+    <div class="error_explanation alert alert-error">
+      <a class="close">×</a>
+        <font color="black">
+        <strong> There were errors with your submission</strong> 
 
       <ul>
       <% @ivrs_info.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
+      </font>
     </div>
   <% end %>
   <% if  !flash[:alert].nil?%>
-    <div class="alert-message error">
-      <%= flash[:alert] %>
-    </div>
+     <div class="alert alert-error">
+      <a class="close">×</a>
+        <font color="black">
+        <strong> 
+          There were errors with your submission 
+        </strong>
+          <%= flash[:alert] %>
+        </font>
+      </div>
   <% end %>
   <% if  !flash[:notice].nil?%>
-    <div class="alert-message success">
-      <%= flash[:notice] %>
-    </div>
+     <div class="alert alert-success">
+      <a class="close">×</a>
+        <font color="black">
+          <%= flash[:notice] %>
+        </font>
+      </div>
   <% end -%>
 
   <div class="field">
     <%= f.label :message %><br />
     <%= f.text_area :message %>
   </div>
-  <div class="actions">
+  <div class="actions field">
     <%= f.submit %>
   </div>
 <% end %>
@@ -82,7 +94,7 @@ $(document).ready(function(){
     <%= f.label :file %>
     <%= f.file_field :file  %>
    </div>
-  <div class="actions">
+  <div class="actions field">
     <%= f.submit 'Upload file'%>
   </div>
 <% end %>

@@ -1,36 +1,11 @@
 <% content_for :left_bar do %>
-        <div class="well">
-          <div id="bold-box-big">
-            <a href="/courses/<%=@course.id%>/home"><%= @course.name%> </a>
-          </div>
-          <div class="clearfix"></div>
-          <div id="bold-box-big">
-            <a href="/courses/<%=@course.id%>/announcements">Announcements</a>
-          </div>
-          <div class="clearfix"></div>
-          <div id="bold-box-big">
-            <a href="/courses/<%=@course.id%>/assignments">Assignments</a>
-          </div>
-          <div class="clearfix"></div>
-          <div id="bold-box-big">
-            <a href="#about">Quizzes</a>
-          </div>
-          <div class="clearfix"></div>
-          <div id="bold-box-big">
-            <a href="/courses/<%=@course.id%>/channel">Live Channel</a>
-          </div>
-          <div class="clearfix"></div>
-          <div id="bold-box-big">
-            <a href="/courses/<%=@course.id%>/files">Files</a>
-          </div>
-          <div class="clearfix"></div>
-          <div id="bold-box-big">
-            <a href="/courses/<%=@course.id%>/groups">Groups</a>
-          </div>
-          <div class="clearfix"></div>
-          <div id="bold-box-big">
-            <a href="/courses/<%=@course.id%>/forum">Forum</a>
-          </div>
-          <div class="clearfix"></div>
-        </div>
+        <div class="headofcourse"> <%=@course.name%> </div>
+        <ul>
+            <li><a href="/courses/<%=@course.id%>/announcements">Announcements</a></li>
+            <li><a href="/courses/<%=@course.id%>/assignments">Assignments</a></li>
+            <li><a href="/courses/<%=@course.id%>/channel">Live Channel</a></li>
+            <li><a href="/courses/<%=@course.id%>/files">Files</a></li>
+            <li><a href="/courses/<%=@course.id%>/groups">Groups</a></li>
+            <li><a href="/courses/<%=@course.id%>/forum">Forum</a></li>
+        </ul>
 <% end -%>

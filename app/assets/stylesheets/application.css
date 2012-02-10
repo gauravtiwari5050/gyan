@@ -1,5 +1,9 @@
 /* 
 *= require_self 
-*= require_tree . 
+*= require bootstrap  
+*= require bootstrap-extra-container  
+*= require dashboard 
+*= require fullcalendar 
+*= require inner-style  
 
 */  

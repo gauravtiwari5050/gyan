@@ -1,7 +1,7 @@
 <% content_for :left_bar do -%>
   <%= render 'left_bar' %>
 <% end -%>
-<% content_for :right_bar do -%>
+<% content_for :top_bar do -%>
   <%= render :template => 'shared/top_bar' %>
 <% end -%>
 <% content_for :right_bar do -%>
@@ -20,11 +20,11 @@ $(document).ready(function(){
       for(var i = 0;i<response.length;i++) {
         var alert_class = '';
         if(response[i].task.execution_status == 'SUCCESS') {
-          alert_class = 'alert-message success';
+          alert_class = 'alert alert-success';
         } else if(response[i].task.execution_status == 'PENDING'){
-          alert_class = 'alert-message info';
+          alert_class = 'alert alert-info';
         } else {
-          alert_class = 'alert-message error';
+          alert_class = 'alert alert-error';
         }
 
         html_message += '<div class="'+ alert_class +'">';

@@ -1,14 +1,23 @@
 
 <%= form_tag('add',:multipart => true,:class => 'form-stacked',:method => :post) do -%>
   <% if  !flash[:alert].nil?%>
-    <div class="alert-message error">
-      <%= flash[:alert] %>
-    </div>
+     <div class="alert alert-error">
+      <a class="close">×</a>
+        <font color="black">
+        <strong> 
+          There were errors with your submission 
+        </strong>
+          <%= flash[:alert] %>
+        </font>
+      </div>
   <% end %>
   <% if  !flash[:notice].nil?%>
-    <div class="alert-message success">
-      <%= flash[:notice] %>
-    </div>
+     <div class="alert alert-success">
+      <a class="close">×</a>
+        <font color="black">
+          <%= flash[:notice] %>
+        </font>
+      </div>
   <% end -%>
 
   <div class="field">

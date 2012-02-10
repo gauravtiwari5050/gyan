@@ -9,11 +9,11 @@ $(document).ready(function(){
       for(var i = 0;i<response.length;i++) {
         var alert_class = '';
         if(response[i].task.execution_status == 'SUCCESS') {
-          alert_class = 'alert-message success';
+          alert_class = 'alert alert-success';
         } else if(response[i].task.execution_status == 'PENDING'){
-          alert_class = 'alert-message info';
+          alert_class = 'alert alert-info';
         } else {
-          alert_class = 'alert-message error';
+          alert_class = 'alert alert-error';
         }
 
         html_message += '<div class="'+ alert_class +'">';
@@ -32,21 +32,33 @@ $(document).ready(function(){
 </div>
 <h2> Please give a comma seperated list of emails</h2>
   <% if  !flash[:alert].nil?%>
-    <div class="alert-message error">
-      <%= flash[:alert] %>
-    </div>
+     <div class="alert alert-error">
+      <a class="close">×</a>
+        <font color="black">
+        <strong> 
+          There were errors with your submission 
+          </br>
+        </strong>
+          <%= flash[:alert] %>
+        </font>
+      </div>
   <% end %>
   <% if  !flash[:notice].nil?%>
-    <div class="alert-message success">
-      <%= flash[:notice] %>
-    </div>
+     <div class="alert alert-success">
+      <a class="close">×</a>
+        <font color="black">
+          <%= flash[:notice] %>
+        </font>
+      </div>
   <% end -%>
 
 <%= form_tag('add',:method => :post) do -%>
   <%= text_area_tag 'user_list' ,nil,:rows => 20  %>
   <br>
 
-  <%= submit_tag %>
+  <div class="field actions">
+    <%= submit_tag %>
+  </div>
 <% end -%>
 
 <h2> Or  Upload a csv/excel file containing the list</h2>
@@ -66,7 +78,7 @@ $(document).ready(function(){
     <%= f.label :file %>
     <%= f.file_field :file  %>
    </div>
-  <div class="actions">
+  <div class="field actions">
     <%= f.submit 'Upload file'%>
   </div>
 <% end %>

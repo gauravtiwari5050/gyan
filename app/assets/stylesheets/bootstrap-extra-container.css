@@ -1,0 +1,22 @@
+
+.span12, .container-auto-width {
+  width: 100%;
+}
+.container-auto-width {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  *zoom: 1;
+}
+.container-auto-width:before, .container-auto-width:after {
+  display: table;
+  content: "";
+}
+.container-auto-width:after {
+  clear: both;
+}
+
+.field {
+padding-top : 10px;
+padding-bottom : 3px;
+}

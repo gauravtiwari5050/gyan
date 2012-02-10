@@ -5,7 +5,7 @@
 body {
 	margin:0;
 	padding:0;
-	background:url(../images/bodybg01.gif) repeat-x 0 0 #BBEBF9;
+	background:url(<%= asset_path 'bodybg01.gif'%>) repeat-x 0 0 #BBEBF9;
 	font:normal 14px/18px "Trebuchet MS", Arial, Helvetica, sans-serif;
 	color:#123548;
 	background-attachment:fixed;
@@ -45,7 +45,7 @@ div.topSec {
 	left:0;
 	top:0;
 	z-index:10;
-	background:url(../images/topsec.gif) repeat-x 0 0;
+	background:url(<%= asset_path 'topsec.gif'%>) repeat-x 0 0;
 	}
 /*------------ TOP lEFT STARTS -----------*/
 div.topSec div.topLeft {
@@ -91,10 +91,10 @@ div.topSec div.topMiddle div.topMiddleLinks ul.menu li a:hover {
 	text-decoration:underline;
 	}
 div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg {
-	background:url(../images/topmid-arrow.gif) 0 100%;
+	background:url(<%= asset_path 'topmid-arrow.gif'%>) 0 100%;
 	}
 div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg a {
-	background:url(../images/topmid-nav.gif) repeat-x 0 0;
+	background:url(<%= asset_path 'topmid-nav.gif'%>) repeat-x 0 0;
 	color:#fff;
 	background-color:inherit;
 	border:1px solid #0087AE;
@@ -107,7 +107,7 @@ div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg a:hover {
 	border:1px solid #3A4766;
 	}	
 div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg a span {
-	background:url(../images/topmid-arrow.gif) no-repeat 100% 7px;
+	background:url(<%= asset_path 'topmid-arrow.gif'%>) no-repeat 100% 7px;
 	padding-right:20px;
 	}
 div.topSec div.topMiddle div.topMiddleLinks ul.menu li.grades{
@@ -121,7 +121,7 @@ top:28px;
 left:0;
 display:none;
 list-style:none;
-background:url(../images/submenubg.jpg) no-repeat 0 0 #485573;
+background:url(<%= asset_path 'submenubg.jpg'%>) no-repeat 0 0 #485573;
 width:440px;
 z-index:100;
 padding:0 22px;
@@ -200,7 +200,7 @@ div.topSec div.topRight div.topRgtCont ul.topRgtLinks {
 div.topSec div.topRight div.topRgtCont ul.topRgtLinks li {
 	display:inline;
 	padding:0 0 0 8px;
-	background:url(../images/top-rgt-divider.gif) no-repeat 0 2px;
+	background:url(<%= asset_path 'top-rgt-divider.gif'%>) no-repeat 0 2px;
 	}
 div.topSec div.topRight div.topRgtCont ul.topRgtLinks li.frist {
 	background:none;
@@ -238,7 +238,7 @@ div.bodySec div.bodyRight ul li{
 	font-size:16px;
 	line-height:28px;
 	font-weight:bold;
-	background:url(../images/dash.jpg) repeat-x 0 0;
+	background:url(<%= asset_path 'dash.jpg'%>) repeat-x 0 0;
 }
 div.bodySec div.bodyRight ul li:first-child{
 	background:none;
@@ -247,7 +247,7 @@ div.bodySec div.bodyRight ul li a{
 	display:block;
 	color:#313030;
 	background-color:inherit;
-	background:url(../images/arrow.gif) no-repeat 0 50%;
+	background:url(<%= asset_path 'arrow.gif'%>) no-repeat 0 50%;
 	padding:0 0 0 8px;
 }
 div.bodySec div.bodyRight ul li a:hover{
@@ -269,10 +269,12 @@ div.bodySec div.bodyLeftMain div.bodyLeftPanel {
 	padding:5px;
 	}
 div.bodySec div.bodyLeftMain div.bodyLeftPanel div.headofcourse{
-	background:url(../images/coursebg.gif) repeat-x 0 0;
-	height:23px;
-	padding:9px 0 0 12px;
+  background: none repeat scroll 0 0 #383838;
+	height:auto;
+	padding:9px 0 10px 12px;
 	border:1px solid #000;
+  color: white;
+  font-size: 22px;
 }
 div.bodySec div.bodyLeftMain div.bodyLeftPanel ul{
 }
@@ -286,11 +288,11 @@ div.bodySec div.bodyLeftMain div.bodyLeftPanel ul li a{
 	border:1px solid #D0D2D4;
 	display:block;
 	padding:0 0 0 16px;
-	background:url(../images/arrow01.gif) no-repeat 7px 50%;
+	background:url(<%= asset_path 'arrow01.gif'%>) no-repeat 7px 50%;
 	background-color:#fff;
 	}
 div.bodySec div.bodyLeftMain div.bodyLeftPanel ul li a:hover{
-	background:url(../images/arrow02.gif) no-repeat 7px 50%;
+	background:url(<%= asset_path 'arrow02.gif'%>) no-repeat 7px 50%;
 	background-color:#C2E5F8;
 	border:1px solid #ADD4E9;
 	color:#2385C3;
@@ -339,7 +341,7 @@ div.bodySec div.bodyLeftMain div.bodyRgithPanel div.announcment div.instructor s
 
 div.bodySec div.bodyLeftMain div.bodyRgithPanel div.announcment h2{
 	color:#fff;
-	background:url(../images/h2bg.gif) repeat-x 0 0;
+	background:url(<%= asset_path 'h2bg.gif'%>) repeat-x 0 0;
 	line-height:31px;
 	padding:0 0 0 13px;
 }
@@ -352,7 +354,7 @@ div.bodySec div.bodyLeftMain div.bodyRgithPanel div.announcment div.annou001{
 	margin:9px 9px 0 9px;
 }
 div.bodySec div.bodyLeftMain div.bodyRgithPanel div.announcment div.annou001 h3{
-	background:url(../images/h3bg.gif) repeat-x 0 0;
+	background:url(<%= asset_path 'h3bg.gif'%>) repeat-x 0 0;
 	line-height:30px;
 	display:block;
 	margin:0;
@@ -443,7 +445,7 @@ a.button02{
 	margin:15px 0 11px 5px;
 }
 a.button01 span{
-	background:url(../images/buttonbg.gif) repeat-x 0 0;
+	background:url(<%= asset_path 'buttonbg.gif'%>) repeat-x 0 0;
 	border:1px solid #000;
 	color:#fff;
 	height:23px;
@@ -455,7 +457,7 @@ a.button01 span{
 	display:inline-block;
 }
 a.button01:hover span{
-	background:url(../images/buttonbghv.gif) repeat-x 0 0;
+	background:url(<%= asset_path 'buttonbghv.gif'%>) repeat-x 0 0;
 }
 
 /*-----------footer----------*/

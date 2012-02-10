@@ -1,19 +1,29 @@
-    <div class="topbar" data-dropdown="dropdown">
-      <div class="topbar-inner">
-        <div class="container-fluid">
-          <a class="brand" href="<%=get_home_for_user%>">CloudClass</a>
-          <ul class="nav">
-	    <li class="menu">
-                      <a href="#" class="menu">Courses</a>
-                       <% courses = get_all_courses_for_user %>
-                      <ul class="menu-dropdown">
-                        <% for course in courses -%>
-                          <li><%= link_to course.name, '/courses/'+course.id.to_s+'/home' %></li>
-                        <% end -%>
-                        <li class="divider"></li>
-                        <li><a href="/courses">All Courses</a></li>
-                      </ul>
-            </li>
+		<div class="topSec">
+			<div class="topLeft">
+				<a href="<%=get_home_for_user%>" class="logo" title="cloudclass"><img src=<%= asset_path "logo.gif" %> alt="cloudclass" /></a>
+			</div>
+			<div class="topRight">
+				<div class="topRgtCont">
+					<p>Welcome <%= session[:user_name] %></p>
+					<ul class="topRgtLinks">
+						<li class="frist"><a href="<%= '/users/'+current_user.id.to_s+'/profile'%>" title="Profile">Profile</a></li>
+						<li><a href="/inbox" title="Inbox">Inbox</a></li>
+						<li><a href="/logout" title="Logout">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="topMiddle">
+				<div class="topMiddleLinks">
+					<ul id="menu" class="menu">
+						<li class="backbg"><a href="#" title="Courses"><span>Courses</span></a>
+                 <ul>
+                    <% courses = get_all_courses_for_user %>
+                    <% for course in courses -%>
+                          <li><span> <%= link_to course.name, '/courses/'+course.id.to_s+'/home',:class => "headingsubmenu" %> </span></li>
+                    <% end -%>
+                    <li><span><a href="" class="headingsubmenu">All Courses</a></span></li>
+                 </ul>
+           </li>
             <% if current_user.user_type == 'ADMIN' %>
               <%= render :template => 'shared/admin_nav' %>
             <% end %>
@@ -21,11 +31,11 @@
               <%= render :template => 'shared/teacher_nav' %>
             <% end %>
             <%= render :template => 'shared/groups' %>
-            <li><a href="/calendar">Calendar</a></li>
-          </ul>
-          <p class="pull-right"> <a href="/logout"> Log out </a></p>
-          <p class="pull-right">Logged in as <a href="<%= '/users/'+current_user.id.to_s+'/profile'%>"><%= session[:user_name]+'    .'  %></a></p>
-        </div>
-      </div>
-    </div>
-  
+
+						<li><a href="/calendar" title="Grades" class="grades">Calendar</a></li>
+                        
+					</ul>
+				</div>
+			</div>
+			<div class="spacer"></div>
+		</div>
