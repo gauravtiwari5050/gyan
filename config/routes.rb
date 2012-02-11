@@ -64,6 +64,8 @@ GyanV1::Application.routes.draw do
   match 'admin' => 'admin#home'
   match 'admin/users' => 'admin#users_index'
   match 'admin/departments' => 'admin#department_index'
+  match 'admin/departments/new' => 'admin#department_new'
+  match 'admin/departments/create' => 'admin#department_create' ,:via => :post
   match 'admin/courses' => 'admin#course_index'
   match 'admin/teachers/new' => 'admin#teachers_new'
   match 'admin/teachers/bulk/new' => 'admin#teachers_new_bulk'
@@ -89,9 +91,6 @@ GyanV1::Application.routes.draw do
   match 'admin/connect/teachers/create' => 'admin#connect_teachers_create' ,:via => :post
 
   #department routes
-  match 'departments' => 'department#index'
-  match 'departments/new' => 'department#new'
-  match 'departments/create' => 'department#create' ,:via => :post
   match 'departments/:id/update' => 'department#update' ,:via => :put
   match 'departments/:id' => 'department#show'
   match 'departments/:id/destroy' => 'department#destroy'

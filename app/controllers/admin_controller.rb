@@ -6,6 +6,25 @@ class AdminController < ApplicationController
   def home
     
   end
+  def department_new
+    @department = Department.new
+  end
+  
+  def department_create
+    @department = Department.new(params[:department])
+    @department.institute_id = get_institute_id
+    if @department.save
+      respond_to  do |format|
+        format.html {redirect_to('/departments/' + @department.id.to_s)}
+      end
+    else
+      respond_to  do |format|
+        format.html {render :action => "department_new" }
+      end
+    end
+
+  end
+
 
   def department_index
     @departments = Department.find(:all,:conditions => {:institute_id => get_institute_id})

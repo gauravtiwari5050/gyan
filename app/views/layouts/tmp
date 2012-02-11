@@ -14,7 +14,6 @@
     <!-- Le styles -->
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
-  <script type='text/javascript' src='http://www.scribd.com/javascripts/view.js'></script>
   <%= csrf_meta_tag %>
     <style type="text/css">
       body {
@@ -33,10 +32,6 @@
       .clearfix {
         padding:2px;
       }
-	#calendar {
-		width: 900px;
-		margin: 0 auto;
-		}
     </style>
 
     <!-- Le fav and touch icons -->
@@ -57,8 +52,10 @@
         <!-- Main hero unit for a primary marketing message or call to action -->
         <div class="row">
           <div class="span18">
-              <h2> Calendar</h2>
+            <div class="hero-unit">
+              <h1> Admin home  </h1>
               <%= yield :main_content %>
+            </div>
           </div>
           <div class="span8">
           <%= yield :right_bar%>

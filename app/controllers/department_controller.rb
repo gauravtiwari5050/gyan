@@ -11,24 +11,6 @@ class DepartmentController < ApplicationController
     end
   end
   
-  def new
-    @department = Department.new
-  end
-
-  def create
-    @department = Department.new(params[:department])
-    @department.institute_id = get_institute_id
-    if @department.save
-      respond_to  do |format|
-        format.html {redirect_to('/departments/' + @department.id.to_s)}
-      end
-    else
-      respond_to  do |format|
-        format.html {render :action => "new" }
-      end
-    end
-
-  end
 
   def show
     @department = Department.find(params[:id])

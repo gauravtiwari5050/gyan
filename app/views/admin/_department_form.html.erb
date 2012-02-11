@@ -1,0 +1,57 @@
+<h2> Create New Department </h2>
+<%= form_for(@department,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+  <% if  !flash[:alert].nil?%>
+     <div class="alert alert-error">
+      <a class="close">×</a>
+        <font color="black">
+        <strong> 
+          There were errors with your submission 
+        </strong>
+          <%= flash[:alert] %>
+        </font>
+      </div>
+  <% end %>
+  <% if  !flash[:notice].nil?%>
+     <div class="alert alert-success">
+      <a class="close">×</a>
+        <font color="black">
+          <%= flash[:notice] %>
+        </font>
+      </div>
+  <% end -%>
+
+  <% if @department.errors.any? %>
+    <div id="error_explanation" class = "alert-message error">
+     <div class="alert alert-error">
+      <a class="close">×</a>
+        <font color="black">
+        <strong> 
+          There were errors with your submission 
+        </strong>
+
+        <ul>
+          <% @department.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+        </font>
+      </div>
+
+    </div>
+  <% end %>
+
+<div class="field">
+  <%= f.label :name, 'Name' %>
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  <%= f.label :about, 'About' %>
+  <%= f.text_area :about  %>
+</div>
+
+
+<div class="actions">
+ <%= f.submit "submit" %>
+</div>
+  
+<% end -%>
