@@ -3,7 +3,6 @@
       padding:0px;
       margin:0px;
        margin-top:15px;
-      height:400px;
       }
     #user_options .option_buttons {
         display:block;
@@ -29,9 +28,9 @@
     #departments_button:hover {background:url(image_path('human.png')) -175px 0 no-repeat;}
 
       .button-box{
+        display: inline-block;
         position: relative;
         overflow: hidden;
-        float:left;
         width: 190px;
       }
 

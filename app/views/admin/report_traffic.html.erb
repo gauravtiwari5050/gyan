@@ -62,8 +62,6 @@
         ac.draw(data, {
           title : 'Traffic indexed by sections on the website',
           isStacked: true,
-          width: 600,
-          height: 400,
           vAxis: {title: "PageViews"},
           hAxis: {title: "Date"}
         });
@@ -72,9 +70,21 @@
 
       google.setOnLoadCallback(drawVisualization);
     </script>
+    <script type="text/javascript">
+      function doSomething() {
+        drawVisualization();
+      };
+
+      var resizeTimer;
+      $(window).resize(function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(doSomething, 100);
+      }); 
+    </script>
+
   
 <% end -%>
 
 
- <div id="visualization" style="width: 500px; height: 400px;"></div>
+ <div id="visualization" style="width:100%; height: 400px;"></div>
 <% end -%>

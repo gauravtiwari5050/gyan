@@ -4,4 +4,5 @@
   -moz-border-radius: 6px;
   border-radius: 6px;
   padding:2%;
+  min-height:500px;
 }
