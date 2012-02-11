@@ -18,17 +18,31 @@ class ProgramController < ApplicationController
     persist_success =  true
     begin
       HelperProgramCourse.transaction do
+        if @helper_program_course.course_name.nil? || @helper_program_course.course_name.length == 0
+          raise 'Course name cant be blank'
+        end
+        if @helper_program_course.course_code.nil? || @helper_program_course.course_code.length == 0
+          raise 'Course code cant be blank'
+        end
+
+        if @helper_program_course.course_term.nil?
+          raise 'Course term cant be blank'
+        end
         @course.name = @helper_program_course.course_name
         @course.code = get_institute_id.to_s + "_" + @helper_program_course.course_code
         @course.about = @helper_program_course.course_about
         @course.institute_id = get_institute_id
-        @course.save
+        logger.info 'HYD ->' + @course.inspect
+        persist_success = @course.save
+        if persist_success == false
+          raise 'error creating course from the details provided'
+        end
 
         @course_allocation.course_id = @course.id
         @course_allocation.program_id = @program.id
         @course_allocation.term = @helper_program_course.course_term
 
-        @course_allocation.save
+        persist_success = @course_allocation.save
       end
     rescue Exception => e
         @helper_program_course.errors.add('course_name',e.message)

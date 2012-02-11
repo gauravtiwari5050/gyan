@@ -10,7 +10,6 @@ class Course < ActiveRecord::Base
 
   validates :institute,:presence => true
   validates :name,:presence => true
-  validates :about,:presence => true
   validates :code,:presence => true
 
 end

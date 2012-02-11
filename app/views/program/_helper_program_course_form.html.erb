@@ -1,15 +1,6 @@
 <%= form_for(@helper_program_course,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
-  <% if @helper_program_course.errors.any? %>
-    <div id="error_explanation" class = "alert-message error">
-      <h2><%= pluralize(@helper_program_course.errors.count, "error") %> prohibited this helper_program_course from being saved:</h2>
-
-      <ul>
-      <% @helper_program_course.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= render :template => "shared/notices" %>
+<%= render :template => "shared/form-errors",:locals => {:form => @helper_program_course} %>
 
 <div class="field">
   <%= f.label :course_name, 'Course Name' %>
@@ -26,7 +17,7 @@
 
 <div class="field">
   <%= f.label :course_term, 'Course Term' %>
-  <%= f.select :course_term ,options_for_select([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"]])%>
+    <%= f.select 'course_term' ,options_for_select([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"]]),{ :include_blank => true }%>
 </div>
 
 

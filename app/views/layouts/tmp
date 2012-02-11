@@ -53,7 +53,7 @@
         <div class="row">
           <div class="span18">
             <div class="hero-unit">
-              <h1> Admin home  </h1>
+              <h2> Program home  </h2>
               <%= yield :main_content %>
             </div>
           </div>
