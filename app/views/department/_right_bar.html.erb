@@ -1,16 +1,8 @@
 <% content_for :right_bar do -%>
   
-            <div class="hero-unit">
-              <p>Quick Links</p>
-
-              <div class="clearfix"></div>
-              <div id="bold-box-big">
-                <a href="#about">New Announcement</a>
-              </div>
-              <div class="clearfix"></div>
-              <div id="bold-box-big">
-                <%= link_to "Add Program ", '/departments/'+@department.id.to_s+'/programs/new' %>
-              </div>
-              <div class="clearfix"></div>
-            </div>
+    <p>Quick Links</p>
+    <ul>
+    <li><a href="#about">New Announcement</a></li>
+    <li><%= link_to "Add Program ", '/departments/'+@department.id.to_s+'/programs/new' %></li>
+    </ul>
 <% end -%>

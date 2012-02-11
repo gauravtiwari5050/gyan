@@ -1,7 +1,8 @@
 class DepartmentController < ApplicationController
   impressionist
   before_filter :validate_institute_url
-  layout :choose_layout
+  before_filter :validate_logged_in_status
+  #layout :choose_layout
 
   def choose_layout
     if action_name.to_s.start_with?('program')

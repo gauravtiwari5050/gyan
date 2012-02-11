@@ -1,31 +1,21 @@
 <h2> Create New Program </h2>
 <%= form_for(@program,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
-  <% if @program.errors.any? %>
-    <div id="error_explanation" class = "alert-message error">
-      <h2><%= pluralize(@program.errors.count, "error") %> prohibited this program from being saved:</h2>
-
-      <ul>
-      <% @program.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= render :template => "shared/notices" %>
+<%= render :template => "shared/form-errors",:locals => {:form => @program} %>
 <div class="field">
-  <%= f.label :term_type, 'term_type' %>
+  <%= f.label :term_type, 'Type of term (semester or year)' %>
   <%= f.select :term_type,options_for_select([["SEMESTER","SEMESTER"],["YEAR","YEAR"]]) %>
 </div>
 <div class="field">
-  <%= f.label :total_terms, 'total_terms' %>
+  <%= f.label :total_terms, 'Total no of terms' %>
   <%= f.text_field :total_terms  %>
 </div>
 <div class="field">
-  <%= f.label :branch, 'branch' %>
+  <%= f.label :branch, 'Branch' %>
   <%= f.text_field :branch  %>
 </div>
 <div class="field">
-  <%= f.label :degree, 'degree' %>
+  <%= f.label :degree, 'Degree' %>
   <%= f.text_field :degree  %>
 </div>
 

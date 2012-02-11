@@ -1,16 +1,8 @@
+
 <% content_for :left_bar do %>
-        <div class="well">
-          <div id="bold-box-big">
-          <%= @department.name %>
-          </div>
-          <div class="clearfix"></div>
-          <div id="bold-box-big">
-            <%= link_to "All Programs", '/departments/'+@department.id.to_s+'/programs' %>
-          </div>
-          <div class="clearfix"></div>
-          <div id="bold-box-big">
-            <a href="#about">All Courses</a>
-          </div>
-          <div class="clearfix"></div>
-        </div>
+<div class="headofcourse"><a href="/departments/<%=@department.id.to_s%>" ><%=@department.name %></a></div>
+   <ul>
+   <li><%= link_to "All Programs", '/departments/'+@department.id.to_s+'/programs' %></li>
+   <li><a href="#about">All Courses</a></li>
+   </ul>
 <% end -%>

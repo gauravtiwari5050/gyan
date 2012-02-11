@@ -1,0 +1,20 @@
+
+  <% if form.errors.any? %>
+    <div id="error_explanation" class = "alert-message error">
+     <div class="alert alert-error">
+      <a class="close">×</a>
+        <font color="black">
+        <strong> 
+          There were errors with your submission 
+        </strong>
+
+        <ul>
+          <% form.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+        </font>
+      </div>
+
+    </div>
+  <% end %>
