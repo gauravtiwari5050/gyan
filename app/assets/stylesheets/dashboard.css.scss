@@ -7,30 +7,30 @@
     #user_options .option_buttons {
         display:block;
         float:left;
-        height:175px;width:175px;
+        height:125px;width:125px;
         margin-left:10px;
         margin-top:20px;
         outline:none;
         text-align: center;
     }
     #users_button {background:url(image_path('human.png')) 0 0 no-repeat;}
-    #users_button:hover {background:url(image_path('human.png')) -175px 0 no-repeat;}
+    #users_button:hover {background:url(image_path('human.png')) -125px 0 no-repeat;}
     #settings_button {background: url(image_path('settings.png')) 0 0 no-repeat;}
-    #settiongs_button:hover {background: url(image_path('settings.png')) -175px 0 no-repeat;}
+    #settiongs_button:hover {background: url(image_path('settings.png')) -125px 0 no-repeat;}
     #calendar_button {background: url(image_path('calendar.png')) 0 0 no-repeat;}
-    #calendar_button:hover {background: url(image_path('calendar.png')) -175px 0 no-repeat;}
+    #calendar_button:hover {background: url(image_path('calendar.png')) -125px 0 no-repeat;}
     #reports_button {background: url(image_path('reports.png')) 0 0 no-repeat;}
-    #reports_button:hover {background: url(image_path('reports.png')) -175px 0 no-repeat;}
+    #reports_button:hover {background: url(image_path('reports.png')) -125px 0 no-repeat;}
     #announcements_button {background:url(image_path('announcements.png')) 0 0 no-repeat;}
-    #announcements_button:hover {background:url(image_path('announcements.png')) -175px 0 no-repeat;}
+    #announcements_button:hover {background:url(image_path('announcements.png')) -125px 0 no-repeat;}
     #courses_button {background:url(image_path('book.png')) 0 0 no-repeat;}
     #departments_button {background:url(image_path('human.png')) 0 0 no-repeat;}
-    #departments_button:hover {background:url(image_path('human.png')) -175px 0 no-repeat;}
+    #departments_button:hover {background:url(image_path('human.png')) -125px 0 no-repeat;}
 
       .button-box{
         display: inline-block;
         position: relative;
         overflow: hidden;
-        width: 190px;
+        width: 140px;
       }
 
