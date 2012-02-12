@@ -15,7 +15,6 @@
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
   <script type='text/javascript' src='http://www.scribd.com/javascripts/view.js'></script>
-  <%= yield :refresh_file_link %>
   <%= csrf_meta_tag %>
     <style type="text/css">
       body {
@@ -53,14 +52,14 @@
       <div class="content">
         <!-- Main hero unit for a primary marketing message or call to action -->
         <div class="row">
-          <div class="span8">
+          <div class="span18">
             <div class="hero-unit">
               <h2> Course home</h2>
-              <%= yield :embed_file_index %>
+              <%= yield :main_content %>
             </div>
           </div>
-          <div class="span18">
-          <%= yield :embed_scribd%>
+          <div class="span8">
+          <%= yield :right_bar%>
           </div>
         </div>
         <footer>
