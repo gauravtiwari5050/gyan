@@ -1,17 +1,7 @@
 
 <%= form_for(@course_announcement,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
-  <% if @course_announcement.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@course_announcement.errors.count, "error") %> prohibited this course_announcement from being saved:</h2>
-
-      <ul>
-      <% @course_announcement.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= render :template => "shared/notices" %>
+  <%= render :template => "shared/form-errors",:locals => {:form => @course_announcement} %>
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>

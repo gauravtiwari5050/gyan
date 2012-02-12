@@ -108,7 +108,7 @@ class CourseController < ApplicationController
         Delayed::Job.enqueue(ScribdUploader.new(@course_file,@course_file.content))
         format.html { redirect_to('/courses/' + @course.id.to_s + '/files', :notice => 'Course file was successfully created.') }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "file_new" }
       end
     end
    
@@ -294,7 +294,8 @@ class CourseController < ApplicationController
       if @post.save
        format.html {redirect_to('/courses/'+@course.id.to_s+'/forum/topics/'+@topic.id.to_s)}
       else
-       format.html {render :action => "forum_topics_show"}
+       flash[:alert] = 'Content cannot be blank'
+       format.html {redirect_to('/courses/'+@course.id.to_s+'/forum/topics/'+@topic.id.to_s)}
       end
     end
     

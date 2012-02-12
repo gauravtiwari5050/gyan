@@ -6,9 +6,27 @@
     <meta name="description" content="">
     <meta name="author" content="">
 <%= stylesheet_link_tag "application" %>
+  <style type="text/css">
+   input, select, .uneditable-input { 
+    height: 26px;
+   }
+   textarea {
+    width: 80%;
+   }
+   label, input, button, select, textarea {
+    font-size: 22px;
+   }
+   .signup-form {
+    padding-top: 20px; 
+   } 
+    h2 {
+    font-size: 30px; 
+   }
+  </style>   
 <%= javascript_include_tag "application" %>
+<%= yield :task_status_check_javascript %>
+<%= yield :report_javascript %>
 <script type='text/javascript' src='http://www.scribd.com/javascripts/view.js'></script>
-  <%= csrf_meta_tag %>
 </head>
 
 <body>
@@ -30,15 +48,9 @@
                 
                 
 				<div class="bodyRgithPanel">
-        <div class="container-auto-width">
-          
-          <div class="hero-unit">
-            <div class="signup-form">
-              <%= yield :main_content %>
-           </div>
-          </div>
-        </div>
-                
+                <div class="main-content">
+                  <%= yield :main_content %>
+                </div>
 			  </div>
 			<!--left panel ends -->
 			<div class="spacer"></div>

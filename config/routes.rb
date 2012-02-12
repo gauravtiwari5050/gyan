@@ -113,7 +113,7 @@ GyanV1::Application.routes.draw do
   match 'courses/:id/files/new' => 'course#file_new'
   match 'courses/:id/files/create' => 'course#file_create' ,:via => :post
   match 'courses/:id/files' => 'course#file_index'
-  match 'courses/:id/files/:file_id' => 'course#file_show'
+  match 'courses/:id/files/:file_id' => 'course#file_show' #json object display
   match 'courses/:id/groups' => 'course#group_index'
   match 'courses/:id/groups/assign' => 'course#group_assign'
   match 'courses/:id/announcements/new' => 'course#announcement_new'
@@ -124,9 +124,9 @@ GyanV1::Application.routes.draw do
   match 'courses/:id/assignments' => 'course#assignment_index' 
   match 'courses/:id/assignments/:ass_id' => 'course#assignment_show' 
   match 'courses/:id/assignments/:ass_id/solve' => 'course#assignment_solution_new' 
-  match 'courses/:id/assignments/:ass_id/solve/create' => 'course#assignment_solution_create' ,:via => :post 
+  match 'courses/:id/assignments/:ass_id/create' => 'course#assignment_solution_create' ,:via => :post 
   match 'courses/:id/assignments/:ass_id/evaluate' => 'course#evaluate_home' 
-  match 'courses/:id/assignments/:ass_id/submitsolution' => 'courses#submitsolution' ,:via => :post 
+  #match 'courses/:id/assignments/:ass_id/submitsolution' => 'courses#submitsolution' ,:via => :post 
   match 'courses/:id/assignments/:ass_id/solutions/:sol_id' => 'course#assignment_solution_show' 
   match 'courses/:id/assignments/:ass_id/solutions/:sol_id/evaluate' => 'course#assignment_solution_evaluate' 
   match 'courses/:id/assign/teacher' => 'course#teacher_assign'

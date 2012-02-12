@@ -1,16 +1,7 @@
 <h2>Submit your solution</h2>
-<%= form_for(@assignment_solution,:html =>{:class => 'form-stacked',:multipart => true},:url => 'solve/create' ,:method => :post) do |f| %>
-  <% if @assignment_solution.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@assignment_solution.errors.count, "error") %> prohibited this assignment_solution from being saved:</h2>
-
-      <ul>
-      <% @assignment_solution.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for(@assignment_solution,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+  <%= render :template => "shared/notices" %>
+  <%= render :template => "shared/form-errors",:locals => {:form => @assignment_solution} %>
 
   <div class="field">
     <%= f.label :content %>
