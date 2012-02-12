@@ -1,16 +1,7 @@
 <h2> Please reset your password  here</h2>
 <%= form_for(@helper_user_verify,:html =>{:class => 'form-stacked',:multipart => true},:url => 'resetpass_update' ,:method => :post) do |f| %>
-  <% if @helper_user_verify.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@helper_user_verify.errors.count, "error") %> prohibited this password  from being saved:</h2>
-
-      <ul>
-      <% @helper_user_verify.errors.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render :template => "shared/notices" %>
+  <%= render :template => "shared/form-errors",:locals => {:form => @helper_user_verify} %>
 
   <div class="field">
     <%= f.label :pass %><br />

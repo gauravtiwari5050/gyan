@@ -1,16 +1,7 @@
 <h2> Compose a new message </h2>
 <%= form_for(@message,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
-  <% if @message.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
-
-      <ul>
-      <% @message.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render :template => "shared/notices" %>
+  <%= render :template => "shared/form-errors",:locals => {:form => @message} %>
 
   <div class="field">
     <%= f.label :subject %><br />

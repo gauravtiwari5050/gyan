@@ -14,7 +14,7 @@
     <!-- Le styles -->
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
-  <script type='text/javascript' src='http://www.scribd.com/javascripts/view.js'></script>
+  <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
   <%= csrf_meta_tag %>
     <style type="text/css">
       body {
@@ -54,7 +54,7 @@
         <div class="row">
           <div class="span18">
             <div class="hero-unit">
-              <h2> Course home</h2>
+              <h2> <%= @user.username %>  </h2>
               <%= yield :main_content %>
             </div>
           </div>

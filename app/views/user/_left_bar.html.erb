@@ -1,16 +1,7 @@
-        <div class="well">
-          <div id="bold-box-big">
-            <%= link_to @user.username, '/users/' + @user.id.to_s + '/profile' %>
-          </div>
-          <div class="clearfix"></div>
+          <div class="headofcourse"><%= link_to @user.username, '/users/' + @user.id.to_s + '/profile' %></div>
+          <ul>
           <% if current_user.user_type == 'ADMIN' || current_user.id == @user.id %>
-            <div id="bold-box-big">
-              <%= link_to "Reset pass", '/users/' + @user.id.to_s + '/profile/resetpass' %>
-            </div>
-            <div class="clearfix"></div>
-            <div id="bold-box-big">
-              <%= link_to 'Edit contact details', '/users/' + @user.id.to_s + '/contact/edit' %>
-            </div>
-            <div class="clearfix"></div>
+           <li><%= link_to "Reset pass", '/users/' + @user.id.to_s + '/profile/resetpass' %></li>
+           <li><%= link_to 'Edit contact details', '/users/' + @user.id.to_s + '/contact/edit' %></li>
           <% end %>
-        </div>
+          </ul>
