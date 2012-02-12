@@ -1,17 +1,7 @@
 <% content_for :main_content do -%>
 <%= form_for(@helper_registration,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
-  <% if @helper_registration.errors.any? %>
-    <div id="error_explanation" class = "alert-message error">
-      <h2><%= pluralize(@helper_registration.errors.count, "error") %> prohibited this helper_registration from being saved:</h2>
-
-      <ul>
-      <% @helper_registration.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= render :template => "shared/notices" %>
+<%= render :template => "shared/form-errors",:locals => {:form => @helper_registration} %>
 <div class="field">
   <%= f.label :email, 'email' %>
   <%= f.text_field :email %>
