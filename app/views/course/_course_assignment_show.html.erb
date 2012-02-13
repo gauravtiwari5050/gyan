@@ -1,27 +1,49 @@
-<p>
-  <b>Title:</b>
-  <%= @assignment.title %>
-</p>
+<fieldset class='fieldset-style radius6'>
+<legend class='legend-style'> Assignment </legend>
+<div class="bifurcate">
+  <div class="left-half">
+    
+    <table>
+
+      <tr>
+        <td><b>Title:</b></td>
+        <td><%= @assignment.title %></td>
+      </tr>
+
+      <tr>
+        <td><b>Total marks:</b></td>
+        <td><%= @assignment.total_marks %></td>
+      </tr>
+
+      <tr>
+        <td><b>Deadline:</b></td>
+        <td><%= @assignment.deadline %></td>
+      </tr>
+      </table>
+  </div>
+  <div class="right-half">
+    <p>
+      <%= link_to "Assignment home", '/assignments/'+@assignment.id.to_s %>
+    </p>
+    <p>
+      <%= link_to "Submit solution", '/courses/'+@course.id.to_s+'/assignments/'+@assignment.id.to_s+'/solve' %>
+    </p>
+    <p>
+      <%= link_to "Evaluate this assignment", '/courses/'+@course.id.to_s+'/assignments/'+@assignment.id.to_s+'/evaluate' %>
+    </p>
+  </div>
+  <div class="clearBoth">
+    
+  </div>
+</div>
+</br>
 
 <p>
   <b>Detail:</b>
+  </br>
   <%= @assignment.detail %>
 </p>
 
-<p>
-  <b>Course:</b>
-  <%= @assignment.course_id %>
-</p>
-
-<p>
-  <b>Total marks:</b>
-  <%= @assignment.total_marks %>
-</p>
-
-<p>
-  <b>Deadline:</b>
-  <%= @assignment.deadline %>
-</p>
 
 <p>
   <b>Assignment file:</b>
@@ -33,7 +55,7 @@
     }
     </script> 
   <% end -%>
-      <li><%= link_to_function "View File","load_file('"+@assignment.scribd_id.to_s+"','"+ @assignment.scribd_key.to_s+"')" %></li>
+      <%= link_to_function "View File","load_file('"+@assignment.scribd_id.to_s+"','"+ @assignment.scribd_key.to_s+"')" %>
       <div id='embedded_flash'>
       <a>File Viewer</a>
       </div>
@@ -42,10 +64,5 @@
     <%= link_to "Download", @assignment.assignment_file_url %>
   <% end %>
 </p>
-<p>
-  <%= link_to "Submit solution", '/courses/'+@course.id.to_s+'/assignments/'+@assignment.id.to_s+'/solve' %>
-</p>
-<p>
-  <%= link_to "Evaluate this assignment", '/courses/'+@course.id.to_s+'/assignments/'+@assignment.id.to_s+'/evaluate' %>
-</p>
 
+</fieldset>

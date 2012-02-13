@@ -124,10 +124,13 @@ GyanV1::Application.routes.draw do
   match 'courses/:id/assignments' => 'course#assignment_index' 
   match 'courses/:id/assignments/:ass_id' => 'course#assignment_show' 
   match 'courses/:id/assignments/:ass_id/solve' => 'course#assignment_solution_new' 
-  match 'courses/:id/assignments/:ass_id/create' => 'course#assignment_solution_create' ,:via => :post 
+  match 'courses/:id/assignments/:ass_id/create' => 'course#assignment_solution_create' ,:via => :put 
   match 'courses/:id/assignments/:ass_id/evaluate' => 'course#evaluate_home' 
   #match 'courses/:id/assignments/:ass_id/submitsolution' => 'courses#submitsolution' ,:via => :post 
   match 'courses/:id/assignments/:ass_id/solutions/:sol_id' => 'course#assignment_solution_show' 
+  match 'courses/:id/assignments/:ass_id/solutions/:sol_id/edit' => 'course#assignment_solution_edit'
+  match 'courses/:id/assignments/:ass_id/solutions/:sol_id/grade' => 'course#assignment_solution_edit'
+  match 'courses/:id/assignments/:ass_id/solutions/:sol_id/create' => 'course#assignment_solution_update' ,:via => :put 
   match 'courses/:id/assignments/:ass_id/solutions/:sol_id/evaluate' => 'course#assignment_solution_evaluate' 
   match 'courses/:id/assign/teacher' => 'course#teacher_assign'
   match 'courses/:id/assign/create' => 'course#teacher_assign_create' ,:via => :put
@@ -178,6 +181,9 @@ GyanV1::Application.routes.draw do
 
   #ivrs routes
   match 'ivrs' => 'ivrs#home'
+
+  #assignment routes
+  match 'assignments/:id' => 'assignment#home'
 
 
 end

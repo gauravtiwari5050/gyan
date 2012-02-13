@@ -9,3 +9,37 @@
 .headofcourse a {
   color:white;
 }
+
+.radius6 {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+ 
+}
+   .fieldset-style {
+    border: 1px solid black;
+    padding: 10px;
+    width: auto;
+   }
+   .legend-style {
+     width:auto;
+     margin-bottom:0px;
+     border-bottom: 0px;
+     margin-left: 20px;
+     margin-right: 20px;
+   } 
+
+.bifurcate {
+  width: auto;
+  position: relative;
+}
+.left-half {
+  float:left;
+  width:50%;
+}
+.right-half {
+  float:left;
+  width:50%;
+}
+.clearBoth {
+clear: both;
+}

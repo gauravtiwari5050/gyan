@@ -1,0 +1,14 @@
+
+<h3>Answers that need evaluation</h3>
+<% for solution in @solutions -%>
+  <% if solution.marks.nil? %>
+   <%= link_to solution.user.username, '/courses/' + @course.id.to_s+ '/assignments/' +@assignment.id.to_s  + '/solutions/' + solution.id.to_s  %>
+   </br>
+  <% end %>
+<% end -%>
+<h3>Answers that already have been evaluated</h3>
+<% for solution in @solutions -%>
+  <% if !solution.marks.nil? %>
+   <%= link_to solution.user.username, '/courses/' + @course.id.to_s+ '/assignments/' +@assignment.id.to_s  + '/solutions/' + solution.id.to_s  %>
+  <% end %>
+<% end -%>

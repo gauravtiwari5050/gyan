@@ -1,14 +1,69 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>GyanV1</title>
-  <%= stylesheet_link_tag "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tag %>
+    <meta charset="utf-8">
+    <title>CloudClass</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+<%= stylesheet_link_tag "application" %>
+  <style type="text/css">
+   input, select, .uneditable-input { 
+    height: 26px;
+   }
+   textarea {
+    width: 80%;
+   }
+   label, input, button, select, textarea {
+    font-size: 22px;
+   }
+   .signup-form {
+    padding-top: 20px; 
+   } 
+    h2 {
+    font-size: 30px; 
+   }
+  </style>   
+<%= javascript_include_tag "application" %>
+<%= yield :task_status_check_javascript %>
+<%= yield :report_javascript %>
 </head>
+
 <body>
-
-<%= yield %>
-
+	<!--wrapper starts -->
+	<div class="wrapper">
+    <%=yield :top_bar%>
+		<!--body section starts -->
+		<div class="bodySec">
+			<!--right panel starts -->
+			<div class="bodyRight">
+        <%= yield :right_bar %>
+      </div>
+			<!--right panel ends -->
+			<!--left panel starts -->
+			<div class="bodyLeftMain">
+				<div class="bodyLeftPanel">
+          <%= yield :left_bar %>
+        </div>
+                
+                
+				<div class="bodyRgithPanel">
+                <div class="main-content">
+                  <%= yield :main_content %>
+                </div>
+			  </div>
+			<!--left panel ends -->
+			<div class="spacer"></div>
+		</div>
+		<!--body section ends -->
+		<!--footer section starts -->
+        <div class="footer">© Cloudclass 2012. All rights Reserved.</div>
+		<!--footer section ends -->
+	</div>
+	<!--wrapper ends -->
+    
+    <script type="text/javascript">
+	var menu=new menu.dd("menu");
+	menu.init("menu","menuhover");
+</script>
 </body>
 </html>

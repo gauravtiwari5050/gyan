@@ -1,0 +1,7 @@
+<% content_for :left_bar do %>
+        <div class="headofcourse"> <%=@course.name%> </div>
+        <ul>
+            <li><a href=<%="/courses/" + @course.id.to_s  + "/assignments/" + @assignment.id.to_s+ "/solve"%>>Submit Solution</a></li>
+            <li><a href=<%="/courses/" + @course.id.to_s  + "/assignments/" + @assignment.id.to_s+ "/evaluate"%>>Evaluate</a></li>
+        </ul>
+<% end -%>

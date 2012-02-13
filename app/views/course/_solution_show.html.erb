@@ -1,3 +1,72 @@
-<h2> Solution Details  </h2>
-<h3>Content</h3>
-<%= @assignment_solution.content %>
+<fieldset class='fieldset-style radius6'>
+<legend class='legend-style'> Assignment Solution </legend>
+<div class="bifurcate">
+  <div class="left-half">
+    
+    <table>
+
+      <tr>
+        <td><b>Assignment</b></td>
+        <td><%= @assignment.title %></td>
+      </tr>
+
+      <tr>
+        <td><b>Marks Obtained:</b></td>
+        <% if @assignment_solution.marks.nil? %>
+          <td>Not assigned</td>
+        <% else %>
+        <td><%= @assignment.total_marks %></td>
+        <% end %>
+      </tr>
+
+      <tr>
+        <td><b>Submitted by</b></td>
+        <td><%= get_user_by_user_id(@assignment_solution.user_id).username%></td>
+      </tr>
+      </table>
+  </div>
+  <div class="right-half">
+  <p>
+    <%= link_to "Edit this solution", "/courses/" + @course.id.to_s + "/assignments/" +@assignment.id.to_s+ "/solutions/" + @assignment_solution.id.to_s + '/edit' %>
+  </p>
+  <p>
+    <%= link_to "Grade this solution", "/courses/" + @course.id.to_s + "/assignments/" +@assignment.id.to_s+ "/solutions/" + @assignment_solution.id.to_s + '/grade' %>
+  </p>
+  </div>
+  <div class="clearBoth">
+    
+  </div>
+</div>
+</br>
+
+<p>
+  <div "style=width:100%">
+    
+  <b>Answer</b>
+  </br>
+  <%= @assignment_solution.content %>
+  </div>
+</p>
+
+
+<p>
+  <b>Assignment file:</b>
+  <% if !@assignment_solution.scribd_id.nil? && @assignment_solution.scribd_id.length > 0 %>
+  <% content_for :embed_scribd_js do -%>
+    <script>
+    window.onload = function() {
+    load_file(<%="'"+@assignment_solution.scribd_id.to_s+"','"+@assignment_solution.scribd_key.to_s+"'"%>);
+    }
+    </script> 
+  <% end -%>
+      <%= link_to_function "View File","load_file('"+@assignment_solution.scribd_id.to_s+"','"+ @assignment_solution.scribd_key.to_s+"')" %>
+      <div id='embedded_flash'>
+      <a>File Viewer</a>
+      </div>
+    
+  <% else %>
+    <%= link_to "Download", @assignment_solution.file_url %>
+  <% end %>
+</p>
+
+</fieldset>

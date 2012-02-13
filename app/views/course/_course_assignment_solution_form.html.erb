@@ -1,18 +1,26 @@
 <h2>Submit your solution</h2>
-<%= form_for(@assignment_solution,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+<%= form_for(@assignment_solution,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :put) do |f| %>
   <%= render :template => "shared/notices" %>
   <%= render :template => "shared/form-errors",:locals => {:form => @assignment_solution} %>
+  <% if @grade == true %>
+    <div class="field">
+      <%= f.label :marks %>
+      <%= f.text_field :marks %>
+    </div>
+    
+  <% else %>
+    <div class="field">
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+    </div>
+    </br>
 
-  <div class="field">
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-  </div>
-  </br>
-
-  <div class="field">
-    <%= f.file_field :file %>
-  </div>
-  </br>
+    <div class="field">
+      <%= f.file_field :file %>
+    </div>
+    </br>
+    
+  <% end %>  
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -170,30 +170,38 @@ class CourseController < ApplicationController
   def assignment_solution_new
     @course = Course.find(params[:id])
     @assignment = Assignment.find(params[:ass_id])
-    #@assignment_solution = AssignmentSolution.find(:first,:limit => 1 ,:conditions => {:assignment_id => @assignment.id,:user_id => session[:user_id]})
-    #if @assignment_solution.nil?
-    #logger.info 'no solution found creating new one'
-    @assignment_solution = AssignmentSolution.new
-    #end
+    @assignment_solution = AssignmentSolution.find(:first,:limit => 1 ,:conditions => {:assignment_id => @assignment.id,:user_id => session[:user_id]})
+    if @assignment_solution.nil?
+      logger.info 'no solution found creating new one'
+      @assignment_solution = AssignmentSolution.new
+    end
 
   end
 
   def assignment_solution_create
+
     @course = Course.find(params[:id])
     @assignment = Assignment.find(params[:ass_id])
     @assignment_solution = AssignmentSolution.new(params[:assignment_solution])
     @assignment_solution.assignment_id = @assignment.id
     @assignment_solution.user_id = session[:user_id]
-    id,key =  upload_to_scribd(@assignment_solution.file)
-    @assignment_solution.scribd_id = id.to_s
-    @assignment_solution.scribd_key = key.to_s
     @current_assignment_solution = AssignmentSolution.find(:first,:limit => 1 ,:conditions => {:assignment_id => @assignment.id,:user_id => session[:user_id]})
-    ##bad bad way what a waste TODO
+    success = true
     if !@current_assignment_solution.nil?
-      @current_assignment_solution.destroy
+        
+       success = @current_assignment_solution.update_attribute(:content,@assignment_solution.content)
+       if success == true && !@assignment_solution.file.nil?
+        Delayed::Job.enqueue(ScribdUploader.new(@current_assignment_solution,@assignment_solution.file))
+       end
+       @assignment_solution = @current_assignment_solution
+    else
+       success = @assignment_solution.save
+       if success == true && !@assignment_solution.file.nil?
+        Delayed::Job.enqueue(ScribdUploader.new(@assignment_solution,@assignment_solution.file))
+       end
     end
     respond_to do |format|
-      if @assignment_solution.save
+      if success
        format.html {redirect_to('/courses/'+@course.id.to_s+'/assignments/'+@assignment.id.to_s+'/solutions/'+@assignment_solution.id.to_s)}
       else
        format.html {render :action => "assignment_solution_new"}
@@ -203,9 +211,37 @@ class CourseController < ApplicationController
     
   end
 
+  def assignment_solution_show
+    @course = Course.find(params[:id])
+    @assignment = Assignment.find(params[:ass_id])
+    @assignment_solution = AssignmentSolution.find(params[:sol_id])
+  end
+  def assignment_solution_edit
+    @course = Course.find(params[:id])
+    @assignment = Assignment.find(params[:ass_id])
+    @assignment_solution = AssignmentSolution.find(params[:sol_id])
+    @grade = request.path.end_with?('grade')
+  end
+  def assignment_solution_update
+    
+    @course = Course.find(params[:id])
+    @assignment = Assignment.find(params[:ass_id])
+    @assignment_solution = AssignmentSolution.find(params[:sol_id])
+    success = true
+    success = @assignment_solution.update_attributes(params[:assignment_solution]);
+    respond_to do |format|
+      if success
+       format.html {redirect_to('/courses/'+@course.id.to_s+'/assignments/'+@assignment.id.to_s+'/solutions/'+@assignment_solution.id.to_s)}
+      else
+       format.html {render :action => "assignment_solution_edit"}
+      end
+    end
+  end
+
   def evaluate_home
     @course = Course.find(params[:id])
     @assignment = Assignment.find(params[:ass_id])
+    @solutions = AssignmentSolution.find(:all,:conditions => {:assignment_id => @assignment.id})
   end
 
   def assignment_solution_evaluate
