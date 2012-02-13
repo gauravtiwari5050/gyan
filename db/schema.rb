@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120209071838) do
+ActiveRecord::Schema.define(:version => 20120213170638) do
+
+  create_table "appfiles", :force => true do |t|
+    t.string   "name"
+    t.string   "content"
+    t.integer  "appfileable_id"
+    t.string   "appfileable_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "status"
+  end
 
   create_table "assignment_solutions", :force => true do |t|
     t.integer  "assignment_id"
@@ -305,6 +315,14 @@ ActiveRecord::Schema.define(:version => 20120209071838) do
     t.string   "s3able_type"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "scribd_files", :force => true do |t|
+    t.integer  "appfile_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "scribd_id"
+    t.string   "scribd_key"
   end
 
   create_table "signups", :force => true do |t|

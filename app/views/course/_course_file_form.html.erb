@@ -1,13 +1,11 @@
-<%= form_for(@course_file,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+<%= form_for(@appfile,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
   <%= render :template => "shared/notices" %>
-  <%= render :template => "shared/form-errors",:locals => {:form => @course_file} %>
+  <%= render :template => "shared/form-errors",:locals => {:form => @appfile} %>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-  <div class="field" style="visibility:hidden">
-    <%= f.text_field :course_id,:value => @course_file.course_id %>
-  </div>
+  </br>
   <p>
     <%= f.file_field :content  %>
   </p>

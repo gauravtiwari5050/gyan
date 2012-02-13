@@ -86,7 +86,7 @@ class CourseController < ApplicationController
 
 
   def file_new
-    @course_file = CourseFile.new
+    @appfile = Appfile.new
     @course = Course.find(params[:id])
 
 
@@ -98,14 +98,12 @@ class CourseController < ApplicationController
 
   def file_create
     @course = Course.find(params[:id])
-    @course_file = CourseFile.new(params[:course_file])
-    @course_file.course_id = @course.id
-    #id,key =  upload_to_scribd(@course_file.content)
-    #@course_file.scribd_id = id.to_s
-    #@course_file.scribd_key = key.to_s
+    @appfile = Appfile.new(params[:appfile])
+    @appfile.appfileable_id = @course.id
+    @appfile.appfileable_type = @course.class.to_s
     respond_to do |format|
-      if @course_file.save
-        Delayed::Job.enqueue(ScribdUploader.new(@course_file,@course_file.content))
+      if @appfile.save
+        Delayed::Job.enqueue(AppfileUploader.new(@appfile.id))
         format.html { redirect_to('/courses/' + @course.id.to_s + '/files', :notice => 'Course file was successfully created.') }
       else
         format.html { render :action => "file_new" }
@@ -120,10 +118,7 @@ class CourseController < ApplicationController
 
   def file_show
     @course = Course.find(params[:id])
-    @file = @course.course_files.find(params[:file_id])
-    if @file.s3_object != nil
-      @file.s3_url = @file.s3_object.url
-    end
+    @file = @course.appfiles.find(params[:file_id])
     respond_to do |format|
      format.js {render :json => @file}
     end
