@@ -62,11 +62,11 @@ class CourseController < ApplicationController
     begin
      Assignment.transaction do
       success = @assignment.save
-      if success == true 
-        appfile.appfileable_id = @assignment.id
-        appfile.appfileable_type = @assignment.class.to_s
-        success = appfile.save
-      end
+      #if success == true 
+      #  appfile.appfileable_id = @assignment.id
+      #  appfile.appfileable_type = @assignment.class.to_s
+      #  success = appfile.save
+      #end
       if success == false
         raise 'Error creating assignment'
       end
@@ -80,7 +80,9 @@ class CourseController < ApplicationController
 
     respond_to do |format|
       if success
-        Delayed::Job.enqueue(AppfileUploader.new(appfile.id))
+        if !@assignment.appfile.nil?
+          Delayed::Job.enqueue(AppfileUploader.new(@assignment.appfile.id))
+        end
         format.html { redirect_to('/courses/' + @course.id.to_s + '/assignments', :notice => 'Course file was successfully created.') }
       else
         format.html { render :action => "assignment_new" }

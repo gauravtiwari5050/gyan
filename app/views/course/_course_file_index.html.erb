@@ -4,17 +4,7 @@
 <div id = "file-index">
 <% @course.appfiles.each do |appfile| %>
   <p>
-    <% if !appfile.scribd_file.nil? && !appfile.scribd_file.scribd_id.nil?%>
-      <%= link_to_function appfile.name,"load_file('"+appfile.scribd_file.scribd_id.to_s+"','"+ appfile.scribd_file.scribd_key.to_s+"')" %>
-    <% elsif !appfile.s3_object.nil? && !appfile.s3_object.url.nil? %>
-      <%= link_to appfile.name, appfile.s3_object.url %>
-    <% else %>
-      <% refresh_class = 'do-not-refresh'%>
-      <% if !appfile.status.nil?  && appfile.status == 'UPLOADING'%>
-          <% refresh_class = 'refresh'%>
-      <% end %>
-        <%= link_to appfile.name, appfile.content_url,:class => refresh_class,"data-course" => @course.id,"data-file" => appfile.id  %>
-    <% end %>
+    <%= render :template => "shared/appfile_link",:locals => {:appfile => appfile} %>
   </p>
 <% end %>
 </div>

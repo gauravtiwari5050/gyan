@@ -47,21 +47,13 @@
 
 <p>
   <b>Assignment file:</b>
-  <% if !@assignment.scribd_id.nil? && @assignment.scribd_id.length > 0 %>
-  <% content_for :embed_scribd_js do -%>
-    <script>
-    window.onload = function() {
-    load_file(<%="'"+@assignment.scribd_id.to_s+"','"+@assignment.scribd_key.to_s+"'"%>);
-    }
-    </script> 
-  <% end -%>
-      <%= link_to_function "View File","load_file('"+@assignment.scribd_id.to_s+"','"+ @assignment.scribd_key.to_s+"')" %>
-      <div id='embedded_flash'>
-      <a>File Viewer</a>
-      </div>
+  <% if !@assignment.appfile.nil? %>
+    <%= render :template => "shared/appfile_link" ,:locals => {:appfile => @assignment.appfile} %>
+  <div id='embedded_flash'></a></div>
     
   <% else %>
     <%= link_to "Download", @assignment.assignment_file_url %>
+
   <% end %>
 </p>
 
