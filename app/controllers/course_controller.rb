@@ -44,6 +44,7 @@ class CourseController < ApplicationController
   def assignment_new
     @assignment = Assignment.new
     @course = Course.find(params[:id])
+    @assignment.build_appfile
 
     respond_to do |format|
       format.html # new.html.erb
@@ -51,20 +52,37 @@ class CourseController < ApplicationController
   end
 
   def assignment_create
+    logger.info 'HYD -> ' + params.inspect
     @assignment = Assignment.new(params[:assignment])
     @course = Course.find(params[:id])
     @assignment.course_id = @course.id
-    #id,key =  upload_to_scribd(@assignment.assignment_file)
-    #@assignment.scribd_id = id.to_s
-    #@assignment.scribd_key = key.to_s
+    appfile = Appfile.new(params[:assignment][:appfile_attributes])
+    logger.info 'HYD -> ' + appfile.content.to_s 
+    success = true
+    begin
+     Assignment.transaction do
+      success = @assignment.save
+      if success == true 
+        appfile.appfileable_id = @assignment.id
+        appfile.appfileable_type = @assignment.class.to_s
+        success = appfile.save
+      end
+      if success == false
+        raise 'Error creating assignment'
+      end
+     end
+    rescue Exception => e
+      logger.error 'Error creating assignment' + e.message
+      @assignment.errors.add('detail',e.message)
+      success = false
+    end
 
 
     respond_to do |format|
-      if @assignment.save
-        Delayed::Job.enqueue(ScribdUploader.new(@assignment,@assignment.assignment_file))
+      if success
+        Delayed::Job.enqueue(AppfileUploader.new(appfile.id))
         format.html { redirect_to('/courses/' + @course.id.to_s + '/assignments', :notice => 'Course file was successfully created.') }
       else
-        @assignment.errors.add('detail','Error in uploading your assignment kindly try again')
         format.html { render :action => "assignment_new" }
       end
     end

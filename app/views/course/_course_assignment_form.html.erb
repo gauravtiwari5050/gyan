@@ -17,9 +17,16 @@
     <%= f.text_field :total_marks %>
   </div>
   </br>
-  <div class="field">
-    <%= f.file_field :assignment_file %>
-  </div>
+  <%= f.fields_for :appfile do |af| -%>
+    <div class="field">
+      <%= af.label :name %>
+      <%= af.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= af.file_field :content %>
+    </div>
+  <% end -%>
   </br>
   <div class="field">
     <%= f.label :deadline %>
