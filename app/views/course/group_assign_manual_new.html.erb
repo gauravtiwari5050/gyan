@@ -1,0 +1,37 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar'%>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar'%>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :main_content do -%>
+  <%= render :template => "shared/notices" %>
+  <% if !@unassigned_students.nil? && @unassigned_students.count > 0 %>
+  <h3>Students without any groups assigned<h3>
+  
+  <%= form_tag('create',:method => :put) do -%>
+    <p>
+    <%= label_tag 'Name of the group', 'Please give a name for the group' %>
+    <%= text_field_tag 'group_name' %>
+    </p>
+    </br>
+    
+    <%= label_tag 'Students', 'Please select the students for this group' %>
+    <% for student in @unassigned_students -%>
+       <p>
+       <%= check_box_tag 'groupable_id_' + student.id.to_s  %>   
+       <%= student.username  %>  
+       </p>
+    <% end -%>
+  <div class="field actions">
+    <%= submit_tag %>
+  </div>
+  <% end -%>
+    
+  <% else %>
+    <p> There are no students for assigning groups</p>
+  <% end -%>
+<% end -%>

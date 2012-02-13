@@ -8,4 +8,5 @@
   <%= render 'right_bar' %>
 <% end -%>
 <% content_for :main_content do -%>
+  <%= link_to "Delete this group", '/groups/' + @group.id.to_s+'/delete' %>
 <% end -%>

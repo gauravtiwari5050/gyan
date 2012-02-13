@@ -116,6 +116,8 @@ GyanV1::Application.routes.draw do
   match 'courses/:id/files/:file_id' => 'course#file_show' #json object display
   match 'courses/:id/groups' => 'course#group_index'
   match 'courses/:id/groups/assign' => 'course#group_assign'
+  match 'courses/:id/groups/assign/manual' => 'course#group_assign_manual_new'
+  match 'courses/:id/groups/assign/create' => 'course#group_assign_manual_create' ,:via => :put
   match 'courses/:id/announcements/new' => 'course#announcement_new'
   match 'courses/:id/announcements/create' => 'course#announcement_create' ,:via => :post
   match 'courses/:id/announcements' => 'course#announcement_index'
@@ -154,6 +156,7 @@ GyanV1::Application.routes.draw do
 
   #group routes
   match 'groups/:id' => 'course_group#home'
+  match 'groups/:id/delete' => 'course_group#delete'
   match 'groups/:id/people' => 'course_group#people'
   match 'groups/:id/collaborate' => 'course_group#pads'
   match 'groups/:id/collaborate/new' => 'course_group#pads_new'

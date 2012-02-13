@@ -4,7 +4,8 @@
   <p> <%= student.username   %>   <p>
 <% end -%>
 
-<%= link_to "Assign these students a group", '/courses/'+@course.id.to_s+'/groups/assign' %>
+<%= link_to "Auto-assign these students a group", '/courses/'+@course.id.to_s+'/groups/assign' %> </br>
+<%= link_to "Manual - assign these students a group", '/courses/'+@course.id.to_s+'/groups/assign/manual' %>
 <% end %>
 <h2> Course Groups </h2>
 <% for group in @course.course_groups -%>

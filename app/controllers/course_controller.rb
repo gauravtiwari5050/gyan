@@ -137,12 +137,62 @@ class CourseController < ApplicationController
   ##TODO requires rigorous testing
   def group_assign
     @course = Course.find(params[:id])
-    group_unassigned_students(@course.id) 
+    group_unassigned_students_by_course_id(@course.id) 
     respond_to do |format|
      format.html{redirect_to('/courses/'+@course.id.to_s+'/groups')}
     end
 
   end
+
+  def group_assign_manual_new
+    @course = Course.find(params[:id])
+    @unassigned_students = get_unassigned_students_for_course(@course.id)
+  end
+
+  def group_assign_manual_create
+
+    @course = Course.find(params[:id])
+    @unassigned_students = get_unassigned_students_for_course(@course.id)
+    logger.info 'HYD -> ' + params.inspect
+    success = true
+    message = 'Selected students grouped successfuly'
+
+    if !(!params[:group_name].nil? && params[:group_name].length > 0)
+      success = false
+      message = 'Group Name cannot be blank'
+    end
+    selected_students = []
+    logger.info 'HYD -> ' + params.keys.inspect
+    if success == true
+      for student in @unassigned_students
+        groupable_id = 'groupable_id_'+student.id.to_s
+
+        if !params[groupable_id.to_s].nil? 
+          logger.info 'HYD ->' + student.username + 'selected for grouping'
+          selected_students.push(student)
+        end
+      end
+      if selected_students.count == 0
+        success = false
+        message = 'Please select a few student for grouping'
+      end
+
+    end
+    if success
+      group_unassigned_students(@course,selected_students,params[:group_name]) 
+    end
+    respond_to do |format|
+     if success
+      flash[:notice] = message
+     else
+      flash[:alert] = message
+     end
+     format.html{redirect_to('/courses/'+@course.id.to_s+'/groups/assign/manual')}
+    end
+
+  end
+
+
 
   ##for assigning teacher to a course
   def teacher_assign

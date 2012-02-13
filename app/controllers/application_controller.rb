@@ -365,13 +365,32 @@ class ApplicationController < ActionController::Base
    
   end
 
-  def group_unassigned_students(course_id)
-    unassigned_students = get_unassigned_students_for_course(course_id)
+  def group_unassigned_students(course,unassigned_students,group_name)
     if !unassigned_students.nil?  
+          course_group = CourseGroup.new
+          course_group.course_id = course.id
+          course_group.group_name = course.name + ' ' + (course.course_groups.count + 1).to_s
+          if !group_name.nil?
+            course_group.group_name = group_name
+          end
+          course_group.save
+
+      for student in unassigned_students
+          group_student = GroupStudent.new
+          group_student.course_group_id = course_group.id
+          group_student.user_id = student.id
+          group_student.save
+      end
+    end
+  end
+
+  def group_unassigned_students_by_course_id(course_id)
+    unassigned_students = get_unassigned_students_for_course(course_id)
+    if !unassigned_students.nil?
       for student in unassigned_students
         assign_group_to_student(course_id,student) 
       end
-    end
+    end 
   end
 
   def assign_group_to_student(course_id,student)

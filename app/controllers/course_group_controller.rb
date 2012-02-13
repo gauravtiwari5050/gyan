@@ -30,4 +30,14 @@ class CourseGroupController < ApplicationController
     
   end
 
+  def delete
+    @group = CourseGroup.find(params[:id])
+    course = @group.course
+    @group.destroy
+
+    respond_to do |format|
+      format.html {redirect_to('/courses/'+course.id.to_s+'/groups')}
+    end
+  end
+
 end
