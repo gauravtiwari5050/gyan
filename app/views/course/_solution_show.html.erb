@@ -51,21 +51,12 @@
 
 <p>
   <b>Assignment file:</b>
-  <% if !@assignment_solution.scribd_id.nil? && @assignment_solution.scribd_id.length > 0 %>
-  <% content_for :embed_scribd_js do -%>
-    <script>
-    window.onload = function() {
-    load_file(<%="'"+@assignment_solution.scribd_id.to_s+"','"+@assignment_solution.scribd_key.to_s+"'"%>);
-    }
-    </script> 
-  <% end -%>
-      <%= link_to_function "View File","load_file('"+@assignment_solution.scribd_id.to_s+"','"+ @assignment_solution.scribd_key.to_s+"')" %>
-      <div id='embedded_flash'>
-      <a>File Viewer</a>
-      </div>
-    
+  <% if !@assignment_solution.appfile.nil? %>
+    <%= render :template => "shared/appfile_link" ,:locals => {:appfile => @assignment_solution.appfile} %>
+    <div id='embedded_flash'></a></div>
   <% else %>
-    <%= link_to "Download", @assignment_solution.file_url %>
+    <%= link_to "Download", @assignment.assignment_file_url %>
+
   <% end %>
 </p>
 

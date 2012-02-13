@@ -15,10 +15,16 @@
     </div>
     </br>
 
+  <%= f.fields_for :appfile do |af| -%>
     <div class="field">
-      <%= f.file_field :file %>
+      <%= af.label :name %>
+      <%= af.text_field :name %>
     </div>
-    </br>
+
+    <div class="field">
+      <%= af.file_field :content %>
+    </div>
+  <% end -%>
     
   <% end %>  
   <div class="actions">

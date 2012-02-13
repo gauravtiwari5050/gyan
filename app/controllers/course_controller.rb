@@ -239,6 +239,7 @@ class CourseController < ApplicationController
     if @assignment_solution.nil?
       logger.info 'no solution found creating new one'
       @assignment_solution = AssignmentSolution.new
+      @assignment_solution.build_appfile
     end
 
   end
@@ -254,15 +255,15 @@ class CourseController < ApplicationController
     success = true
     if !@current_assignment_solution.nil?
         
-       success = @current_assignment_solution.update_attribute(:content,@assignment_solution.content)
-       if success == true && !@assignment_solution.file.nil?
-        Delayed::Job.enqueue(ScribdUploader.new(@current_assignment_solution,@assignment_solution.file))
+       success = @current_assignment_solution.update_attributes(params[:assignment_solution])
+       if success == true && !@assignment_solution.appfile.nil?
+          Delayed::Job.enqueue(AppfileUploader.new(@assignment_appfile.appfile.id))
        end
        @assignment_solution = @current_assignment_solution
     else
        success = @assignment_solution.save
-       if success == true && !@assignment_solution.file.nil?
-        Delayed::Job.enqueue(ScribdUploader.new(@assignment_solution,@assignment_solution.file))
+       if success == true && !@assignment_solution.appfile.nil?
+         Delayed::Job.enqueue(AppfileUploader.new(@assignment_solution.appfile.id))
        end
     end
     respond_to do |format|
