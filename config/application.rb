@@ -50,5 +50,6 @@ module GyanV1
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     config.assets.precompile += ['signup.css','login.css']
+    config.time_zone = 'Chennai'
   end
 end

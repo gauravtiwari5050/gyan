@@ -42,6 +42,30 @@ function createAnnouncement(title,content,course_id,modal_dialog_obj) {
                 );
     
 }
+function createEvent(event_title,event_description,current_date,start_time,end_time,modal_dialog_obj) {
+//alert(title + " " + description + " " + current_date + " " +  start_time + " " + end_time);
+start_time = current_date + " " + start_time;
+end_time = current_date + " " + end_time;
+              $.create(
+                '/calendar/events/create',
+                {event:{title:event_title,description:event_description,starts_at:start_time,ends_at:end_time}},
+                  function(response) {
+                  updateTips("Event created successfuly");  
+                  if(modal_dialog_obj!=null) {
+                    setTimeout(function() {
+                      modal_dialog_obj.dialog("close");
+                      $('#calendar').html("");
+                      drawCalendar();
+                    }, 1500 );
+                    
+                  }
+
+                  },
+                  function(error) {
+                  updateTips("Error creating event ,please try again later");  
+                  }
+                );
+}
     function updateTips( t ) {
       $( ".validateTips" )
         .text( t )

@@ -2,3 +2,24 @@
             <ul>
               <li><a href="/calendar/events/new">Add an Event</a></li>
             </ul>
+            
+            <% content_for :modal_dialog do -%>
+            
+            <div id="dialog-form-event" title="Create an event" style="display:none"  >
+              <p class="validateTips">Add an event</p>
+
+              <form>
+                <fieldset>
+                <label for="title">Title</label>
+                <input type="text" name="title" id="modal-title" class="text ui-widget-content ui-corner-all" />
+                <label for="description">Description</label>
+                <textarea  name="announcement" id="modal-description" class="text ui-widget-content ui-corner-all" rows="5" style="width:100%" ></textarea>
+                <label for="start-time">Start Time</label>
+                <input type="text" name="title" id="modal-start_time" class="text ui-widget-content ui-corner-all  timepicker" />
+                <label for="start-time">End Time</label>
+                <input type="text" name="end time" id="modal-end_time" class="text ui-widget-content ui-corner-all timepicker" />
+                </fieldset>
+            </form>
+            </div>
+
+            <% end -%>

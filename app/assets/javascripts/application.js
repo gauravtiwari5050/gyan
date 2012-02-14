@@ -54,6 +54,10 @@ jQuery(document).ready(function() {
 
 $(function() {
   $( ".datetimepicker" ).datetimepicker({ dateFormat: 'yy-mm-dd' });
+  $( ".timepicker" ).timepicker({
+   hourGrid: 4,
+   minuteGrid: 15 
+  });
 });
 
 

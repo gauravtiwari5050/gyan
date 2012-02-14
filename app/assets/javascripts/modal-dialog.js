@@ -1,4 +1,5 @@
 var user_type = 'STUDENT';
+var current_date = '';
   $(function() {
     $( "#dialog-form-user" ).dialog({
       
@@ -55,6 +56,41 @@ var user_type = 'STUDENT';
       close: function() {
         $("#modal-subject").val("");
         $("#modal-announcement").val("");
+      }
+    });
+    $( "#dialog-form-event" ).dialog({
+      
+      autoOpen: false,
+      height: 300,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Add event": function() {
+        var title = $("#modal-title");
+        var description = $("#modal-description");
+        var start_time = $("#modal-start_time");
+        var end_time = $("#modal-end_time");
+        //bad way to pass around in global vars #TODO remove this
+        
+        var bValid = true;
+        bValid = bValid && checkLength( title, "event title", 1, 10 );
+        bValid = bValid && checkLength( description, "event description", 1, 200 );
+        bValid = bValid && checkLength( start_time, "start time", 1, 10 );
+        bValid = bValid && checkLength( end_time, "end time", 1, 10 );
+        if(bValid) {
+          createEvent(title.val(),description.val(),current_date,start_time.val(),end_time.val(),$(this));
+        }
+
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        $("#modal-title").val("");
+        $("#modal-description").val("");
+        $("#modal-start_time").val("");
+        $("#modal-end_time").val("");
       }
     });
 

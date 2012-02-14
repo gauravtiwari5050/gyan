@@ -1,4 +1,5 @@
-$(document).ready(function() {
+$(document).ready(drawCalendar);
+function drawCalendar() {
 	var date = new Date();
 	var d = date.getDate();
 	var m = date.getMonth();
@@ -41,10 +42,20 @@ $(document).ready(function() {
 
         // http://arshaw.com/fullcalendar/docs/mouse/eventClick/
         eventClick: function(event, jsEvent, view){
-          alert('clicked');
+          //alert('clicked on event'); TODO add update/delete functionality here
         },
+        dayClick: function(date, allDay, jsEvent, view) {
+
+        if (allDay) {
+            current_date = $.datepicker.formatDate('yy-mm-dd', date); 
+            $( "#dialog-form-event" ).attr('currrent-date',current_date);
+            $( "#dialog-form-event" ).dialog( "open" );
+        }
+
+
+    },
 	});
-});
+}
 
 function updateEvent(the_event) {
     $.update(
