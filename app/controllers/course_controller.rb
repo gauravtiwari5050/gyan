@@ -31,6 +31,7 @@ class CourseController < ApplicationController
     respond_to do |format|
       if @course_announcement.save
         format.html { redirect_to('/courses/' + @course.id.to_s + '/announcements', :notice => 'Course file was successfully created.') }
+        format.js { render :json => @course_announcement }
       else
         format.html { render :action => "announcement_new" }
       end

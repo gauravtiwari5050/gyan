@@ -18,19 +18,6 @@ var user_type = 'STUDENT';
           if ( bValid ) {
               updateTips("Creating user.Please wait ..");  
               createUser(username.val(),email.val(),user_type,$(this));
-              /*
-              $.create(
-                'admin/teachers/add',
-                {user_email:email,user_name:username},
-                  function(response) {
-                  updateTips("User created successfuly.");  
-                  },
-                  function(error) {
-                  updateTips("Error creating user");  
-                  alert("error");
-                  }
-                );
-                */
            }
         },
         Cancel: function() {
@@ -42,6 +29,36 @@ var user_type = 'STUDENT';
         $("#modal-email").val("");
       }
     });
+
+    $( "#dialog-form-announcement" ).dialog({
+      
+      autoOpen: false,
+      height: 300,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Announce": function() {
+            var subject = $("#modal-subject");
+            var announcement = $("#modal-announcement");
+            var bValid = true;
+            bValid = bValid && checkLength( subject, "subject", 3, 10 );
+            bValid = bValid && checkLength( announcement, "announcement", 6, 80 );
+            if ( bValid ) {
+              createAnnouncement(subject.val(),announcement.val(),$(this).attr("data-course"),$(this));
+            }
+
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        $("#modal-subject").val("");
+        $("#modal-announcement").val("");
+      }
+    });
+
+
     $( ".add-student" )
       .click(function() {
         user_type = 'STUDENT';
@@ -51,6 +68,10 @@ var user_type = 'STUDENT';
       .click(function() {
         user_type = 'TEACHER';
         $( "#dialog-form-user" ).dialog( "open" );
+      });
+    $( ".add-announcement" )
+      .click(function() {
+        $( "#dialog-form-announcement" ).dialog( "open" );
       });
   
   

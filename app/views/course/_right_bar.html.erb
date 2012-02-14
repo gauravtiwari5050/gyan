@@ -1,10 +1,27 @@
 <% content_for :right_bar do -%>
             <p> Quick Links </p>
              <ul>
-                <li><%= link_to "New Announcement", '/courses/'+@course.id.to_s+'/announcements/new' %></li>
+                <li> <a href="#" class="add-announcement">New Announcement</a></li>
                 <li><%= link_to "New Assignment", '/courses/'+@course.id.to_s+'/assignments/new' %></li>
                 <li><%= link_to "New File", '/courses/'+@course.id.to_s+'/files/new' %></li>
                 <li><%= link_to "Assign instructor", '/courses/'+@course.id.to_s+'/assign/teacher' %></li>
 
              </ul>
 <% end -%>
+            <% content_for :modal_dialog do -%>
+            
+            <div id="dialog-form-announcement" title="Create new announcement" style="display:none" data-course="<%=@course.id.to_s%>" >
+              <p class="validateTips">Add an announcement.</p>
+
+              <form>
+                <fieldset>
+                <label for="subject">Subject</label>
+                <input type="text" name="subject" id="modal-subject" class="text ui-widget-content ui-corner-all" />
+                <label for="name">Announcement</label>
+                <textarea  name="announcement" id="modal-announcement" class="text ui-widget-content ui-corner-all" rows="5" style="width:100%" ></textarea>
+                </fieldset>
+            </form>
+            </div>
+
+            <% end -%>
+
