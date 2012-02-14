@@ -3,6 +3,8 @@
 *= require bootstrap  
 *= require bootstrap-extra-container  
 *= require dashboard 
+*= require jquery-ui
+*= require timepicker
 *= require fullcalendar 
 *= require inner-style  
 *= require my-style  

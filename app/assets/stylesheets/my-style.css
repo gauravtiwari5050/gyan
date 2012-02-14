@@ -43,3 +43,6 @@
 .clearBoth {
 clear: both;
 }
+div.ui-datepicker {
+ font-size: 62.5%;
+}

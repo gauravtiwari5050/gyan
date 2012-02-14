@@ -52,3 +52,8 @@ jQuery(document).ready(function() {
 
 });
 
+$(function() {
+  $( ".datetimepicker" ).datetimepicker({ dateFormat: 'yy-mm-dd' });
+});
+
+

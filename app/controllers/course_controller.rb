@@ -57,7 +57,7 @@ class CourseController < ApplicationController
     @course = Course.find(params[:id])
     @assignment.course_id = @course.id
     appfile = Appfile.new(params[:assignment][:appfile_attributes])
-    logger.info 'HYD -> ' + appfile.content.to_s 
+    #logger.info 'HYD -> ' + (appfile.content||" ").to_s 
     success = true
     begin
      Assignment.transaction do
