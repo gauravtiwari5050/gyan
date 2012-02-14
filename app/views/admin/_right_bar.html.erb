@@ -2,7 +2,24 @@
             <ul>
               <li><a href="#" title="Add an Announcement">New Announcement</a></li>
             	<li><a href="/admin/departments/new">New Department</a></a></li>
-              <li><%= link_to "Add Teachers", '/admin/teachers/new' %></li>
-              <li> <%= link_to "Add Student", '/admin/students/new' %> </li>
+              <li> <a href="#" class="add-student">Add Student</a></li>
+              <li> <a href="#" class="add-teacher">Add Teacher</a></li>
             </ul>
+
+            <% content_for :modal_dialog do -%>
+            <div id="dialog-form-user" title="Create new user" style="display:none">
+              <p class="validateTips">All form fields are required.</p>
+
+              <form>
+                <fieldset>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="modal-username" class="text ui-widget-content ui-corner-all" />
+                <label for="email">Email</label>
+                <input type="text" name="email" id="modal-email" value="" class="text ui-widget-content ui-corner-all" />
+                </fieldset>
+            </form>
+          </div>
+
+              
+            <% end -%>
 

@@ -25,9 +25,10 @@
   </style>   
 <%= javascript_include_tag "application" %>
 <script type='text/javascript' src='http://www.scribd.com/javascripts/view.js'></script>
-<%= csrf_meta_tag %>
 <%= yield :task_status_check_javascript %>
 <%= yield :report_javascript %>
+<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+<%= csrf_meta_tag %>
 </head>
 
 <body>

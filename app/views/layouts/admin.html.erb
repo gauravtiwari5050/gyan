@@ -26,6 +26,8 @@
 <%= javascript_include_tag "application" %>
 <%= yield :task_status_check_javascript %>
 <%= yield :report_javascript %>
+<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+<%= csrf_meta_tag %>
 </head>
 
 <body>
@@ -60,8 +62,8 @@
 		<!--footer section ends -->
 	</div>
 	<!--wrapper ends -->
-    
-    <script type="text/javascript">
+<%= yield :modal_dialog%>    
+<script type="text/javascript">
 	var menu=new menu.dd("menu");
 	menu.init("menu","menuhover");
 </script>

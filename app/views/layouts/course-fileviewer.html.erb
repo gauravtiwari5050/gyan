@@ -36,6 +36,7 @@
 <%= yield :report_javascript %>
 <script type='text/javascript' src='http://www.scribd.com/javascripts/view.js'></script>
 <%= yield :refresh_file_link %>
+<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
 <%= csrf_meta_tag %>
 </head>
 

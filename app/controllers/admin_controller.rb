@@ -80,10 +80,12 @@ class AdminController < ApplicationController
    respond_to do |format|
     if success == true
       flash[:notice] =  status_message
+      format.html{redirect_to('/admin/teachers/new')}
+      format.js  { render :json => user }
     else
       flash[:alert] =  status_message
+      format.html{redirect_to('/admin/teachers/new')}
     end
-    format.html{redirect_to('/admin/teachers/new')}
    end
 
   end
@@ -133,20 +135,21 @@ class AdminController < ApplicationController
         user.username = user_name
       end
       user.save
-      
-      student_program_detail = StudentProgramDetail.new
-      student_program_detail.student_id = user.id
-      #why twice i dont know
-      program_id = params[:user_program][:user_program]
-      if !program_id.nil?
-        student_program_detail.program_id = program_id
-      end
-      term = params[:user_term][:user_term]
-      if !term.nil?
-        student_program_detail.term = term
-      end
-      student_program_detail.save
-
+      #TODO bad hack
+      if !params[:user_program].nil? && !params[:user_program][:user_program].nil?
+        student_program_detail = StudentProgramDetail.new
+        student_program_detail.student_id = user.id
+        #why twice i dont know
+        program_id = params[:user_program][:user_program]
+        if !program_id.nil?
+          student_program_detail.program_id = program_id
+        end
+        term = params[:user_term][:user_term]
+        if !term.nil?
+          student_program_detail.term = term
+        end
+        student_program_detail.save
+     end
       Delayed::Job.enqueue(MailingJob.new(user.id))
     rescue Exception => e
       success =  false
@@ -159,6 +162,7 @@ class AdminController < ApplicationController
    respond_to do |format|
     if success == true
       flash[:notice] =  status_message
+      format.js  { render :json => user }
     else
       flash[:alert] =  status_message
     end
