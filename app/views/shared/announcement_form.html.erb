@@ -1,0 +1,16 @@
+
+<%= form_for(@announcement,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+  <%= render :template => "shared/notices" %>
+  <%= render :template => "shared/form-errors",:locals => {:form => @announcement} %>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

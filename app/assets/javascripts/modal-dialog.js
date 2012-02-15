@@ -60,6 +60,33 @@ var username = '';
         $("#modal-announcement").val("");
       }
     });
+    $( "#dialog-form-announcement_dep" ).dialog({
+      
+      autoOpen: false,
+      height: 300,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Announce": function() {
+            var subject = $("#modal-subject");
+            var announcement = $("#modal-announcement");
+            var bValid = true;
+            bValid = bValid && checkLength( subject, "subject", 3, 10 );
+            bValid = bValid && checkLength( announcement, "announcement", 6, 80 );
+            if ( bValid ) {
+              createAnnouncementForDepartment(subject.val(),announcement.val(),$(this).attr("data-dep"),$(this));
+            }
+
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        $("#modal-subject").val("");
+        $("#modal-announcement").val("");
+      }
+    });
     $( "#dialog-form-message" ).dialog({
       
       autoOpen: false,
@@ -137,6 +164,10 @@ var username = '';
     $( ".add-announcement" )
       .click(function() {
         $( "#dialog-form-announcement" ).dialog( "open" );
+      });
+    $( ".add-announcement_dep" )
+      .click(function() {
+        $( "#dialog-form-announcement_dep" ).dialog( "open" );
       });
   
   

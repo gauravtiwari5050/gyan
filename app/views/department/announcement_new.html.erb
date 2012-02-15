@@ -1,0 +1,8 @@
+<%= render 'left_bar' %>
+<% content_for :top_bar do -%>
+<%= render :template => "shared/top_bar" %>
+<% end -%>
+<%= render 'right_bar' %>
+<% content_for :main_content do -%>
+  <%= render :template => "shared/announcement_form" %>
+<% end -%>

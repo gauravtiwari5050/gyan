@@ -99,6 +99,9 @@ GyanV1::Application.routes.draw do
   match 'departments/:id/programs/create' => 'department#program_create' ,:via => :post
   match 'departments/:id/programs/:program_id' => 'department#program_show'
   match 'departments/:id/programs' => 'department#program_index'
+  match 'departments/:id/announcements' => 'department#announcement_index' 
+  match 'departments/:id/announcements/new' => 'department#announcement_new' 
+  match 'departments/:id/announcements/create' => 'department#announcement_create' ,:via => :post 
 
   #program routes
   match 'programs/:id' => 'program#show'

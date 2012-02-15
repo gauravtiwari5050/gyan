@@ -2,6 +2,7 @@
 <% content_for :left_bar do %>
 <div class="headofcourse"><a href="/departments/<%=@department.id.to_s%>" ><%=@department.name %></a></div>
    <ul>
+   <li><%= link_to "Annoucements", '/departments/'+@department.id.to_s+'/announcements' %></li>
    <li><%= link_to "All Programs", '/departments/'+@department.id.to_s+'/programs' %></li>
    </ul>
 <% end -%>

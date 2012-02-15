@@ -42,6 +42,27 @@ function createAnnouncement(title,content,course_id,modal_dialog_obj) {
                 );
     
 }
+
+function createAnnouncementForDepartment(title,content,department_id,modal_dialog_obj) {
+              $.create(
+                '/departments/' + department_id  + '/announcements/create',
+                {announcement:{title:title,content:content},department_id:department_id},
+                  function(response) {
+                  updateTips("Announcement posted successfuly..");  
+                  if(modal_dialog_obj!=null) {
+                    setTimeout(function() {
+                      modal_dialog_obj.dialog("close");
+                    }, 1500 );
+                    
+                  }
+
+                  },
+                  function(error) {
+                  updateTips("Error posting your announcement ,please try again later");  
+                  }
+                );
+    
+}
 function createEvent(event_title,event_description,current_date,start_time,end_time,modal_dialog_obj) {
 //alert(title + " " + description + " " + current_date + " " +  start_time + " " + end_time);
 start_time = current_date + " " + start_time;

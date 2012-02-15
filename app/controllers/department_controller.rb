@@ -77,5 +77,33 @@ class DepartmentController < ApplicationController
     end
   end
 
+  def announcement_new
+    @announcement = Announcement.new
+    @department = Department.find(params[:id])
+  end
+
+  def announcement_create
+    
+    @department = Department.find(params[:id])
+    @announcement = Announcement.new(params[:announcement])
+    @announcement.announcable_id = @department.id
+    @announcement.announcable_type = @department.class.to_s
+    @announcement.user_id = current_user.id
+    respond_to do |format|
+      if @announcement.save
+        format.html{redirect_to('/departments/'+@department.id.to_s+'/announcements')}
+        format.js{ render :json => @department}
+      else
+        format.html {render :action => 'announcement_new'}
+      end
+    end
+  end
+
+  def announcement_index
+    @department = Department.find(params[:id])
+    @announcements = @department.announcements
+    
+  end
+
 
 end

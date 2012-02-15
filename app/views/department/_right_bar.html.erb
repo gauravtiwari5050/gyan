@@ -2,7 +2,23 @@
   
     <p>Quick Links</p>
     <ul>
-    <li><a href="#about">New Announcement</a></li>
+    <li> <a href="#" class="add-announcement_dep">New Announcement</a></li>
     <li><%= link_to "Add Program ", '/departments/'+@department.id.to_s+'/programs/new' %></li>
     </ul>
 <% end -%>
+            <% content_for :modal_dialog do -%>
+            
+            <div id="dialog-form-announcement_dep" title="Create new announcement" style="display:none" data-dep="<%=@department.id.to_s%>" >
+              <p class="validateTips">Add an announcement.</p>
+
+              <form>
+                <fieldset>
+                <label for="subject">Subject</label>
+                <input type="text" name="subject" id="modal-subject" class="text ui-widget-content ui-corner-all" />
+                <label for="name">Announcement</label>
+                <textarea  name="announcement" id="modal-announcement" class="text ui-widget-content ui-corner-all" rows="5" style="width:100%" ></textarea>
+                </fieldset>
+            </form>
+            </div>
+
+            <% end -%>
