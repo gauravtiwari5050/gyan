@@ -85,6 +85,7 @@ var username = '';
       close: function() {
         $("#modal-subject").val("");
         $("#modal-announcement").val("");
+        location.reload();
       }
     });
     $( "#dialog-form-message" ).dialog({
