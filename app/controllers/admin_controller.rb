@@ -66,12 +66,14 @@ class AdminController < ApplicationController
       if !user_name.nil? && user_name.length > 0
         user.username = user_name
       end
-      user.save
+      if !user.save
+        raise 'Error saving user'
+      end
 
       Delayed::Job.enqueue(MailingJob.new(user.id))
     rescue Exception => e
       success =  false
-      status_message = 'Error creating user,the email id should be unique'
+      status_message = 'Error creating user,the email id should be unique and of the form name@xyz.com'
       logger.info e.message
     end
     
@@ -134,7 +136,9 @@ class AdminController < ApplicationController
       if !user_name.nil? && user_name.length > 0
         user.username = user_name
       end
-      user.save
+      if !user.save
+        raise 'Error creating user'
+      end
       #TODO bad hack
       if !params[:user_program].nil? && !params[:user_program][:user_program].nil?
         student_program_detail = StudentProgramDetail.new
@@ -153,7 +157,7 @@ class AdminController < ApplicationController
       Delayed::Job.enqueue(MailingJob.new(user.id))
     rescue Exception => e
       success =  false
-      status_message = 'Error creating user,the email id should be unique'
+      status_message = 'Error creating user,the email id should be unique and of the form nam@xyz.com'
       logger.info e.message
     end
     
