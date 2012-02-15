@@ -1,0 +1,15 @@
+<% content_for :left_bar do -%>
+  <%= render 'inbox_left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'inbox_right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+  <%= render :template => "shared/users_message" %>
+<% end -%>
+
+<% content_for :send_message_js do -%>
+<% end -%>

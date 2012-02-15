@@ -52,6 +52,33 @@ jQuery(document).ready(function() {
 
 });
 
+jQuery(document).ready(function() {
+    // put all your jQuery goodness in here.
+  jQuery(".user-message").keyup(function() {
+    jQuery.read(
+     '/search/users',
+    {username:jQuery(this).val()},
+    function (response) {
+      var html = '<h3> No users found with that name </h3>';
+      if(response.length != 0) {
+         html = '<table>';
+         html += '<tr><th>User Name</th> <th>email</th> </tr>';
+        for(var i = 0;i<response.length;i++) {
+         var link_to_user = '<a href="#"  onclick = "modal_message_create(\''+ response[i].user.username +'\',\''+ response[i].user.id +'\');return false;" >' + response[i].user.username  +' </a>'
+         html += '<tr><td>' + link_to_user + '</td> <td>' + response[i].user.email + '</td> </tr>';
+        }
+         html += '</table>';
+      }
+    jQuery("#user-search-results").html(html);
+
+    }
+
+);
+  });
+
+
+});
+
 $(function() {
   $( ".datetimepicker" ).datetimepicker({ dateFormat: 'yy-mm-dd' });
   $( ".timepicker" ).timepicker({

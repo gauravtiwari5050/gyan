@@ -1,0 +1,25 @@
+  
+              <p>Quick Links</p>
+              <ul>
+              </ul>
+            <% content_for :modal_dialog do -%>
+            
+            <div id="dialog-form-message" title="Create your message" style="display:none"  >
+              <p class="validateTips">Create message for 
+              <div id="modal-username">
+              </div>
+              <div id="from-user" style="display:none"><%=current_user.id%></div>
+
+              </p>
+
+              <form>
+                <fieldset>
+                <label for="subject">Subject</label>
+                <input type="text" name="subject" id="modal-subject" class="text ui-widget-content ui-corner-all" />
+                <label for="name">Message</label>
+                <textarea  name="message" id="modal-message" class="text ui-widget-content ui-corner-all" rows="5" style="width:100%" ></textarea>
+                </fieldset>
+            </form>
+            </div>
+
+            <% end -%>

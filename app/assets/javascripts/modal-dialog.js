@@ -1,5 +1,7 @@
 var user_type = 'STUDENT';
 var current_date = '';
+var user_id = '';
+var username = '';
   $(function() {
     $( "#dialog-form-user" ).dialog({
       
@@ -56,6 +58,33 @@ var current_date = '';
       close: function() {
         $("#modal-subject").val("");
         $("#modal-announcement").val("");
+      }
+    });
+    $( "#dialog-form-message" ).dialog({
+      
+      autoOpen: false,
+      height: 300,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Send": function() {
+            var subject = $("#modal-subject");
+            var message = $("#modal-message");
+            var bValid = true;
+            bValid = bValid && checkLength( subject, "subject", 3, 10 );
+            bValid = bValid && checkLength( message, "message", 6, 80 );
+            if ( bValid ) {
+              createMessage(subject.val(),message.val(),user_id,$(this));
+            }
+
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        $("#modal-subject").val("");
+        $("#modal-message").val("");
       }
     });
     $( "#dialog-form-event" ).dialog({
@@ -138,3 +167,15 @@ var current_date = '';
         return true;
       }
     }
+
+    function modal_message_create(name,uid) {
+      username = name;
+      user_id = uid;
+      alert(username + user_id); 
+      $('#modal-username').html('<b>' + username  +  '</b>')
+      $( "#dialog-form-message" ).dialog( "open" );
+    }
+
+
+
+

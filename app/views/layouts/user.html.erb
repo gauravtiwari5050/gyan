@@ -26,6 +26,7 @@
 <%= javascript_include_tag "application" %>
 <%= yield :task_status_check_javascript %>
 <%= yield :report_javascript %>
+<%= yield :send_message_js%>
 <%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
 <%= csrf_meta_tag %>
 </head>
@@ -62,6 +63,7 @@
 		<!--footer section ends -->
 	</div>
 	<!--wrapper ends -->
+<%= yield :modal_dialog%>    
     
     <script type="text/javascript">
 	var menu=new menu.dd("menu");

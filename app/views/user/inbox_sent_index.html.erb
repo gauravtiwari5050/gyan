@@ -1,0 +1,25 @@
+<% content_for :left_bar do -%>
+  <%= render 'inbox_left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'inbox_right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+  <table>
+    <tr>
+      <th>To</th>
+      <th>Message</th>
+    </tr>
+
+    <% for message in @messages -%>
+      <tr>
+        <td><%= get_user_by_user_id(message.to_user).username%> </td>
+        <td><%=message.subject %></td>
+      </tr>
+    <% end -%>
+
+  </table>
+<% end -%>

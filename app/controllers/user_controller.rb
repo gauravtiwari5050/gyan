@@ -35,6 +35,7 @@ class UserController < ApplicationController
       if @message.save
         Delayed::Job.enqueue(MessageMailingJob.new(@message.id))
         format.html{redirect_to('/users/'+@user.id.to_s+'/profile')}
+        format.js{render :json => @message}
       else
         format.html{render :action => 'message_new'}
       end
@@ -102,7 +103,18 @@ class UserController < ApplicationController
       end
     end
     
-    
+  end
+
+  def inbox_index
+   @user = current_user
+   @messages = Message.find(:all,:conditions => {:to_user => @user.id})
+  end
+
+  def inbox_sent_index
+   @user = current_user
+   @messages = Message.find(:all,:conditions => {:from_user => @user.id})
+  end
+  def inbox_compose
   end
 
 end

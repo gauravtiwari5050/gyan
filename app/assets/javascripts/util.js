@@ -66,6 +66,25 @@ end_time = current_date + " " + end_time;
                   }
                 );
 }
+
+function createMessage(subject,message,to_user,modal_dialog_obj) {
+  $.create(
+    '/users/' + user_id +'/message/create',
+    {message:{subject:subject,content:message,email:1,sms:0,facebook:0,twitter:0},user_id:user_id},
+    function(response) {
+                  updateTips("Message sent successfuly");  
+                  if(modal_dialog_obj!=null) {
+                    setTimeout(function() {
+                      modal_dialog_obj.dialog("close");
+                    }, 1500 );
+                    }
+      
+    },
+    function(response) {
+     updateTips("Error creating event ,please try again later");  
+    }
+  );  
+}
     function updateTips( t ) {
       $( ".validateTips" )
         .text( t )
