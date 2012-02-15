@@ -10,7 +10,6 @@ GyanV1::Application.routes.draw do
 
   get "group/home"
 
-  resources :samples
 
   get "student/home"
 
@@ -87,6 +86,9 @@ GyanV1::Application.routes.draw do
   match 'admin/connect/students/create' => 'admin#connect_students_create' ,:via => :post
   match 'admin/connect/teachers/new' => 'admin#connect_teachers_new'
   match 'admin/connect/teachers/create' => 'admin#connect_teachers_create' ,:via => :post
+  match 'admin/connect/departments' => 'admin#connect_departments_select'
+  match 'admin/departments/:department_id/connect/new' => 'admin#connect_department_new'
+  match 'admin/departments/:department_id/connect/create' => 'admin#connect_department_create' ,:via => :post 
 
   #department routes
   match 'departments/:id/update' => 'department#update' ,:via => :put

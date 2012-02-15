@@ -238,6 +238,8 @@ class AdminController < ApplicationController
   def connect_students_new
   end
 
+  
+
   def connect_users_create(user_type)
     users = User.find(:all ,:conditions => {:institute_id => get_institute_id,:user_type => user_type })
     logger.info "HYD ->" + users.class.to_s
@@ -272,6 +274,22 @@ class AdminController < ApplicationController
 
   def connect_teachers_new
     
+  end
+
+  def connect_departments_select
+    @departments = Department.find(:all,:conditions => {:institute_id => get_institute_id})
+  end
+
+  def connect_department_new
+  end
+
+  def connect_department_create
+    students = get_students_for_department(params[:department_id])
+    bulk_message(students,current_user)
+    respond_to do |format|
+      format.html{ redirect_to('/admin/departments/'+params[:department_id]+'/connect/new')}
+    end
+
   end
 
   def ivrs_edit

@@ -447,4 +447,37 @@ class ApplicationController < ActionController::Base
    user = User.find_by_id(user_id)
    return user
   end
+
+  def get_students_for_department(department_id)
+    department = Department.find(department_id)
+    user_ids = []
+    programs = department.programs
+    if !programs.nil?
+      for program in programs
+       student_program_details = program.student_program_details
+       if !student_program_details.nil? 
+          for student_program_detail in student_program_details 
+            user_ids.push(student_program_detail.student_id)
+          end
+       end
+      
+      end
+    end
+
+    students = User.find(:all,:conditions => {:id => user_ids})
+    return students
+  end
+
+  def bulk_message(users,from_user)
+    bulk_message_subj = params[:subject]
+    bulk_message = params[:message]
+    is_email = params[:email]
+    is_sms = params[:sms]
+    is_fb = params[:faceboook]
+    is_twitter = params[:twitter]
+    task =  create_new_task('BULK_MESSAGE','sending message to users',from_user.id,true)
+    bulk_messaging_job = BulkMessagingJob.new(task,users,from_user,bulk_message_subj,bulk_message,is_email,is_sms,is_fb,is_twitter)
+    Delayed::Job.enqueue(bulk_messaging_job)
+    
+  end
 end
