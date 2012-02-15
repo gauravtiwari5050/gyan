@@ -20,8 +20,6 @@ GyanV1::Application.routes.draw do
 
   get "course/show"
 
-  get "department/new"
-
   get "admin/home"
 
   get "login/new"
