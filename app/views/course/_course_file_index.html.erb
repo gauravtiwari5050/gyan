@@ -2,11 +2,24 @@
 <% end -%>
 <% content_for :embed_file_index do %>
 <div id = "file-index">
-<% @course.appfiles.each do |appfile| %>
-  <p>
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered data_table" style="width:100%">
+<thead>
+  <tr>
+    <th> File </th>
+    <th> Uploaded at </th>
+  </tr>
+</thead>
+<tbody>
+<% @course.appfiles.order(:updated_at).reverse.each do |appfile| %>
+  <tr>
+  <td>
     <%= render :template => "shared/appfile_link",:locals => {:appfile => appfile} %>
-  </p>
+  </td>
+  <td> <%= time_ago_in_words(appfile.updated_at)%> ago </td>
+  </tr>
 <% end %>
+</tbody>
+</table>
 </div>
 <%= link_to "Create file", "/courses/"+@course.id.to_s+"/files/new" %>
 <% end -%>
