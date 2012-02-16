@@ -1,0 +1,20 @@
+
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered data_table" style="width:100%">
+<thead>
+  <tr>
+    <th> User </th>
+    <th> Member since </th>
+  </tr>
+</thead>
+<tbody>
+  <% for user in users -%>
+    <tr>
+      <td><%= link_to user.username, '/users/'+user.id.to_s+'/profile' %></td> 
+      <td> <%= time_ago_in_words(user.created_at)%> ago </td>
+    </tr>
+  <% end -%>
+</tbody>
+
+
+
+</table>

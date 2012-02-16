@@ -9,10 +9,7 @@
 <% end -%>
 <% content_for :main_content do -%>
   <h3> Please select the faculty to manage his/her settings</h3>
-  <% for user in @users -%>
-    <p>
-    <%= link_to user.username, '/users/'+user.id.to_s+'/profile' %> 
-    </p>
-  <% end -%>
+
+  <%= render :template => "shared/manage_users" ,:locals => {:users => @users} %>
 
 <% end -%>
