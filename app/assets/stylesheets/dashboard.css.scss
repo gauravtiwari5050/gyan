@@ -12,6 +12,13 @@
         margin-top:20px;
         outline:none;
         text-align: center;
+        background-color: #F2F9FE;
+    border-color: #DCDFE3 #D0D4D8 #D0D4D8 #DCDFE3;
+    border-style: solid;
+    border-width: 1px;
+    color: #666666;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
     }
     #users_button {background:url(image_path('human.png')) 0 0 no-repeat;}
     #users_button:hover {background:url(image_path('human.png')) -125px 0 no-repeat;}
