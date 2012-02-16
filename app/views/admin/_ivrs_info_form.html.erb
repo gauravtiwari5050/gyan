@@ -71,7 +71,7 @@ $(document).ready(function(){
     <%= f.text_area :message %>
   </div>
   <div class="actions field">
-    <%= f.submit %>
+    <%= f.submit nil,:class => 'btn btn-large btn-primary' %>
   </div>
 <% end %>
 
@@ -95,6 +95,6 @@ $(document).ready(function(){
     <%= f.file_field :file  %>
    </div>
   <div class="actions field">
-    <%= f.submit 'Upload file'%>
+    <%= f.submit 'Upload file',:class => 'btn btn-large btn-primary'%>
   </div>
 <% end %>

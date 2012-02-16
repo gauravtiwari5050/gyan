@@ -9,6 +9,6 @@
     <%= f.select :user_id ,options_for_select(@teachers),{ :include_blank => true } %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit nil,:class => 'btn btn-large btn-primary' %>
   </div>
 <% end %>

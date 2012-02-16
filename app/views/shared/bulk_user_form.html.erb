@@ -57,7 +57,7 @@ $(document).ready(function(){
   <br>
 
   <div class="field actions">
-    <%= submit_tag %>
+    <%= submit_tag 'Create Users' ,:class => 'btn btn-large btn-primary'%>
   </div>
 <% end -%>
 
@@ -79,6 +79,6 @@ $(document).ready(function(){
     <%= f.file_field :file  %>
    </div>
   <div class="field actions">
-    <%= f.submit 'Upload file'%>
+    <%= f.submit 'Upload file',:class => 'btn btn-large btn-primary'%>
   </div>
 <% end %>
