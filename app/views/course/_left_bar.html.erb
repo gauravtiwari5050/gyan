@@ -1,5 +1,5 @@
 <% content_for :left_bar do %>
-        <div class="headofcourse"> <%=@course.name%> </div>
+        <div class="headofcourse"> <a href="/courses/<%=@course.id%>/home"><%=@course.name%></a></div>
         <ul>
             <li><a href="/courses/<%=@course.id%>/announcements">Announcements</a></li>
             <li><a href="/courses/<%=@course.id%>/assignments">Assignments</a></li>

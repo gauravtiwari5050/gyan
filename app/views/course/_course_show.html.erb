@@ -1,5 +1,22 @@
-<h2> Course details </h2>
-  <%= @course.name  %></br>
-  <%= @course.about  %></br>
-  <%= @course.code  %></br>
-
+<div class="announcment padd ui-corner-all">
+                <h2><%= @course.name  %> Home</h2>
+                
+                  <div class="natoque ui-corner-all">Course code: <%= @course.code%> <br> Number of Students : <%= get_students_for_course(@course.id).count %> <br> Number of groups : <%=@course.course_groups.count%> </div> 
+                  <% instructors = get_instructors_for_course(@course.id)%>
+                  <% if !instructors.nil? && instructors.count > 0%>
+                    <%instructors_names = ''%>
+                    <% for instructor in instructors -%>
+                      <% instructors_names += (instructor.username||instructor.email) + ' '%>
+                    <% end -%>
+                    <div class="instructor"><span>Instructor:</span> <%= instructors_names%></div>
+                  <% else %>
+                    <% if current_user.user_type == 'STUDENT' %>
+                      <div class="instructor"><span>Instructor:</span> No instructor has been assigned</div>
+                    <% else %>
+                      <div class="instructor"><span>Instructor:</span>  <%= link_to "Assign instructor", '/courses/'+@course.id.to_s+'/assign/teacher' %> </div>
+                    <% end %>
+                  <% end %>
+                  <div class="instructor"><span>About:</span> </br>
+                   <%=@course.about%> 
+                  </div>
+ </div>

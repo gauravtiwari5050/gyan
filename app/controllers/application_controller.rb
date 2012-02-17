@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     request.accepts.sort! { |x, y| ajax_request_types.include?(y.to_s) ? 1 : -1 } if request.xhr?
   end
 
-  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id
+  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course
 
   def md5_hash(content)
   require 'digest/md5'
@@ -331,10 +331,25 @@ class ApplicationController < ActionController::Base
     end
    end
 
+
    users = User.find(:all,:conditions => {:id => student_ids})
    return users
 
   end
+
+   def get_instructors_for_course(course_id)
+   instructor_ids = []
+   course_allocations = CourseAllocation.find(:all,:conditions =>{:course_id =>course_id})
+   if !course_allocations.nil? 
+    for course_allocation in course_allocations
+      if !course_allocation.user_id.nil?
+        instructor_ids.push(course_allocation.user_id)
+      end
+    end
+   end
+   users = User.find(:all,:conditions => {:id => instructor_ids})
+   return users 
+   end
 
   def get_unassigned_students_for_course(course_id)
    unassigned_students = []
@@ -480,4 +495,25 @@ class ApplicationController < ActionController::Base
     Delayed::Job.enqueue(bulk_messaging_job)
     
   end
+
+  def get_student_for_student_program_detail (student_program_detail) 
+    if !student_program_detail.nil?
+      return User.find_by_id(student_program_detail.student_id)  
+    end
+    return nil
+  end
+
+  def get_students_for_program(program)
+  users = []
+  if !program.nil?
+    student_program_details = program.student_program_details
+    if !student_program_details.nil?
+      for student_program_detail in student_program_details
+        users.push(get_student_for_student_program_detail(student_program_detail))
+      end
+    end
+  end
+    
+  end
+
 end

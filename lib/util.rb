@@ -73,7 +73,10 @@ module Util
     user = create_vanilla_user(email,user_type)
     begin
       
-      user.save
+      if !user.save
+        logger.error 'ERROR SAVING USER' + user.inspect
+        raise 'Error creating user from the list provided'
+      end
       Delayed::Job.enqueue(MailingJob.new(user.id))
     rescue Exception => e
       logger.info e.message
