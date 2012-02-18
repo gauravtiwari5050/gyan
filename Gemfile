@@ -29,6 +29,7 @@ gem 'fog'
 gem 'spreadsheet'
 gem "validates_existence", ">= 0.4"
 gem 'exception_notification'
+gem 'tinymce-rails'
 
 # Use unicorn as the web server
 # gem 'unicorn'
