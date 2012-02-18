@@ -115,6 +115,8 @@ class UserController < ApplicationController
    @messages = Message.find(:all,:conditions => {:from_user => @user.id})
   end
   def inbox_compose
+   @user = current_user
+
   end
 
 end

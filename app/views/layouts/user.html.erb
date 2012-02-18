@@ -50,6 +50,15 @@
                 
                 
 				<div class="bodyRgithPanel">
+                  <ul class="breadcrumb">        
+                    <li><a href="<%=get_home_for_user%>"> <i class="icon-home"></i>  Home</a> 
+                    <li>
+                      <span class="divider">/</span>
+                      <i class="icon-user"></i> <%= link_to "Profile", '/users/'+ @user.id.to_s+'/profile' %> 
+                    <li>
+
+                    <%= yield :breadcrumb  %>
+                  </ul>  
                 <div class="main-content">
                   <%= yield :main_content %>
                 </div>

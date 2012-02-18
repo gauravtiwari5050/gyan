@@ -8,18 +8,29 @@
   <%= render 'inbox_right_bar' %>
 <% end -%>
 <% content_for :main_content do -%>
-  <table>
+  <table class="table table-striped">
+    <thead>
     <tr>
       <th>From</th>
       <th>Message</th>
     </tr>
-
+    </thead>
+    <tbody>
     <% for message in @messages -%>
       <tr>
         <td><%= get_user_by_user_id(message.from_user).username%> </td>
         <td><%=message.subject %></td>
       </tr>
     <% end -%>
+    </tbody>
 
   </table>
 <% end -%>
+<% content_for :breadcrumb do -%>
+  <li class="active">
+   <span class="divider">/</span>
+   <i class="icon-list-alt"></i>
+   Inbox
+  </li>
+
+  <% end -%>
