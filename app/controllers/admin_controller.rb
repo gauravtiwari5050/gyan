@@ -285,6 +285,7 @@ class AdminController < ApplicationController
   end
 
   def connect_department_new
+    @department = Department.find(params[:department_id])
   end
 
   def connect_department_create

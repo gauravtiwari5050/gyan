@@ -1,10 +1,11 @@
-<ul>
+<h2> All courses </h2>
+</br>
+<table class="table table-striped">
+<tbody>
 <% for course in @courses -%>
-<li>
-  <div id="bold-box-big">
+  <tr><td>
     <%= link_to course.name, '/courses/'+course.id.to_s+'/home' %>
-  </div>
-</li>
-  
+  </td></tr>
 <% end -%>
-</ul>
+</tbody>
+</table>

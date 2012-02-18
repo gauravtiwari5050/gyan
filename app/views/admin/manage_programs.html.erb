@@ -10,17 +10,33 @@
 <% content_for :main_content do -%>
  <h3> Please select a program to manage it </h3>
  <% for department in @departments -%>
-    <p>Department --<b> <%= department.name %></b></p> 
-    <% for program in department.programs -%>
-      <div id="bold-box">
+<fieldset class='fieldset-style ui-corner-all'>
+<legend class='legend-style'> <%= department.name %> </legend>
 
-      <p>
-      <% program_name = program.degree + '-' + program.branch%>
-      <%= link_to program_name , "/programs/"+program.id.to_s %>
-      </p>
-        
-      </div>
+<table class="table table-striped">
+<tbody>
+    <% for program in department.programs -%>
+    <tr>
+    <td>
+        <% program_name = program.degree + '-' + program.branch%>
+        <%= link_to program_name , "/programs/"+program.id.to_s %>
+    </td>
+    </tr>    
     <% end -%>
+
+</tbody>
+</table>
+ </legend>
+ </fieldset>
+ </br>
  <% end -%>
 
 <% end -%>
+<% content_for :breadcrumb do -%>
+  <li class="active">
+   <span class="divider">/</span>
+   <i class="icon-asterisk"></i>
+   Manage Departments
+  </li>
+
+  <% end -%>

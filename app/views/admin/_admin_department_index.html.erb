@@ -1,3 +1,14 @@
+<h2>All departments</h2>
+</br>
+
+<table class="table table-striped">
+<tbody>
+
 <% for department in @departments -%>
+  <tr><td>
   <%= link_to department.name,'/departments/'+department.id.to_s  %></br>
+  </td></tr>
 <% end -%>
+
+</tbody>
+</table>

@@ -44,3 +44,10 @@ $(document).ready(function(){
   </div>
    <%= render :template => "shared/connect_form" %>
 <% end -%>
+<% content_for :breadcrumb do -%>
+  <li class="active">
+   <span class="divider">/</span>
+   <i class="icon-user"></i>
+   Connect with Faculty
+  </li>
+<% end -%>

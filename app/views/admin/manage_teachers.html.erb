@@ -13,3 +13,12 @@
   <%= render :template => "shared/manage_users" ,:locals => {:users => @users} %>
 
 <% end -%>
+<% content_for :breadcrumb do -%>
+
+  <li class="active">
+   <span class="divider">/</span>
+   <i class="icon-asterisk"></i>
+   Manage Teachers
+  </li>
+
+  <% end -%>

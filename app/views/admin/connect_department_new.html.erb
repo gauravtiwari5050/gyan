@@ -44,3 +44,15 @@ $(document).ready(function(){
   </div>
    <%= render :template => "shared/connect_form" %>
 <% end -%>
+<% content_for :breadcrumb do -%>
+  <li class="">
+   <span class="divider">/</span>
+   <%= link_to "Connect with Department", "/admin/connect/departments" %>
+  </li>
+
+  <li class="active">
+   <span class="divider">/</span>
+   <%=@department.name%>
+  </li>
+  
+<% end -%>
