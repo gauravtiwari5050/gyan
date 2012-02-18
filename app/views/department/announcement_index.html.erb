@@ -5,13 +5,16 @@
 <%= render 'right_bar' %>
 <% content_for :main_content do -%>
 <% if !@department.announcements.nil? %>
-  <table>
   <% for announcement in @department.announcements -%>
-    <tr> 
-    <td><%=announcement.title%></td>
-    </tr> 
+   <div class="announce">
+    <fieldset class="fieldset-style radius6">
+      <legend class="legend-style"> <%= image_tag "announcement.png" %>  </legend>
+        <h3><%=announcement.title%></h3>
+        <span><%= announcement.content  %></span>
+      </legend>
+    </fieldset>
+    </div>
   <% end -%>
-  </table>
   
 <% end %>
 <% end -%>

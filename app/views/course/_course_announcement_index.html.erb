@@ -1,12 +1,15 @@
 
 <% @course.course_announcements.reverse.each do |course_announcement| %>
-  <div id="bold-box-big">
-
-    <b><%= course_announcement.title  %> </b>
-      </br>
-    </b><%= course_announcement.details  %> </b>
     
-  </div>
+   <div class="announce">
+    <fieldset class="fieldset-style radius6">
+      <legend class="legend-style"> <%= image_tag "announcement.png" %>  </legend>
+      <h3><%= course_announcement.title  %></h3>
+      <span><%= course_announcement.details  %></span>
+    </fieldset>
+   </div>
+      
+    
 
 <% end %>
 </br>

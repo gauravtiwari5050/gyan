@@ -47,3 +47,9 @@ clear: both;
 div.ui-datepicker {
  font-size: 62.5%;
 }
+.announce h3{
+  border-bottom: 1px solid #95B1DD;
+}
+.announce span {
+  margin-left: 10px;
+}
