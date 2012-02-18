@@ -169,7 +169,8 @@ GyanV1::Application.routes.draw do
   match 'calendar/events' => 'calendar#events_index'
   match 'calendar/events/new' => 'calendar#events_new'
   match 'calendar/events/create' => 'calendar#events_create'
-  match 'calendar/events/:event_id' => 'calendar#events_show'
+  match 'calendar/events/:event_id/edit' => 'calendar#events_edit'
+  match 'calendar/events/:event_id/create' => 'calendar#events_create'
 
   #helper routes
   match 'search/users' => 'user#search_json'

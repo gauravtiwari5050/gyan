@@ -1,24 +1,22 @@
-<h1>Listing events</h1>
+<h2>All events</h2>
 
-<table>
+<table class="table table-striped">
+  <thead>
   <tr>
     <th>Title</th>
     <th>Starts at</th>
     <th>Ends at</th>
-    <th>All day</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
+  </thead>
 
+  <tbody>
 <% @events.each do |event| %>
   <tr>
-    <td><%= event.title %></td>
-    <td><%= event.starts_at %></td>
-    <td><%= event.ends_at %></td>
-    <td><%= event.all_day %></td>
-    <td><%= event.description %></td>
+    <td><%= link_to event.title,"/calendar/events/" + event.id.to_s + "/edit"  %></td>
+    <td><%= time_ago_in_words(event.starts_at) %></td>
+    <td><%= distance_of_time_in_words(event.ends_at,event.starts_at) %> after start</td>
   </tr>
+
 <% end %>
+  </tbody>
 </table>

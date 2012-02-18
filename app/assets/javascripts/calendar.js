@@ -43,6 +43,8 @@ function drawCalendar() {
         // http://arshaw.com/fullcalendar/docs/mouse/eventClick/
         eventClick: function(event, jsEvent, view){
           //alert('clicked on event'); TODO add update/delete functionality here
+          window.open('/calendar/events/'+event.id+'/edit');
+          return false;
         },
         dayClick: function(date, allDay, jsEvent, view) {
 

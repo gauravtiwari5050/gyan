@@ -208,6 +208,3 @@ var username = '';
       $( "#dialog-form-message" ).dialog( "open" );
     }
 
-
-
-
