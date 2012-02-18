@@ -8,5 +8,17 @@
   <%= render 'right_bar' %>
 <% end -%>
 <% content_for :main_content do -%>
-  <%= link_to "Delete this group", '/groups/' + @group.id.to_s+'/delete' %>
+<div class="announcment padd ui-corner-all">
+                <h2><%= @group.group_name  %> Home</h2>
+                  <div class="natoque ui-corner-all">
+                    Group for course:<%=@group.course.name%> 
+                    <br> 
+                    Number of Students : <%= @group.group_students.count %>
+                 </div> 
+
+  
+</div>
+  <% if !(current_user.user_type == 'STUDENT') %>
+    <%= link_to "Delete this group", '/groups/' + @group.id.to_s+'/delete',:class => 'btn btn-danger' %>
+  <% end %>
 <% end -%>

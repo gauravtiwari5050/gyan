@@ -1,9 +1,11 @@
-<h2> Department Details </h2>
-<%=@department.name%>
+
+<div class="announcment padd ui-corner-all">
+     <h2><%= @department.name  %></h2>
+     <div class="instructor">
+        <%= @department.about%>
+     </div>
+</div>
 </br>
-<pre>
-<%= @department.about%>
-</pre>
-</br>
-<%= link_to 'Destroy', '/departments/'+@department.id.to_s+'/destroy', :confirm => 'Are you sure?' %> <br>
-<%= link_to 'Edit', '/departments/'+@department.id.to_s+'/edit', :confirm => 'Are you sure?' %>
+<p>
+<%= link_to 'Edit settings', '/departments/'+@department.id.to_s+'/edit', :confirm => 'Are you sure?',:class => 'btn btn-warning'%>
+</p>

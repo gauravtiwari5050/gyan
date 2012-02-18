@@ -1,6 +1,16 @@
-<h2> Program details </h2>
-  <%= @program.branch  %></br>
-  <%= @program.degree  %></br>
-  <%= @program.term_type  %></br>
-  <%= @program.total_terms  %></br>
 
+<div class="announcment padd ui-corner-all">
+                <h2><%= @program.branch  %></h2>
+                  <div class="natoque ui-corner-all">
+                    Degree: <%= @program.degree%> 
+                    <br> 
+                    Term Type : <%= @program.term_type %> 
+                    <br> 
+                    Total number of terms : <%=@program.total_terms%> 
+                  </div> 
+
+  
+</div>
+
+
+<%= link_to 'Edit settings', '/departments/'+@program.id.to_s+'/edit', :confirm => 'Are you sure?',:class => 'btn btn-warning'%>
