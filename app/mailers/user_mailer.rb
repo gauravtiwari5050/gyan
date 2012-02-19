@@ -4,7 +4,10 @@ class UserMailer < ActionMailer::Base
     @user = user
     @url = @user.institute.institute_url.url
     @url = 'http://'+@url+'/register/verify/'+@user.one_time_login.to_s
-    mail(:to => user.email, :subject => "Registered")
+    @login_url = 'http://'+@user.institute.institute_url.url+"/login"
+    @institute_name = @user.institute.name
+    @user_type = @user.user_type.downcase
+    mail(:to => user.email, :subject => "New user Registration , " + @institute_name + " ,CloudClass")
   end
 
   def message_send(message)
