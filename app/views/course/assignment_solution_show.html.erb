@@ -10,3 +10,16 @@
 <% content_for :main_content do -%>
   <%= render 'solution_show' %>
 <% end -%>
+<% content_for :breadcrumb do -%>
+  <li>
+   <span class="divider">/</span>
+   <i class="icon-asterisk"></i>
+   <%= link_to "Assignment", '/courses/'+@course.id.to_s+'/assignments/'+@assignment.id.to_s  %>
+  </li>
+  <li class="active">
+   <span class="divider">/</span>
+   <i class="icon-edit"></i>
+   Solution
+  </li>
+
+  <% end -%>

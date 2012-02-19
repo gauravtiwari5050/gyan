@@ -1,3 +1,10 @@
+<h3> All Courses </h3>
+<table class="table table-striped">
+<tbody>
 <% for course in @courses -%>
-  <%= link_to course.name, '/courses/'+course.id.to_s+'/home' %></br>
+  <tr><td>
+  <%= link_to course.name, '/courses/'+course.id.to_s+'/home' %>
+  </td></tr>
 <% end -%>
+</tbody>
+</table>

@@ -8,3 +8,11 @@
   <%= render :template => "shared/top_bar" %>
 <% end -%>
 <%= render 'course_file_index' %>
+<% content_for :breadcrumb do -%>
+  <li class="active">
+   <span class="divider">/</span>
+   <i class="icon-list-alt"></i>
+   Files
+  </li>
+
+  <% end -%>

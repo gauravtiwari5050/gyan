@@ -10,3 +10,16 @@
 <% content_for :main_content do -%>
   <%= render 'topic_new'%>
 <% end -%>
+<% content_for :breadcrumb do -%>
+  <li>
+   <span class="divider">/</span>
+   <i class="icon-comment"></i>
+   <%= link_to "Forum",'/courses/'+@course.id.to_s+'/forum'  %>
+  </li>
+  <li class="active">
+   <span class="divider">/</span>
+   <i class="icon-plus"></i>
+   New Topic
+  </li>
+
+  <% end -%>

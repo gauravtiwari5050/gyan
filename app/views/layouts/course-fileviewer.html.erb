@@ -55,6 +55,15 @@
                 
                 
 				<div class="bodyRgithPanel">
+                  <ul class="breadcrumb">        
+                    <li><a href="<%=get_home_for_user%>"> <i class="icon-home"></i>  Home</a> 
+                    <li>
+                      <span class="divider">/</span>
+                      <i class="icon-book"></i> <%= link_to @course.name, '/courses/'+@course.id.to_s+'/home' %> 
+                    <li>
+
+                    <%= yield :breadcrumb  %>
+                  </ul>  
               
                 <div class="file-index">
                   <%= yield :embed_file_index %>
