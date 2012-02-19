@@ -29,6 +29,8 @@ class RegistrationController < ApplicationController
       
       if success == true
         respond_to do |format|
+          @success_message = 'An email has been sent to your email id.Please follow the instructions to reset the password.'
+          flash[:notice] = @success_message
           format.html {redirect_to('/register/success')}
         end
       else
@@ -53,6 +55,8 @@ class RegistrationController < ApplicationController
 
       if success == true
         respond_to do |format|
+          @success_message = 'An email has been sent to your email id.Please follow the instructions to complete registration.'
+          flash[:notice] = @success_message
           format.html {redirect_to('/register/success')}
         end
       else
@@ -76,6 +80,8 @@ class RegistrationController < ApplicationController
 
       if success == true
         respond_to do |format|
+          @success_message = 'An email has been sent to your email id.Please follow the instructions to complete registration.'
+          flash[:notice] = @success_message
           format.html {redirect_to('/register/success')}
         end
       else
@@ -86,7 +92,6 @@ class RegistrationController < ApplicationController
   end
 
   def success
-    @message = "Regsitration successful,an email has been sent to the id provided.Please use that for next steps"
     
   end
 
@@ -125,6 +130,8 @@ class RegistrationController < ApplicationController
       
     if persist_success == true
       respond_to do |format|
+        @success_message = 'Your account has been validated. <a href="/login"> Please login here </a>'
+        flash[:notice] = @success_message
         format.html {redirect_to('/register/success')}
       end
     else

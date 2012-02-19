@@ -1,0 +1,42 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+<h3> The following courses do not have any instructors assigned.Please select to assign instructor</h3>
+<table class="table">
+</tbody>
+<% for course in @courses  -%>
+  <% has_allocation = false %>
+  <% course_allocations =  course.course_allocations %> 
+  <% if !course_allocations.nil? && course_allocations.count > 0%>
+     <% for ca in course_allocations -%>
+         <% if !ca.user_id.nil? %>
+           <% has_allocation = true %>
+         <% end %>
+     <% end -%>
+  <% end %>
+  <% if has_allocation == false %>
+  <tr><td>
+     <%= link_to course.name, '/courses/'+course.id.to_s+'/assign/teacher'  %>
+  </td></tr>
+  <% end %>
+  
+<% end -%>
+</tbody>
+</table>
+
+<% end -%>
+<% content_for :breadcrumb do -%>
+  <li class="active">
+   <span class="divider">/</span>
+   <i class="icon-asterisk"></i>
+   Manage Courses
+  </li>
+
+  <% end -%>

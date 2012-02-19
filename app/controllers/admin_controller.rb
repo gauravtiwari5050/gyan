@@ -345,4 +345,8 @@ class AdminController < ApplicationController
     end
   end
 
+  def manage_courses
+    @courses =  get_all_courses_for_user 
+  end
+
 end

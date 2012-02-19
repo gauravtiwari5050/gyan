@@ -69,6 +69,7 @@ class UserController < ApplicationController
 
     respond_to do |format|
       if success
+        flash[:notice] = 'Your password has been reset'
         format.html{redirect_to('/users/'+@user.id.to_s+'/profile')}
       else
         format.html{render :action => 'resetpass'}

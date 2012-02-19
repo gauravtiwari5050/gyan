@@ -224,6 +224,9 @@ class CourseController < ApplicationController
 
     respond_to do |format|
       if @course_allocation.update_attribute(:user_id,@course_allocation_new.user_id)
+        if @course_allocation.user_id.nil?
+            flash[:alert] = 'There is no allocated teacher for this institute now.'
+        end
         format.html {redirect_to ('/courses/'+@course.id.to_s+'/home')}
       else
         format.html {render :action => "teacher_assign"} 

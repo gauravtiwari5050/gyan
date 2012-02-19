@@ -1,9 +1,18 @@
-<h2> <b><%= @topic.title %> </b></h2>
-<p> <%= @topic.description  %>  </p>
-<b>Posts</b>
+<div class="forum-topic ui-corner-all">
+  <h3 class="ui-corner-all"> <%= @topic.title %></h3>
+  <p> 
+     <%= @topic.description  %>  
+  </p>
+</div>
+<h3>Posts</h3>
 <% for post in @topic.posts -%>
-  <p><%= post.content %></p></br>
+<div class="forum-post ui-corner-all">
+  <span class="ui-corner-all"><%= post.user.username %> wrote <%= time_ago_in_words(post.updated_at)%> ago </span>
+  <p> <%=post.content%> </p>
+</div>
+</br>
 <% end -%>
+
 
 
 <h3>New post </h3>

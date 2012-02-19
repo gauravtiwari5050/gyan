@@ -77,6 +77,7 @@ GyanV1::Application.routes.draw do
   match 'admin/manage/teachers' => 'admin#manage_teachers'
   match 'admin/manage/departments' => 'admin#department_index'
   match 'admin/manage/programs' => 'admin#manage_programs'
+  match 'admin/manage/courses' => 'admin#manage_courses'
   match 'admin/traffic' => 'admin#report_traffic'
   match 'admin/tasks/:task_id' => 'admin#task_show'
   match 'admin/ivrs/edit' => 'admin#ivrs_edit'

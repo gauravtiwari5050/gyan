@@ -53,3 +53,27 @@ div.ui-datepicker {
 .announce span {
   margin-left: 10px;
 }
+
+.forum-topic {
+  background-color:white;
+  padding:5px;
+  border:1px solid #95B1DD;
+  }
+.forum-topic h3 {
+  background-color: #DEE9FB;
+}
+.forum-topic p {
+  padding-left: 5px;
+}
+
+.forum-post {
+  background-color:white;
+  padding:5px;
+  border:1px solid #95B1DD;
+  }
+.forum-post span {
+  background-color :#D3DCE3;
+}
+.forum-post p {
+  padding-left: 5px;
+}

@@ -1,4 +1,6 @@
 <% content_for :main_content do -%>
-<p>
-<%= @message %>  
+  <% message  = flash[:notice].html_safe%>
+  <p>
+    <%= message%>
+  </p>
 <% end -%>

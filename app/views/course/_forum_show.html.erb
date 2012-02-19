@@ -1,14 +1,23 @@
 <% if @course.forum.nil? %>
   <h3>There is no forum present for this course as of now</h3> 
-  <%= link_to "Create a new forum", '/courses/'+@course.id.to_s+'/forum/new' %>
+  <%= link_to "Create a new forum", '/courses/'+@course.id.to_s+'/forum/new' ,:class => 'btn btn-large'%>
 <% else %>
   <h2><%= @course.forum.name  %></h2>
   </br>
   <h3><%= @course.forum.description  %></h3>
-  <%= link_to "Create a new topic", '/courses/'+@course.id.to_s+'/forum/topics/new' %>
+  <%= link_to "Create a new topic", '/courses/'+@course.id.to_s+'/forum/topics/new',:class => 'btn btn-large' %>
   </br>
+ </p>
+ <h3>All topics </h3>
+  <table class="table table-striped">
+  <tbody>
   <% for topic in @course.forum.topics -%>
+    <tr>
+    <td>
     <%= link_to topic.title, '/courses/'+@course.id.to_s+'/forum/topics/'+topic.id.to_s %>
-    </br>
+    </td>
+    </tr>
   <% end -%>
+  </tbody>
+  </table>
 <% end %>
