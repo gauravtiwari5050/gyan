@@ -2,19 +2,19 @@
   <%= render 'left_bar' %>
 <% end -%>
 <% content_for :top_bar do -%>
-  <%= render :template => 'shared/top_bar' %>
+  <%= render :template => "shared/top_bar" %>
 <% end -%>
 <% content_for :right_bar do -%>
   <%= render 'right_bar' %>
 <% end -%>
 <% content_for :main_content do -%>
-  <%= render 'admin_teacher_form' %>
+  <%= render 'home_department_index' %>
 <% end -%>
 <% content_for :breadcrumb do -%>
   <li class="active">
    <span class="divider">/</span>
-   <i class="icon-plus"></i>
-   New Faculty 
+   <i class="icon-list-alt"></i>
+   Departments
   </li>
 
   <% end -%>

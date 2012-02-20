@@ -1,7 +1,7 @@
 function createUser(username,email,usertype,modal_dialog_obj) {
-            var post_url = 'admin/teachers/add';
+            var post_url = '/home/teachers/add';
             if(usertype == 'STUDENT') {
-              post_url = 'admin/students/add';
+              post_url = '/home/students/add';
             }
               $.create(
                 post_url,

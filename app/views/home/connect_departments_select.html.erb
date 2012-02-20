@@ -10,7 +10,7 @@
 <% content_for :main_content do -%>
   <h3>Select a department to send messages </h3>
   <% for department in @departments -%>
-    <%= link_to department.name, '/admin/departments/'+department.id.to_s+'/connect/new' %> </br>
+    <%= link_to department.name, '/home/departments/'+department.id.to_s+'/connect/new' %> </br>
   <% end -%>
 <% end -%>
 <% content_for :breadcrumb do -%>

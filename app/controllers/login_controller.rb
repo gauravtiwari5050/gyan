@@ -41,17 +41,8 @@ class LoginController < ApplicationController
    if successful_login
      login_user(@saved_user)
      respond_to do |format|
-     redirect_url = GyanV1::Application.config.landing_page.to_s
-     #could be done in a better way for now,but we will need this for multiple roles later
-     #so keeping it like this for now
-     if @saved_user.user_type == 'ADMIN'
-      redirect_url = '/admin'
-     elsif @saved_user.user_type =='TEACHER'
-      redirect_url = '/teacher'
-     elsif @saved_user.user_type =='STUDENT'
-      redirect_url = '/student'
-     end
-     format.html {redirect_to(redirect_url)}
+        redirect_url = '/home'
+        format.html {redirect_to(redirect_url)}
      end
    else
      respond_to do |format|

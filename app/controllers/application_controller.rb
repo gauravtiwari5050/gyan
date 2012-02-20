@@ -59,14 +59,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_home_for_user
-   if session[:user_type] == 'ADMIN'
-      return '/admin' 
-   elsif session[:user_type] == 'STUDENT'
-      return '/student'
-   elsif session[:user_type] == 'TEACHER'
-      return '/teacher'
-   end
-   return '/bad'
+    return '/home'
   end
 
   def get_institute_id

@@ -28,7 +28,7 @@ $(document).ready(function(){
         }
 
         html_message += '<div class="'+ alert_class +'">';
-        html_message += '<a href="/admin/tasks/'+ response[i].task.id + '"> Click here for more details of this task </a>'
+        html_message += '<a href="/home/tasks/'+ response[i].task.id + '"> Click here for more details of this task </a>'
         html_message += '</div>';
       }
       $('#task-status').html(html_message);
@@ -47,7 +47,7 @@ $(document).ready(function(){
 <% content_for :breadcrumb do -%>
   <li class="">
    <span class="divider">/</span>
-   <%= link_to "Connect with Department", "/admin/connect/departments" %>
+   <%= link_to "Connect with Department", "/home/connect/departments" %>
   </li>
 
   <li class="active">

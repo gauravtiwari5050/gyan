@@ -17,7 +17,7 @@ $(document).ready(function(){
         }
 
         html_message += '<div class="'+ alert_class +'">';
-        html_message += '<a href="/admin/tasks/'+ response[i].task.id + '"> Click here for more details of this task </a>'
+        html_message += '<a href="/home/tasks/'+ response[i].task.id + '"> Click here for more details of this task </a>'
         html_message += '</div>';
       }
       $('#task-status').html(html_message);

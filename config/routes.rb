@@ -57,39 +57,39 @@ GyanV1::Application.routes.draw do
   match 'student/courses' => 'student#course_index'
 
 
-  #admin routes
-  match 'admin' => 'admin#home'
-  match 'admin/users' => 'admin#users_index'
-  match 'admin/departments' => 'admin#department_index'
-  match 'admin/departments/new' => 'admin#department_new'
-  match 'admin/departments/create' => 'admin#department_create' ,:via => :post
-  match 'admin/courses' => 'admin#course_index'
-  match 'admin/teachers/new' => 'admin#teachers_new'
-  match 'admin/teachers/bulk/new' => 'admin#teachers_new_bulk'
-  match 'admin/teachers/add' => 'admin#teachers_add' ,:via => :post
-  match 'admin/teachers/bulk/add' => 'admin#teachers_bulk_add' ,:via => :post
-  match 'admin/students/new' => 'admin#students_new'
-  match 'admin/students/bulk/new' => 'admin#students_new_bulk'
-  match 'admin/students/add' => 'admin#students_add' ,:via => :post
-  match 'admin/students/bulk/add' => 'admin#students_bulk_add' ,:via => :post
-  match 'admin/programs/new' => 'admin#programs_new'
-  match 'admin/manage/students' => 'admin#manage_students'
-  match 'admin/manage/teachers' => 'admin#manage_teachers'
-  match 'admin/manage/departments' => 'admin#department_index'
-  match 'admin/manage/programs' => 'admin#manage_programs'
-  match 'admin/manage/courses' => 'admin#manage_courses'
-  match 'admin/traffic' => 'admin#report_traffic'
-  match 'admin/tasks/:task_id' => 'admin#task_show'
-  match 'admin/ivrs/edit' => 'admin#ivrs_edit'
-  match 'admin/ivrs/update' => 'admin#ivrs_update' ,:via => :put
-  match 'admin/ivrs/upload_result' => 'admin#ivrs_result_upload' ,:via => :post
-  match 'admin/connect/students/new' => 'admin#connect_students_new'
-  match 'admin/connect/students/create' => 'admin#connect_students_create' ,:via => :post
-  match 'admin/connect/teachers/new' => 'admin#connect_teachers_new'
-  match 'admin/connect/teachers/create' => 'admin#connect_teachers_create' ,:via => :post
-  match 'admin/connect/departments' => 'admin#connect_departments_select'
-  match 'admin/departments/:department_id/connect/new' => 'admin#connect_department_new'
-  match 'admin/departments/:department_id/connect/create' => 'admin#connect_department_create' ,:via => :post 
+  #home routes
+  match 'home' => 'home#home'
+  match 'home/users' => 'home#users_index'
+  match 'home/departments' => 'home#department_index'
+  match 'home/departments/new' => 'home#department_new'
+  match 'home/departments/create' => 'home#department_create' ,:via => :post
+  match 'home/courses' => 'home#course_index'
+  match 'home/teachers/new' => 'home#teachers_new'
+  match 'home/teachers/bulk/new' => 'home#teachers_new_bulk'
+  match 'home/teachers/add' => 'home#teachers_add' ,:via => :post
+  match 'home/teachers/bulk/add' => 'home#teachers_bulk_add' ,:via => :post
+  match 'home/students/new' => 'home#students_new'
+  match 'home/students/bulk/new' => 'home#students_new_bulk'
+  match 'home/students/add' => 'home#students_add' ,:via => :post
+  match 'home/students/bulk/add' => 'home#students_bulk_add' ,:via => :post
+  match 'home/programs/new' => 'home#programs_new'
+  match 'home/manage/students' => 'home#manage_students'
+  match 'home/manage/teachers' => 'home#manage_teachers'
+  match 'home/manage/departments' => 'home#department_index'
+  match 'home/manage/programs' => 'home#manage_programs'
+  match 'home/manage/courses' => 'home#manage_courses'
+  match 'home/traffic' => 'home#report_traffic'
+  match 'home/tasks/:task_id' => 'home#task_show'
+  match 'home/ivrs/edit' => 'home#ivrs_edit'
+  match 'home/ivrs/update' => 'home#ivrs_update' ,:via => :put
+  match 'home/ivrs/upload_result' => 'home#ivrs_result_upload' ,:via => :post
+  match 'home/connect/students/new' => 'home#connect_students_new'
+  match 'home/connect/students/create' => 'home#connect_students_create' ,:via => :post
+  match 'home/connect/teachers/new' => 'home#connect_teachers_new'
+  match 'home/connect/teachers/create' => 'home#connect_teachers_create' ,:via => :post
+  match 'home/connect/departments' => 'home#connect_departments_select'
+  match 'home/departments/:department_id/connect/new' => 'home#connect_department_new'
+  match 'home/departments/:department_id/connect/create' => 'home#connect_department_create' ,:via => :post 
 
   #department routes
   match 'departments/:id/update' => 'department#update' ,:via => :put

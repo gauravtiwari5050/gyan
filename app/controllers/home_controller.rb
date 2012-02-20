@@ -1,6 +1,6 @@
 include Util
 
-class AdminController < ApplicationController
+class HomeController < ApplicationController
   before_filter :validate_institute_url
   before_filter {|role| role.validate_role 'ADMIN'}
   def home
@@ -82,11 +82,11 @@ class AdminController < ApplicationController
    respond_to do |format|
     if success == true
       flash[:notice] =  status_message
-      format.html{redirect_to('/admin/teachers/new')}
+      format.html{redirect_to('/home/teachers/new')}
       format.js  { render :json => user }
     else
       flash[:alert] =  status_message
-      format.html{redirect_to('/admin/teachers/new')}
+      format.html{redirect_to('/home/teachers/new')}
     end
    end
 
@@ -111,7 +111,7 @@ class AdminController < ApplicationController
     else
       flash[:alert] =  status_message
     end
-    format.html {redirect_to('/admin/teachers/bulk/new')}
+    format.html {redirect_to('/home/teachers/bulk/new')}
    end
 
   end
@@ -170,7 +170,7 @@ class AdminController < ApplicationController
     else
       flash[:alert] =  status_message
     end
-    format.html{redirect_to('/admin/students/new')}
+    format.html{redirect_to('/home/students/new')}
    end
     
   end
@@ -194,7 +194,7 @@ class AdminController < ApplicationController
     else
       flash[:alert] =  status_message
     end
-    format.html {redirect_to('/admin/students/bulk/new')}
+    format.html {redirect_to('/home/students/bulk/new')}
    end
   end
 
@@ -264,14 +264,14 @@ class AdminController < ApplicationController
   def connect_students_create
     connect_users_create("STUDENT")
     respond_to do |format|
-      format.html{ redirect_to('/admin/connect/students/new')}
+      format.html{ redirect_to('/home/connect/students/new')}
     end
   end
 
   def connect_teachers_create
     connect_users_create("TEACHER")
     respond_to do |format|
-      format.html{ redirect_to('/admin/connect/teachers/new')}
+      format.html{ redirect_to('/home/connect/teachers/new')}
     end
     
   end
@@ -292,7 +292,7 @@ class AdminController < ApplicationController
     students = get_students_for_department(params[:department_id])
     bulk_message(students,current_user)
     respond_to do |format|
-      format.html{ redirect_to('/admin/departments/'+params[:department_id]+'/connect/new')}
+      format.html{ redirect_to('/home/departments/'+params[:department_id]+'/connect/new')}
     end
 
   end
@@ -315,7 +315,7 @@ class AdminController < ApplicationController
     @ivrs_info = institute.ivrs_info
     respond_to do |format|
       if @ivrs_info.update_attributes(params[:ivrs_info])
-        format.html { redirect_to('/admin/ivrs/edit', :notice => 'Your IVRS message was successfully updated') }
+        format.html { redirect_to('/home/ivrs/edit', :notice => 'Your IVRS message was successfully updated') }
       else
         format.html { render :action => "ivrs_edit" }
       end
@@ -341,7 +341,7 @@ class AdminController < ApplicationController
     Delayed::Job.enqueue(CreateIvrsResultsFromFileJob.new(file_url,task.id,@ivrs_info.id))
 
     respond_to do |format|
-      format.html { redirect_to('/admin/ivrs/edit') }
+      format.html { redirect_to('/home/ivrs/edit') }
     end
   end
 
