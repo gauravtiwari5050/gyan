@@ -1,22 +1,23 @@
-  
-            <div class="hero-unit">
-              <p>Quick Links</p>
+            <p> Quick Links </p>
+            <ul>
+              <li> <a href="#" class="add-student">Add Student</a></li>
+            </ul>
 
-              <div class="clearfix"></div>
-              <div id="bold-box-big">
-                <a href="#about">New Announcement</a>
-              </div>
-              <div class="clearfix"></div>
-              <div id="bold-box-big">
-                <a href="/departments/new">Add Department</a>
-              </div>
-              <div class="clearfix"></div>
-              <div id="bold-box-big">
-                 <%= link_to "Add Teachers", '/admin/teachers/new' %>
-              </div>
-              <div class="clearfix"></div>
-              <div id="bold-box-big">
-                 <%= link_to "Add Student", '/admin/students/new' %>
-              </div>
-              <div class="clearfix"></div>
+            <% content_for :modal_dialog do -%>
+            <div id="dialog-form-user" title="Create new user" style="display:none">
+              <p class="validateTips">All form fields are required.</p>
+
+              <form>
+                <fieldset>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="modal-username" class="text ui-widget-content ui-corner-all" />
+                <label for="email">Email</label>
+                <input type="text" name="email" id="modal-email" value="" class="text ui-widget-content ui-corner-all" />
+                </fieldset>
+            </form>
             </div>
+            
+
+              
+            <% end -%>
+
