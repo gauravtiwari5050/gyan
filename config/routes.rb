@@ -24,6 +24,7 @@ GyanV1::Application.routes.draw do
   get "login/new"
 
   get "signup/new"
+  match "/" => 'static#welcome'
 
   #regsitration for a new institute
   match 'signup' => 'signup#new'

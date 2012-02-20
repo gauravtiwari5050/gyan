@@ -22,7 +22,7 @@ group :assets do
   gem 'uglifier'  
 end  
 
-gem 'jquery-rails', '>= 1.0.12'
+gem 'jquery-rails'
 gem 'execjs'
 gem 'therubyracer'
 gem 'fog'

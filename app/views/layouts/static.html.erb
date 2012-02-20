@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>CloudClass</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+<%= stylesheet_link_tag "welcome" %>
+  </style>   
+<%= javascript_include_tag "welcome" %>
+<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+<%= csrf_meta_tag %>
+</head>
+<%= yield %>
+
+</html>
