@@ -23,14 +23,13 @@
   </div>
   <div class="right-half">
     <p>
-      <%= link_to "Assignment home", '/assignments/'+@assignment.id.to_s %>
-    </p>
-    <p>
       <%= link_to "Submit solution", '/courses/'+@course.id.to_s+'/assignments/'+@assignment.id.to_s+'/solve' %>
     </p>
-    <p>
-      <%= link_to "Evaluate this assignment", '/courses/'+@course.id.to_s+'/assignments/'+@assignment.id.to_s+'/evaluate' %>
-    </p>
+     <% if !(get_user_type == 'STUDENT') %>
+      <p>
+        <%= link_to "Evaluate this assignment", '/courses/'+@course.id.to_s+'/assignments/'+@assignment.id.to_s+'/evaluate' %>
+      </p>
+     <% end %>
   </div>
   <div class="clearBoth">
     

@@ -1,7 +1,12 @@
 <% content_for :main_content do -%>
 <% if @course.bbb.nil? %>
   <h3>There is no channel running for this course</h3>
-  <%= link_to "Create a live channel for this course", '/courses/'+@course.id.to_s+'/channel/new' %>
+  <% if !(get_user_type == 'STUDENT') %>
+    <%= link_to "Create a live channel for this course", '/courses/'+@course.id.to_s+'/channel/new' %>
+  <% else %>
+   <p> Please consult your instructor to create a live channel for this course </p> 
+  <% end %>
+
 <% else %>
   <% if @course.bbb.status == 'CREATING' %>
     <h3>The live channel for this course is being prepared</h3>

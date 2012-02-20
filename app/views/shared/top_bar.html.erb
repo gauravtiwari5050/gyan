@@ -21,7 +21,6 @@
                     <% for course in courses -%>
                           <li><span> <%= link_to course.name, '/courses/'+course.id.to_s+'/home',:class => "headingsubmenu" %> </span></li>
                     <% end -%>
-                    <li><span><a href="" class="headingsubmenu">All Courses</a></span></li>
                  </ul>
            </li>
             <% if current_user.user_type == 'ADMIN' %>
@@ -30,7 +29,9 @@
             <% if current_user.user_type == 'TEACHER' %>
               <%= render :template => 'shared/teacher_nav' %>
             <% end %>
-            <%= render :template => 'shared/groups' %>
+            <% if current_user.user_type == 'STUDENT' %>
+              <%= render :template => 'shared/groups' %>
+            <% end %>
 
 						<li><a href="/calendar" title="Grades" class="grades">Calendar</a></li>
                         

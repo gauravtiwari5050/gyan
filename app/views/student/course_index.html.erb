@@ -1,7 +1,7 @@
 <% content_for :left_bar do -%>
   <%= render 'left_bar' %>
 <% end -%>
-<% content_for :right_bar do -%>
+<% content_for :top_bar do -%>
   <%= render :template => "shared/top_bar" %>
 <% end -%>
 <% content_for :right_bar do -%>
@@ -10,3 +10,11 @@
 <% content_for :main_content do -%>
   <%= render :template => "shared/course_index" %>
 <% end -%>
+<% content_for :breadcrumb do -%>
+  <li class="active">
+   <span class="divider">/</span>
+   <i class="icon-list-alt"></i>
+   My courses
+  </li>
+
+  <% end -%>

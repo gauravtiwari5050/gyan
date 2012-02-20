@@ -50,7 +50,7 @@ GyanV1::Application.routes.draw do
 
   #student routes
   match 'student' => 'student#home'
-  match 'student/profile' => 'student#profile_edit'
+  match 'student/academic_profile' => 'student#profile_edit'
   match 'student/profile_update' => 'student#profile_update' ,:via => :put
   match 'student/users' => 'student#users_index'
   match 'student/departments' => 'student#department_index'

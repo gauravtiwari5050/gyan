@@ -1,10 +1,10 @@
-	        <% if get_user_type == 'STUDENT' %>
 						<li class="backbg"><a href="#" title="Groups"><span>Groups</span></a>
+              
                  <ul>
-                    <li><span><a href="" class="headingsubmenu">Data Structures and Algorithms</a></span></li>
-                    <li><span><a href="" class="headingsubmenu">Mathematics - I</a></span></li>
-                    <li><span><a href="" class="headingsubmenu">All Courses</a></span></li>
+                  <% groups = get_course_groups_for_user %>
+                  <% for group in groups -%>
+                    <li><span><a href="/groups/<%=group.id%>" class="headingsubmenu"><%= group.group_name %></a></span></li>
+                  <% end -%>
                  </ul>
            </li>
 	          
-	        <% end %>  

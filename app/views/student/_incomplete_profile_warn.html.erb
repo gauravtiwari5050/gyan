@@ -1,0 +1,3 @@
+<% if is_user_profile_complete == false %>
+   <%= render :template => "shared/display_message",:locals => {:message_type => 'ERROR',:message_content => 'Your profile is incomplete.<a href="'+get_institute_base_url+'/student/academic_profile">Please complete your profile to access courses  </a>'} %>
+<% end %>

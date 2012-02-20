@@ -13,5 +13,7 @@
 
 <% end %>
 </br>
-<%= link_to "Add announcement", "/courses/"+@course.id.to_s+"/announcements/new" %>
+<% if get_user_type == 'TEACHER' || get_user_type == 'ADMIN' %>
+  <%= link_to "Add announcement", "/courses/"+@course.id.to_s+"/announcements/new" %>
+<% end %>
 

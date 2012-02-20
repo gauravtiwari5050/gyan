@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     request.accepts.sort! { |x, y| ajax_request_types.include?(y.to_s) ? 1 : -1 } if request.xhr?
   end
 
-  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course
+  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user
 
   def md5_hash(content)
   require 'digest/md5'
@@ -513,6 +513,68 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+    
+  end
+
+  def is_user_profile_complete
+    user_type =  get_user_type
+    if user_type == 'ADMIN' || user_type == 'TEACHER'
+      return true
+    elsif user_type == 'STUDENT'
+      student_program_detail = StudentProgramDetail.find_by_student_id(current_user.id)
+      if student_program_detail.nil?
+        return false
+      else
+        return true
+      end
+    else
+      return true
+    end
+
+
+    
+  end
+
+  def get_institute_base_url
+    current_institute = get_current_institute
+    url = current_institute.institute_url.url
+    return 'http://'+url
+  end
+
+  def teacher_admin_access
+    user_type =  get_user_type
+    if user_type == 'ADMIN' || user_type == 'TEACHER'
+      return true
+    else
+      redirect_to (GyanV1::Application.config.landing_page.to_s)
+    end
+    
+  end
+
+  def get_course_groups_for_user
+   course_groups = []
+   group_students = current_user.group_students
+   if !group_students.nil?
+    for group_student in group_students
+      course_groups.push(group_student.course_group) 
+    end
+   end
+   return course_groups
+  end
+
+  def get_department_link_for_user
+    if !(get_user_type == 'STUDENT')
+      return '#'
+    else
+      student_program_detail = StudentProgramDetail.find_by_student_id(current_user.id)
+      if student_program_detail.nil?
+        return '#'
+      else
+        department =  student_program_detail.program.department
+        return '/departments/' + department.id.to_s
+      end
+      
+    end
     
   end
 

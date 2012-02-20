@@ -1,0 +1,13 @@
+<% if message_type == 'SUCCESS' %>
+  <% class_type = 'alert alert-success' %>
+<% elsif message_type == 'WARN' %>
+  <% class_type = 'alert alert-warn' %>
+<% else %>
+  <% class_type = 'alert alert-error' %>
+<% end %>
+     <div class="<%=class_type%>">
+      <a class="close">×</a>
+        <font color="black">
+          <%= message_content.html_safe %>
+        </font>
+      </div>
