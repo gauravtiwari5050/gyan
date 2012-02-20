@@ -14,6 +14,8 @@ class UserMailer < ActionMailer::Base
     @message = message
     @to_user = User.find(@message.to_user)
     @from_user = User.find(@message.from_user)
+    @institute_name = @from_user.institute.name
+    @login_url = 'http://'+@from_user.institute.institute_url.url+"/login"
     mail(:to => @to_user.email, :subject => @message.subject)
   end
     
