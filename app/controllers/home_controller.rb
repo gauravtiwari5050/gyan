@@ -2,7 +2,9 @@ include Util
 
 class HomeController < ApplicationController
   before_filter :validate_institute_url
-  before_filter {|role| role.validate_role 'ADMIN'}
+  before_filter :admin_access ,:only => [:department_new,:department_create,:profile_new,:teachers_new_bulk,:teachers_new_bulk,:teachers_add,:teachers_bulk_add,:manage_teachers,:manage_programs,:connect_teachers_new,:connect_teachers_create,:connect_departments_select,:connect_department_new,:connect_department_create,:ivrs_edit,:ivrs_update,:ivrs_result_upload,:programs_new]
+  before_filter :teacher_admin_access ,:only => [:students_new,:students_add,:students_new_bulk,:students_bulk_add]
+  before_filter :student_access ,:only => [:profile_edit,:profile_update]
   def home
     
   end
@@ -347,6 +349,49 @@ class HomeController < ApplicationController
 
   def manage_courses
     @courses =  get_all_courses_for_user 
+  end
+
+  def profile_edit
+  end
+
+  def profile_update
+    user_id = session[:user_id]
+    student_program_detail = StudentProgramDetail.find_by_student_id(user_id)
+    persist_success = true
+    if student_program_detail.nil?
+      logger.info 'no student exists creating new'
+      #no entry for student exists in the student program detail table
+      #create a new one
+      student_program_detail = StudentProgramDetail.new
+      student_program_detail.student_id = user_id
+      #why twice i dont know
+      student_program_detail.program_id = params[:program][:program]
+      student_program_detail.term = params[:term][:term]
+      begin
+        student_program_detail.save
+      rescue Exception => e
+        logger.error e.message
+        persist_success = false
+      end
+    else
+      #why twice i dont know
+      begin
+         student_program_detail.update_attributes(:program_id => params[:program][:program],:term => params[:term][:term])
+      rescue Exception => e
+        logger.error e.message
+        persist_success = false
+      end
+     end
+    
+    respond_to do |format|
+      if persist_success
+        flash[:notice] = 'Profile updates successfuly'
+        format.html {redirect_to('/home')}
+      else
+        format.html {render :action => 'profile_edit'}
+      end
+    end
+
   end
 
 end

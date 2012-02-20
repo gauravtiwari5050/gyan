@@ -1,8 +1,14 @@
             <p> Quick Links </p>
             <ul>
-            	<li><a href="/home/departments/new">New Department</a></a></li>
-              <li> <a href="#" class="add-student">Add Student</a></li>
-              <li> <a href="#" class="add-teacher">Add Teacher</a></li>
+              <% user_type = get_user_type %>
+              <% if user_type == 'ADMIN' %>
+            	  <li><a href="/home/departments/new">New Department</a></a></li>
+                <li> <a href="#" class="add-teacher">Add Teacher</a></li>
+              <% end %>
+              <% if user_type == 'ADMIN' || user_type == 'TEACHER' %>
+                <li> <a href="#" class="add-student">Add Student</a></li>
+              <% end %>
+            	<li><a href="/calendar/events/new">New Event</a></a></li>
             </ul>
 
             <% content_for :modal_dialog do -%>

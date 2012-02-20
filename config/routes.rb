@@ -35,26 +35,10 @@ GyanV1::Application.routes.draw do
 
   match 'loguser' => 'login#loguser' ,:via => :post
 
-  #teacher routes
-  match 'teacher' => 'teacher#home'
-  match 'teacher/users' => 'teacher#users_index'
-  match 'teacher/departments' => 'teacher#department_index'
-  match 'teacher/courses' => 'teacher#course_index'
-  match 'teacher/students/new' => 'teacher#students_new'
-  match 'teacher/students/bulk/new' => 'teacher#students_new_bulk'
-  match 'teacher/students/bulk/add' => 'teacher#students_bulk_add' ,:via => :post
-  match 'teacher/students/add' => 'teacher#students_add' ,:via => :post
-  match 'teacher/manage/students' => 'teacher#manage_students'
-  match 'teacher/connect/students/new' => 'teacher#connect_students_new'
-  match 'teacher/connect/students/create' => 'teacher#connect_students_create' ,:via => :post
 
   #student routes
-  match 'student' => 'student#home'
-  match 'student/academic_profile' => 'student#profile_edit'
-  match 'student/profile_update' => 'student#profile_update' ,:via => :put
-  match 'student/users' => 'student#users_index'
-  match 'student/departments' => 'student#department_index'
-  match 'student/courses' => 'student#course_index'
+  match 'home/academic_profile' => 'home#profile_edit'
+  match 'home/profile_update' => 'home#profile_update' ,:via => :put
 
 
   #home routes

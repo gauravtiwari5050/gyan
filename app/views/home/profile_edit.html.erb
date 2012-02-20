@@ -2,15 +2,11 @@
   <%= render 'left_bar' %>
 <% end -%>
 <% content_for :top_bar do -%>
-  <%= render :template => "shared/top_bar" %>
+  <%= render :template => 'shared/top_bar' %>
 <% end -%>
 <% content_for :right_bar do -%>
   <%= render 'right_bar' %>
 <% end -%>
 <% content_for :main_content do -%>
-<% if get_user_type == 'STUDENT' %>
-  <%= render 'incomplete_profile_warn' %>
-<% end %>
-<%= render 'home_dashboard' %>
-  
+ <%= render 'student_profile_form' %>
 <% end -%>

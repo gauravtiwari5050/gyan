@@ -544,6 +544,36 @@ class ApplicationController < ActionController::Base
     
   end
 
+  def admin_access
+    user_type =  get_user_type
+    if user_type == 'ADMIN'
+      return true
+    else
+      redirect_to (GyanV1::Application.config.landing_page.to_s)
+    end
+    
+  end
+
+  def student_access
+    user_type =  get_user_type
+    if user_type == 'STUDENT'
+      return true
+    else
+      redirect_to (GyanV1::Application.config.landing_page.to_s)
+    end
+    
+  end
+
+  def teacher_access
+    user_type =  get_user_type
+    if user_type == 'TEACHER'
+      return true
+    else
+      redirect_to (GyanV1::Application.config.landing_page.to_s)
+    end
+    
+  end
+
   def get_course_groups_for_user
    course_groups = []
    group_students = current_user.group_students
