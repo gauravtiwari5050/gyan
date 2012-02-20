@@ -19,8 +19,11 @@
 
     <% for message in @messages -%>
       <tr>
-        <td><%= get_user_by_user_id(message.to_user).username%> </td>
-        <td><%=message.subject %></td>
+        <% user = get_user_by_user_id(message.to_user) %>
+        <% if !user.nil? %>
+          <td><%= user.username%> </td>
+          <td><%=message.subject %></td>
+        <% end %>
       </tr>
     <% end -%>
     </tbody>
