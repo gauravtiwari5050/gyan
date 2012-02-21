@@ -9,11 +9,11 @@ class ChannelCreator < Struct.new(:bbb_id)
     params+= '&'
     params+= 'moderatorPW='+bbb.moderator_pw
     Delayed::Worker.logger.info 'PARAMs - ' + params
-    checksum_input = 'create'+params+'77d3ed90b49520239acf9eb2dccd0a04'
+    checksum_input = 'create'+params+'a86d8a2c3c52a3a96f49a2c0bde3afe2'
     Delayed::Worker.logger.info 'CHECKSUM INPUT - ' + checksum_input
     checksum = Digest::SHA1.hexdigest checksum_input
     Delayed::Worker.logger.info 'CHECKSUM - ' + checksum
-    create_url ='http://178.79.183.87/bigbluebutton/api/create?'+params+'&checksum='+checksum
+    create_url ='http://ec2-50-19-46-255.compute-1.amazonaws.com/bigbluebutton/api/create?'+params+'&checksum='+checksum
     Delayed::Worker.logger.info 'CREATE_URL - ' + create_url
     req = Net::HTTP.get_response(URI.parse(create_url))
 

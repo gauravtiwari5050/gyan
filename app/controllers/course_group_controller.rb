@@ -18,7 +18,7 @@ class CourseGroupController < ApplicationController
     etherpad = Etherpad.new
     etherpad.course_group_id = @group.id
     etherpad.status = 'CREATING'
-    etherpad.server = '178.79.183.87:9001'
+    etherpad.server = 'ec2-50-19-46-255.compute-1.amazonaws.com:9001'
     etherpad.name = unique_id('').delete('-')
     #TODO what if the save fails
     etherpad.save

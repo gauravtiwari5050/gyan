@@ -294,11 +294,11 @@ class ApplicationController < ActionController::Base
 
     logger.info 'JOIN CHANNEL PARAMS - ' + params
 
-    checksum_input = 'join' + params + '77d3ed90b49520239acf9eb2dccd0a04'
+    checksum_input = 'join' + params + 'a86d8a2c3c52a3a96f49a2c0bde3afe2'
     logger.info 'JOIN CHANNEL CHECKSUM INPUT - ' + checksum_input
     checksum = Digest::SHA1.hexdigest checksum_input
     logger.info 'JOIN CHANNEL CHECKSUM - ' + checksum
-    join_url ='http://178.79.183.87/bigbluebutton/api/join?'+params+'&checksum='+checksum
+    join_url ='http://ec2-50-19-46-255.compute-1.amazonaws.com/bigbluebutton/api/join?'+params+'&checksum='+checksum
     logger.info 'JOIN CHANNEL JOIN URL - ' + join_url
     return join_url
   end

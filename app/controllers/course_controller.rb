@@ -333,7 +333,9 @@ class CourseController < ApplicationController
     bbb.attendee_pw = unique_id('').delete('-') 
     bbb.moderator_pw = unique_id('').delete('-') 
     bbb.status = 'CREATING'
-    bbb.save ##TODO what if this fails
+    if !bbb.save ##TODO what if this fails
+      raise 'Exception saving bbb ' + bbb.inspect.to_s
+    end
     Delayed::Job.enqueue(ChannelCreator.new(bbb.id))
     respond_to do |format|
      format.html{redirect_to('/courses/'+@course.id.to_s+'/channel')}  
