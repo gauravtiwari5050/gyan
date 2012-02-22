@@ -20,19 +20,13 @@
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     }
-    #users_button {background:url(image_path('human.png')) 0 0 no-repeat;}
-    #users_button:hover {background:url(image_path('human.png')) -125px 0 no-repeat;}
-    #settings_button {background: url(image_path('settings.png')) 0 0 no-repeat;}
-    #settiongs_button:hover {background: url(image_path('settings.png')) -125px 0 no-repeat;}
-    #calendar_button {background: url(image_path('calendar.png')) 0 0 no-repeat;}
-    #calendar_button:hover {background: url(image_path('calendar.png')) -125px 0 no-repeat;}
-    #reports_button {background: url(image_path('reports.png')) 0 0 no-repeat;}
-    #reports_button:hover {background: url(image_path('reports.png')) -125px 0 no-repeat;}
-    #announcements_button {background:url(image_path('announcements.png')) 0 0 no-repeat;}
-    #announcements_button:hover {background:url(image_path('announcements.png')) -125px 0 no-repeat;}
-    #courses_button {background:url(image_path('book.png')) 0 0 no-repeat;}
-    #departments_button {background:url(image_path('human.png')) 0 0 no-repeat;}
-    #departments_button:hover {background:url(image_path('human.png')) -125px 0 no-repeat;}
+    #users_button {background:url(image_path('home-users.png')) 0 0 no-repeat;}
+    #settings_button {background: url(image_path('home-settings.png')) 0 0 no-repeat;}
+    #calendar_button {background: url(image_path('home-calendar.png')) 0 0 no-repeat;}
+    #reports_button {background: url(image_path('home-reports.png')) 0 0 no-repeat;}
+    #announcements_button {background:url(image_path('home-activity.png')) 0 0 no-repeat;}
+    #courses_button {background:url(image_path('home-courses.png')) 0 0 no-repeat;}
+    #departments_button {background:url(image_path('home-users.png')) 0 0 no-repeat;}
 
       .button-box{
         display: inline-block;
