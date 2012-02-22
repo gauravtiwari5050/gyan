@@ -3,7 +3,7 @@
 *= require bootstrap  
 *= require bootstrap-extra-container  
 *= require dashboard 
-*= require jquery-ui
+*= require jquery-ui/redmond
 *= require timepicker
 *= require fullcalendar 
 *= require inner-style-new  

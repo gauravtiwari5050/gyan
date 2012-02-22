@@ -30,6 +30,7 @@ gem 'spreadsheet'
 gem "validates_existence", ">= 0.4"
 gem 'exception_notification'
 gem 'tinymce-rails'
+gem "jquery-ui-themes", "~> 0.0.4"
 
 # Use unicorn as the web server
 # gem 'unicorn'
