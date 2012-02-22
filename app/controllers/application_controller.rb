@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :correct_safari_and_ie_accept_headers,:force_login_user
+  before_filter :correct_safari_and_ie_accept_headers
   after_filter :set_xhr_flash
   def set_xhr_flash
     flash.discard if request.xhr?
