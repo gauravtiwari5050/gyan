@@ -303,6 +303,48 @@ class ApplicationController < ActionController::Base
     return join_url
   end
 
+  def is_channel_running(bbb)
+    if bbb.nil?
+      return false
+    end
+    params = 'meetingID='+bbb.meeting_id
+    checksum_input = 'isMeetingRunning' + params + 'a86d8a2c3c52a3a96f49a2c0bde3afe2'
+    checksum = Digest::SHA1.hexdigest checksum_input
+    check_url ='http://ec2-50-19-46-255.compute-1.amazonaws.com/bigbluebutton/api/isMeetingRunning?'+params+'&checksum='+checksum
+    req = Net::HTTP.get_response(URI.parse(check_url))
+    if req.nil?
+      raise 'channel check request is null'
+    end
+    if req.body.nil?
+      logger.warn 'channel check response body was nil,return false'
+      return false
+    end
+    response =  req.body.to_s
+    logger.info "CHANNEL CHECK RESPONSE -> "  + response
+    return response.include? "true"
+
+  end
+
+  def channel_exists(bbb)
+    if bbb.nil?
+      return false
+    end
+    checksum_input = 'getMeetings' + 'a86d8a2c3c52a3a96f49a2c0bde3afe2'
+    checksum = Digest::SHA1.hexdigest checksum_input
+    check_url ='http://ec2-50-19-46-255.compute-1.amazonaws.com/bigbluebutton/api/getMeetings?' + '&checksum='+checksum
+    req = Net::HTTP.get_response(URI.parse(check_url))
+    if req.body.nil?
+      logger.warn 'channel check response body was nil,return false'
+      return false
+    end
+    response =  req.body.to_s
+    logger.info "GET MEETING -> "  + response
+    return response.include? bbb.meeting_id
+
+
+
+  end
+
   def join_collaboration(etherpad)
     url = 'http://'+etherpad.server+'/p/'+etherpad.name
     return url

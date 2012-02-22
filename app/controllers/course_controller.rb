@@ -323,6 +323,12 @@ class CourseController < ApplicationController
 
   def channel_show
     @course = Course.find(params[:id])
+    #if @course.bbb.status == 'RUNNING' && is_channel_running(@course.bbb) == false
+    if !@course.bbb.nil? && channel_exists(@course.bbb) == false
+      @course.bbb.update_attribute(:status,"CREATING") #TODO what if this fails
+      Delayed::Job.enqueue(ChannelCreator.new(@course.bbb.id))
+    end
+
   end
   def channel_new
     @course = Course.find(params[:id])

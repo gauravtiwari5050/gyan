@@ -9,7 +9,10 @@
 
 <% else %>
   <% if @course.bbb.status == 'CREATING' %>
-    <h3>The live channel for this course is being prepared</h3>
+    <div id="channel_creation">
+      <h3>The live channel for this course is being prepared.The page would refresh automaticaly when the channel is ready</h3>
+    </div>
+    
   <% else %>
 
     <h3>There is a channel running for this course</h3>
@@ -17,5 +20,15 @@
   <% end %>
 
 <% end %>
+<script type="text/javascript">
+  $(document).ready(function() {
+    if($("#channel_creation").length !=0) {
+      setTimeout(reloadPage,2000);
+    }
+    function reloadPage() {
+     location.reload(); 
+    }
+  });
+</script>
   
 <% end -%>
