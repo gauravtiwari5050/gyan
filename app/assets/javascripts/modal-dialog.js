@@ -203,7 +203,6 @@ var username = '';
     function modal_message_create(name,uid) {
       username = name;
       user_id = uid;
-      alert(username + user_id); 
       $('#modal-username').html('<b>' + username  +  '</b>')
       $( "#dialog-form-message" ).dialog( "open" );
     }
