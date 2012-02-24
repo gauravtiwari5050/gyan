@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
 
   def validate_logged_in_status
     if !is_logged_in
-      redirect_to (GyanV1::Application.config.landing_page.to_s)
+      redirect_to ('/login')
     end
   end
 
@@ -262,7 +262,7 @@ class ApplicationController < ActionController::Base
   end
 
   if validation_success == false
-      redirect_to (GyanV1::Application.config.landing_page.to_s)
+      redirect_to ('/login')
   end
   end
 
@@ -274,7 +274,7 @@ class ApplicationController < ActionController::Base
   logger.info 'courses are' + courses.inspect
   validation_success  = courses.include?(Integer(course_id))
   if validation_success == false
-      redirect_to (GyanV1::Application.config.landing_page.to_s)
+      redirect_to ('/home')
   end
 
   end
@@ -489,7 +489,7 @@ class ApplicationController < ActionController::Base
 
     if success == false
       logger.info 'Access denied to program'
-      redirect_to (GyanV1::Application.config.landing_page.to_s)
+      redirect_to ('/home')
     end
     
   end
@@ -581,7 +581,7 @@ class ApplicationController < ActionController::Base
     if user_type == 'ADMIN' || user_type == 'TEACHER'
       return true
     else
-      redirect_to (GyanV1::Application.config.landing_page.to_s)
+      redirect_to ('/home')
     end
     
   end
@@ -591,7 +591,7 @@ class ApplicationController < ActionController::Base
     if user_type == 'ADMIN'
       return true
     else
-      redirect_to (GyanV1::Application.config.landing_page.to_s)
+      redirect_to ('/home')
     end
     
   end
@@ -601,7 +601,7 @@ class ApplicationController < ActionController::Base
     if user_type == 'STUDENT'
       return true
     else
-      redirect_to (GyanV1::Application.config.landing_page.to_s)
+      redirect_to ('/home')
     end
     
   end
@@ -611,7 +611,7 @@ class ApplicationController < ActionController::Base
     if user_type == 'TEACHER'
       return true
     else
-      redirect_to (GyanV1::Application.config.landing_page.to_s)
+      redirect_to ('/home')
     end
     
   end
