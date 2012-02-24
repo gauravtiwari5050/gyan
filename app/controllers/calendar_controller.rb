@@ -1,5 +1,5 @@
 class CalendarController < ApplicationController
-  before_filter :validate_institute_url
+  before_filter :validate_institute_url,:validate_logged_in_status
   def home
   end
   def events_new

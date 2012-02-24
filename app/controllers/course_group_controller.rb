@@ -1,5 +1,6 @@
 class CourseGroupController < ApplicationController
   impressionist
+  before_filter :validate_institute_url,:validate_logged_in_status
   def home
     @group = CourseGroup.find(params[:id])
   end

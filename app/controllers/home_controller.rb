@@ -1,7 +1,7 @@
 include Util
 
 class HomeController < ApplicationController
-  before_filter :validate_institute_url
+  before_filter :validate_institute_url,:validate_logged_in_status
   before_filter :admin_access ,:only => [:department_new,:department_create,:profile_new,:teachers_new_bulk,:teachers_new_bulk,:teachers_add,:teachers_bulk_add,:manage_teachers,:manage_programs,:connect_teachers_new,:connect_teachers_create,:connect_departments_select,:connect_department_new,:connect_department_create,:ivrs_edit,:ivrs_update,:ivrs_result_upload,:programs_new]
   before_filter :teacher_admin_access ,:only => [:students_new,:students_add,:students_new_bulk,:students_bulk_add]
   before_filter :student_access ,:only => [:profile_edit,:profile_update]

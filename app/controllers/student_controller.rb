@@ -1,5 +1,5 @@
 class StudentController < ApplicationController
-  before_filter :validate_institute_url
+  before_filter :validate_institute_url,:validate_logged_in_status
   before_filter {|role| role.validate_role 'STUDENT'}
   def home
   end

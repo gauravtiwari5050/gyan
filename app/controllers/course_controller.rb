@@ -1,7 +1,7 @@
 class CourseController < ApplicationController
   impressionist
   layout :choose_layout
-  before_filter :validate_institute_url
+  before_filter :validate_institute_url,:validate_logged_in_status
   before_filter {|role| role.validate_course_access params[:id]}
   before_filter :teacher_admin_access ,:only => [:announcement_new,:announcement_create,:assignment_new,:assignment_create,:group_assign,:group_assign_manual_new,:group_assign_manual_create,:teacher_assign,:teacher_assign_create,:forum_new,:channel_new]
 
