@@ -1,7 +1,7 @@
           <div class="headofcourse"><%= link_to @user.username, '/users/' + @user.id.to_s + '/profile' %></div>
           <ul>
           <% if current_user.user_type == 'ADMIN' || current_user.id == @user.id %>
-           <li><%= link_to "Reset pass", '/users/' + @user.id.to_s + '/profile/resetpass' %></li>
+           <li><%= link_to "Reset password", '/users/' + @user.id.to_s + '/profile/resetpass' %></li>
            <li><%= link_to 'Edit contact details', '/users/' + @user.id.to_s + '/contact/edit' %></li>
           <% end %>
           </ul>
