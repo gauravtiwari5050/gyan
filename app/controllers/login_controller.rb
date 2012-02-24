@@ -1,6 +1,5 @@
 class LoginController < ApplicationController
   before_filter :validate_institute_url
-  caches_page :new
   def new
     @login = Login.new
   end
