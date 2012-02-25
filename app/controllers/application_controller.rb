@@ -49,6 +49,7 @@ class ApplicationController < ActionController::Base
   end
 
   def validate_logged_in_status
+    logger.info 'Validating logged in status'
     if !is_logged_in
       redirect_to ('/login')
     end

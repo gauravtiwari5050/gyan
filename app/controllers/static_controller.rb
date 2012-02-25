@@ -3,4 +3,8 @@ class StaticController < ApplicationController
   end
   def demo
   end
+  def terms
+  end
+  def privacy
+  end
 end
