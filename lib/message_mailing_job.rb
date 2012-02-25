@@ -1,7 +1,5 @@
 class MessageMailingJob < Struct.new(:message_id)
   def perform
-    #temporarily turning off message sending system
-    return
     @message = Message.find(message_id)
     if @message.email == true 
       send_email @message
