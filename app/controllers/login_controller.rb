@@ -12,6 +12,7 @@ class LoginController < ApplicationController
 
 
   def loguser
+   logger.info "LOGGING IN -> " + params.inspect
    @login = Login.new(params[:login]) 
    @saved_user = User.find_by_email(@login.email)
 
@@ -49,6 +50,8 @@ class LoginController < ApplicationController
         format.html {redirect_to(redirect_url)}
      end
    else
+    logger.error "UNABLE TO LOG THE USER IN"
+      @login.errors.add('email','Error logging you in')
      respond_to do |format|
      format.html {render :action => "new"}
      end
