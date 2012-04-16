@@ -8,6 +8,7 @@ class Course < ActiveRecord::Base
   has_one :forum,:dependent => :restrict
   has_many :course_allocations ,:dependent => :restrict
   has_many :appfiles,:as => :appfileable,:dependent => :restrict
+  has_many :course_attendances ,:dependent => :destroy
 
   validates :institute,:presence => true
   validates :name,:presence => true

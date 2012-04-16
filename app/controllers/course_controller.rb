@@ -416,4 +416,51 @@ class CourseController < ApplicationController
     
   end
 
+  def mark_attendance
+    @course = Course.find(params[:id])
+    @students = get_students_for_course(@course.id)
+  end
+
+  def update_attendance
+    @course = Course.find(params[:id])
+    logger.info params.inspect
+    @students = get_students_for_course(@course.id)
+    #move this to ajax ?
+    date = params[:date]
+    if date.nil?
+       date = Date.today.to_s
+    end
+    class_type = params[:class_type]
+    if class_type.nil?
+       class_type = 'LECTURE'
+    end
+    logger.info "Checking presence of students"
+    for student in @students
+      if params.has_key?(student.id.to_s) 
+         course_attendance  = CourseAttendance.find(:first,:conditions => {:date => date,:course_id => @course.id,:user_id => student.id,:class_type => class_type})
+         if course_attendance.nil?
+           course_attendance = CourseAttendance.new
+           course_attendance.course_id = @course.id
+           course_attendance.user_id = student.id
+           course_attendance.date = date
+           course_attendance.class_type = class_type
+           course_attendance.save #TODO failure check
+         end
+      else
+         course_attendance  = CourseAttendance.find(:first,:conditions => {:date => date,:course_id => @course.id,:user_id => student.id,:class_type => class_type})
+         if !course_attendance.nil?
+          course_attendance.destroy #failure check
+         end
+      end
+
+    end
+    respond_to do |format|
+        format.html { redirect_to('/courses/' + @course.id.to_s + '/mark_attendance/'+params[:date]+'/'+params[:class_type], :notice => 'Attendance updated') }
+    end
+  end
+
+  def select_attendance
+    @course = Course.find(params[:id])
+  end
+
 end

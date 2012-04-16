@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :course_groups , :through => :group_students ,:dependent => :restrict
   has_many :topics,:dependent => :restrict
   has_one :contact_detail,:dependent => :restrict
+  has_many :course_attendances,:dependent => :destroy
 
   validates :institute,:presence => true
   validates :email ,:presence => true

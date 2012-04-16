@@ -57,6 +57,29 @@ function drawCalendar() {
 
     },
 	});
+	$('#calendar_attendance').fullCalendar({
+		editable: true,        
+        defaultView: 'month',
+        slotMinutes: 15,
+        
+        loading: function(bool){
+            if (bool) 
+                $('#loading').show();
+            else 
+                $('#loading').hide();
+        },
+        
+        timeFormat: 'h:mm t{ - h:mm t} ',
+        dragOpacity: "0.5",
+        
+        dayClick: function(date, allDay, jsEvent, view) {
+          window.open('/courses/1/mark_attendance/'+date.getFullYear()+'-'+date.getMonth()+'-'+date.getDate()+'/LECTURE');
+          return false;
+
+        }
+
+
+	});
 }
 
 function updateEvent(the_event) {

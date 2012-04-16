@@ -134,7 +134,9 @@ GyanV1::Application.routes.draw do
   match 'courses/:id/forum/topics/create' => 'course#forum_topics_create' ,:via => :post 
   match 'courses/:id/forum/topics/:topic_id' => 'course#forum_topics_show'  
   match 'courses/:id/forum/topics/:topic_id/create_post' => 'course#forum_topics_create_post' ,:via => :post  
-
+  match 'courses/:id/mark_attendance/:date/:class_type' => 'course#mark_attendance'
+  match 'courses/:id/attendance' => 'course#select_attendance'
+  match 'courses/:id/mark_attendance/:date/attendance/update' => 'course#update_attendance' ,:via => :post
   #regsitration routes
   match 'register/teacher/new' => 'registration#teacher_new'
   match 'register/teacher/create' => 'registration#teacher_create' ,:via => :post
