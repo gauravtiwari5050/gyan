@@ -1,0 +1,12 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar'%>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar'%>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :main_content do -%>
+  <%= render 'course_attendance_form'%>
+<% end -%>

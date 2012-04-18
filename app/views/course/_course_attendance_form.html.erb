@@ -1,0 +1,40 @@
+  <h2>
+    <% if Date.today.to_s == params[:date] %>
+      <%current_date = 'Today' %>
+    <% else %>
+      <% current_date = params[:date]%>
+    <% end %>
+    Attendance for <%=current_date%>
+  </h2>
+    <%= link_to "Lecture attendance", '/courses/' + @course.id.to_s + '/mark_attendance/' + params[:date] + '/LECTURE' %> |
+    <%= link_to "Lab attendance", '/courses/' + @course.id.to_s + '/mark_attendance/' + params[:date] + '/LAB' %>
+    </p>
+  </br>
+  <%= render :template => "shared/notices" %>
+  <%= form_tag('attendance/update',:method => :post) do -%>
+      <%= hidden_field_tag 'class_type', params[:class_type] %>
+      <table class="table table-bordered">
+         <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Check if present</th>
+          </tr> 
+         </thead>
+         <tbody>
+    <% for student in @students -%>
+          <tr>
+            <td><%= student.username%></td>   
+            <% if  is_student_present(student.id,@course.id,params[:date],params[:class_type])%>
+              <td><%=check_box_tag student.id ,student.id,true %></td>
+              
+            <% else %>
+              <td><%=check_box_tag student.id%></td>
+            <% end %>
+          </tr> 
+    <% end -%>   
+         </tbody>
+       </table>
+  <div class="actions">
+    <%= submit_tag nil,:class => 'btn  btn-primary'%>
+  </div>
+  <% end -%>
