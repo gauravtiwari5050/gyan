@@ -1,7 +1,7 @@
 require "bundler/capistrano"
 require "delayed/recipes"
 
-set :application, "gauravtiwari.net"
+set :application, "178.79.189.97"
 set :repository, "git://github.com/gauravtiwari5050/gyan.git"
 
 set :scm, "git"

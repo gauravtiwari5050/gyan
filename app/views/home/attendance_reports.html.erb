@@ -1,0 +1,168 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+<% content_for :report_javascript do -%>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['corechart']});
+    </script>
+    <script type="text/javascript">
+      var loading = true;
+     $(document).ready(function(){
+      $( "#tabs" ).tabs();
+      $( ".clickable" ).click(function(){
+        doSomething();
+      });
+      
+     }); 
+    </script>
+
+  
+<script type="text/javascript">
+      function drawVisualization() {
+        drawBranchWiseReport();
+        drawDepartmentWiseReport();
+        drawCourse('DataStructures');
+        drawCourse('AnalysisAndDesignOfAlgorithms');
+        drawCourse('StrengthOfMaterials');
+        drawCourse('SampleCourse');
+      }
+
+      function drawBranchWiseReport() {
+        // Create and populate the data table.
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'ComputerScience', 'Civil', 'Electrical', 'Mechanical'],
+          ['Today',  83,    56,    74,   45],
+          ['17 April',  89,    90,    63,   Math.floor((Math.random()*100)+1)],
+          ['16 April',  65,    Math.floor((Math.random()*100)+1),    65,   55 ],
+          ['15 April',  77,    88,    Math.floor((Math.random()*100)+1),   44],
+          ['14 April',  56,    Math.floor((Math.random()*100)+1),    88,    99],
+          ['13 April',  Math.floor((Math.random()*100)+1),    Math.floor((Math.random()*100)+1),    78,    Math.floor((Math.random()*100)+1)]
+        ]);
+      
+        // Create and draw the visualization.
+        new google.visualization.BarChart(document.getElementById('branch')).
+            draw(data,
+                 {title:"Branch Wise Attendance Report",
+                  vAxis: {title: "Dates"},
+                  hAxis: {title: "Percentage of Students Present"}}
+            );
+        
+      }
+      function drawDepartmentWiseReport() {
+        // Create and populate the data table.
+        var data = google.visualization.arrayToDataTable([
+          ['Date', 'ComputerScience', 'Civil', 'Electrical', 'Mechanical'],
+          ['Today',  Math.floor((Math.random()*100)+1),    Math.floor((Math.random()*100)+1),    Math.floor((Math.random()*100)+1),   Math.floor((Math.random()*100)+1)],
+          ['17 April',  89,    90,    63,   Math.floor((Math.random()*100)+1)],
+          ['16 April',  65,    Math.floor((Math.random()*100)+1),    65,   55 ],
+          ['15 April',  77,    88,    Math.floor((Math.random()*100)+1),   44],
+          ['14 April',  Math.floor((Math.random()*100)+1),    Math.floor((Math.random()*100)+1),    88,    99],
+          ['13 April',  95,    Math.floor((Math.random()*100)+1),    78,    Math.floor((Math.random()*100)+1)]
+        ]);
+      
+        // Create and draw the visualization.
+       var barChart =  new google.visualization.BarChart(document.getElementById('department')).
+            draw(data,
+                 {title:"Department Wise Attendance Report",
+                  vAxis: {title: "Dates"},
+                  hAxis: {title: "Percentage of Students Present"}}
+            );
+        
+      }
+      
+      function drawCourse(courseName) {
+        var wrapper = new google.visualization.ChartWrapper({
+          chartType: 'ColumnChart',
+          dataTable: [['', 'Today', '17th', '16th', '15th', '13th', '12th'],
+                      ['', Math.floor((Math.random()*100)+1), Math.floor((Math.random()*100)+1), Math.floor((Math.random()*100)+1), Math.floor((Math.random()*100)+1), Math.floor((Math.random()*100)+1), Math.floor((Math.random()*100)+1)]],
+          options: {'title': courseName},
+          containerId: courseName
+        });
+        wrapper.draw();
+      
+        
+      }
+      
+      
+
+      google.setOnLoadCallback(drawVisualization);
+      function myReadyHandler() {
+        alert("ready");
+      }
+    </script>
+    <script type="text/javascript">
+      function doSomething() {
+        drawVisualization();
+      };
+
+      var resizeTimer;
+      $(window).resize(function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(doSomething, 100);
+      }); 
+    </script>
+
+  
+<% end -%>
+
+<div id="tabs">
+<ul id="myTab">
+  <li class="active"><a class='clickable' href="#branchwise_div" data-toggle="tab">Branch</a></li>
+  <li><a class='clickable' href="#departmentwise_div" data-toggle="tab">Department</a></li>
+  <li><a class='clickable' href="#coursewise_div" data-toggle="tab">Course</a></li>
+</ul>
+  
+
+  <div class="tab-pane" id="branchwise_div">
+    <h3>Branch wise Reports</h3>
+    <div id="branch" style="width:100%; height: 400px;"></div>
+  </div>
+
+  <div class="tab-pane" id="departmentwise_div">
+    <h3>Department wise Reports</h3>
+  <div id="department" style="width:100%; height: 400px;"></div>
+  </div>
+
+  <div class="tab-pane" id="coursewise_div">
+    <h3>Course wise Reports</h3>
+    <div class="container">
+      <div class="row">
+        <div class="span6">
+          <div id="DataStructures" style="width:100%; height: 400px;"></div>
+        </div>
+        <div class="span6">
+          <div id="AnalysisAndDesignOfAlgorithms" style="width:100%; height: 400px;"></div>
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="span6">
+          <div id="StrengthOfMaterials" style="width:100%; height: 400px;"></div>
+        </div>
+        <div class="span6">
+          <div id="SampleCourse" style="width:100%; height: 400px;"></div>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+
+</div>
+<% end -%>
+<% content_for :breadcrumb do -%>
+  <li class="active">
+   <span class="divider">/</span>
+   <i class="icon-asterisk"></i>
+   Attendance Reports
+  </li>
+
+  <% end -%>
