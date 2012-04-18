@@ -394,4 +394,7 @@ class HomeController < ApplicationController
 
   end
 
+  def attendance_reports
+  end
+
 end

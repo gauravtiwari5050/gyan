@@ -66,7 +66,10 @@ GyanV1::Application.routes.draw do
   match 'home/manage/departments' => 'home#department_index'
   match 'home/manage/programs' => 'home#manage_programs'
   match 'home/manage/courses' => 'home#manage_courses'
+
   match 'home/traffic' => 'home#report_traffic'
+  match 'home/attendance_reports' => 'home#attendance_reports'
+
   match 'home/tasks/:task_id' => 'home#task_show'
   match 'home/ivrs/edit' => 'home#ivrs_edit'
   match 'home/ivrs/update' => 'home#ivrs_update' ,:via => :put
