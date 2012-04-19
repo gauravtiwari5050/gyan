@@ -22,4 +22,7 @@ class LibraryController < ApplicationController
     end
     
   end
+
+  def home
+  end
 end

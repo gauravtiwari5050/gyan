@@ -192,6 +192,7 @@ GyanV1::Application.routes.draw do
   #library routes
   match 'library/upload_video_contents' => 'library#upload_video'
   match 'library/video_content/upload' => 'library#upload_video_task'
+  match 'library' => 'library#home'
 
 
 end

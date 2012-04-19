@@ -1,0 +1,19 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+  <div class="library_heading">
+    <div id="">
+    <img src="/assets/cloudclass-logo.png" alt="cloudclass">
+    <h1>CloudClass Library</h1>
+      
+    </div>
+    
+  </div>
+<% end -%>
