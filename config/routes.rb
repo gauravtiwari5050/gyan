@@ -189,5 +189,9 @@ GyanV1::Application.routes.draw do
   #assignment routes
   match 'assignments/:id' => 'assignment#home'
 
+  #library routes
+  match 'library/upload_video_contents' => 'library#upload_video'
+  match 'library/video_content/upload' => 'library#upload_video_task'
+
 
 end
