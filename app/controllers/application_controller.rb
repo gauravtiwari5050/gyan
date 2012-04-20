@@ -299,7 +299,7 @@ class ApplicationController < ActionController::Base
     logger.info 'JOIN CHANNEL CHECKSUM INPUT - ' + checksum_input
     checksum = Digest::SHA1.hexdigest checksum_input
     logger.info 'JOIN CHANNEL CHECKSUM - ' + checksum
-    join_url ='http://ec2-50-19-46-255.compute-1.amazonaws.com/bigbluebutton/api/join?'+params+'&checksum='+checksum
+    join_url ='http://ec2-75-101-233-92.compute-1.amazonaws.com/bigbluebutton/api/join?'+params+'&checksum='+checksum
     logger.info 'JOIN CHANNEL JOIN URL - ' + join_url
     return join_url
   end
@@ -311,7 +311,7 @@ class ApplicationController < ActionController::Base
     params = 'meetingID='+bbb.meeting_id
     checksum_input = 'isMeetingRunning' + params + 'a86d8a2c3c52a3a96f49a2c0bde3afe2'
     checksum = Digest::SHA1.hexdigest checksum_input
-    check_url ='http://ec2-50-19-46-255.compute-1.amazonaws.com/bigbluebutton/api/isMeetingRunning?'+params+'&checksum='+checksum
+    check_url ='http://ec2-75-101-233-92.compute-1.amazonaws.com/bigbluebutton/api/isMeetingRunning?'+params+'&checksum='+checksum
     req = Net::HTTP.get_response(URI.parse(check_url))
     if req.nil?
       raise 'channel check request is null'
@@ -332,7 +332,7 @@ class ApplicationController < ActionController::Base
     end
     checksum_input = 'getMeetings' + 'a86d8a2c3c52a3a96f49a2c0bde3afe2'
     checksum = Digest::SHA1.hexdigest checksum_input
-    check_url ='http://ec2-50-19-46-255.compute-1.amazonaws.com/bigbluebutton/api/getMeetings?' + '&checksum='+checksum
+    check_url ='http://ec2-75-101-233-92.compute-1.amazonaws.com/bigbluebutton/api/getMeetings?' + '&checksum='+checksum
     req = Net::HTTP.get_response(URI.parse(check_url))
     if req.body.nil?
       logger.warn 'channel check response body was nil,return false'

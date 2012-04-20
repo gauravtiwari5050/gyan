@@ -13,7 +13,7 @@ class ChannelCreator < Struct.new(:bbb_id)
     Delayed::Worker.logger.info 'CHECKSUM INPUT - ' + checksum_input
     checksum = Digest::SHA1.hexdigest checksum_input
     Delayed::Worker.logger.info 'CHECKSUM - ' + checksum
-    create_url ='http://ec2-50-19-46-255.compute-1.amazonaws.com/bigbluebutton/api/create?'+params+'&checksum='+checksum
+    create_url ='http://ec2-75-101-233-92.compute-1.amazonaws.com/bigbluebutton/api/create?'+params+'&checksum='+checksum
     Delayed::Worker.logger.info 'CREATE_URL - ' + create_url
     req = Net::HTTP.get_response(URI.parse(create_url))
 

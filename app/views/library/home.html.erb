@@ -8,12 +8,14 @@
   <%= render 'right_bar' %>
 <% end -%>
 <% content_for :main_content do -%>
-  <div class="library_heading">
-    <div id="">
-    <img src="/assets/cloudclass-logo.png" alt="cloudclass">
-    <h1>CloudClass Library</h1>
-      
-    </div>
-    
-  </div>
+  <h3> Search for content</h3>
+  <%= form_tag('profile_update',:method => :put) do -%>
+    <%= text_field_tag 'search'%>
+  <% end -%>
+  <div class="search_results">
+   <div class="search_result">
+     
+   </div> 
+  </div>  
+
 <% end -%>
