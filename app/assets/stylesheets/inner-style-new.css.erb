@@ -100,7 +100,20 @@ div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg a {
 	background-color:inherit;
 	border:1px solid #0087AE;
 	}
+div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg1 a {
+	background:url(<%= asset_path 'topmid-nav.gif'%>) repeat-x 0 0;
+	color:#fff;
+	background-color:inherit;
+	border:1px solid #0087AE;
+	}
 div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg a:hover {
+	background-position:0 100%;
+	color:#fff;
+	background-color:inherit;
+	text-decoration:none;
+	border:1px solid #3A4766;
+	}	
+div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg1 a:hover {
 	background-position:0 100%;
 	color:#fff;
 	background-color:inherit;
@@ -109,6 +122,9 @@ div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg a:hover {
 	}	
 div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg a span {
 	background:url(<%= asset_path 'topmid-arrow.gif'%>) no-repeat 100% 7px;
+	padding-right:20px;
+	}
+div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg a span {
 	padding-right:20px;
 	}
 div.topSec div.topMiddle div.topMiddleLinks ul.menu li.grades{
@@ -127,7 +143,22 @@ width:440px;
 z-index:100;
 padding:0 22px;
 }
+
+div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg1 ul{
+position:absolute;
+top:28px;
+left:0;
+display:none;
+list-style:none;
+background:url(<%= asset_path 'submenubg.jpg'%>) no-repeat 0 0 #485573;
+width:440px;
+z-index:100;
+padding:0 22px;
+}
+
 div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg .menuhover{
+}
+div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg1 .menuhover{
 }
 div.topSec div.topMiddle div.topMiddleLinks ul.menu li.backbg ul li{
 background:none;

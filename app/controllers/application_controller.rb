@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     request.accepts.sort! { |x, y| ajax_request_types.include?(y.to_s) ? 1 : -1 } if request.xhr?
   end
 
-  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present
+  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present,:get_sections_hash_for_class
 
   def md5_hash(content)
   require 'digest/md5'
@@ -48,6 +48,22 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def redirect_to_school_home
+    # add another function to validate url for logged in user
+    current_host = request.host
+    if !Rails.env.production?
+     #current_host += ':' + request.port.to_s TODO ?? 3000 hard code why ?
+      current_host += ':' + 3000.to_s
+    end
+    institute_url = InstituteUrl.find_by_url(current_host)
+    if institute_url.nil?
+      redirect_to (GyanV1::Application.config.landing_page.to_s)
+    elsif institute_url.institute.institution_type == 'SCHOOL'
+      redirect_to ('/school')
+    end
+    
+  end
+
   def validate_logged_in_status
     logger.info 'Validating logged in status'
     if !is_logged_in
@@ -60,6 +76,9 @@ class ApplicationController < ActionController::Base
   end
 
   def get_home_for_user
+    if Institute.find_by_id(get_institute_id).institution_type == 'SCHOOL'
+      return '/school'
+    end
     return '/home'
   end
 
@@ -119,6 +138,18 @@ class ApplicationController < ActionController::Base
       end
     end
     return programs
+  end
+
+  def get_sections_hash_for_class(sc_class)
+    sections_hash = []
+    sections = sc_class.sc_sections
+    for section in sections
+      tmp = []
+      tmp.push(section.name)
+      tmp.push(section.id)
+      sections_hash.push(tmp)
+    end
+    return sections_hash
   end
 
   def get_all_courses_for_institute

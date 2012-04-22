@@ -1,0 +1,36 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar_school" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+<h2> Create a new class </h2>
+<%= form_for(@sc_class,:html =>{:class => 'form-stacked',:multipart => true},:url => 'create' ,:method => :post) do |f| %>
+  <div class="field">
+    <%= label_tag 'name' ,"Class" %> 
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= label_tag 'descritption' ,"Details(Optional)" %> 
+    <%= f.text_area :description %>
+  </div>
+  <%= f.fields_for :sc_sections do |section| -%>
+  <h3> New Section </h3>
+  <div class="field">
+    <%= label_tag 'section' ,"Section" %> 
+    <%= section.text_field :name %>
+   </div> 
+  <% end -%>
+  <div class="actions">
+    <%= f.submit 'Create',:class => 'btn btn-large btn-primary'%>
+  </div>
+  
+<% end -%>
+  
+  
+<% end -%>

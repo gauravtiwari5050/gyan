@@ -1,0 +1,38 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar_school" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+<%= link_to "Add more classes", '/school/classes/new' %>
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" style="width:100%">
+<thead>
+  <tr>
+    <th> Class </th>
+    <th> Sections </th>
+  </tr>
+</thead>
+<tbody>
+  <% for sc_class in @institute.sc_classes -%>
+    
+    <tr>
+      
+      <td><%= link_to sc_class.name, '/school/classes/'+sc_class.id.to_s+'/home' %> </td> 
+      <% for section in sc_class.sc_sections -%>
+      <td> <%= link_to 'Section '+ section.name, '/school/classes/sections/'+section.id.to_s %> </td> 
+      <% end -%>
+      <td><%= link_to 'Add Section', '/school/classes/'+sc_class.id.to_s+'/add_section' %> </td> 
+    </tr>
+  <% end -%>
+</tbody>
+
+
+
+</table>
+  
+  
+<% end -%>

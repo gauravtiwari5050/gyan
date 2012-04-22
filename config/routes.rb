@@ -194,5 +194,12 @@ GyanV1::Application.routes.draw do
   match 'library/video_content/upload' => 'library#upload_video_task'
   match 'library' => 'library#home'
 
+  match 'school' => 'school#home'
+  match 'school/users' => 'school#users_index'
+  match 'school/manage/classes' => 'school#manage_classes'
+  match 'school/classes/new' => 'school#class_new'
+  match 'school/classes/create' => 'school#class_create'
+
+
 
 end

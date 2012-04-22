@@ -88,3 +88,9 @@ $(function() {
   });
 });
 
+function go_to_section(object) {
+  var val = object.options[object.selectedIndex].value;
+  var text = object.options[object.selectedIndex].text;
+  window.location = '/school/sections/'+val+'/'+text;
+}
+

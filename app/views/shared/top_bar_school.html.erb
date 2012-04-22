@@ -1,0 +1,38 @@
+		<div class="topSec">
+			<div class="topLeft">
+				<a href="<%=get_home_for_user%>" class="logo" title="cloudclass"><img src=<%= asset_path "cloudclass-logo.png" %> alt="cloudclass" /></a>
+			</div>
+			<div class="topRight">
+				<div class="topRgtCont">
+					<p>Welcome <%= session[:user_name] %></p>
+					<ul class="topRgtLinks">
+						<li class="frist"><a href="<%= '/users/'+current_user.id.to_s+'/profile'%>" title="Profile">Profile</a></li>
+						<li><a href="/inbox" title="Inbox">Inbox</a></li>
+						<li><a href="/logout" title="Logout">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="topMiddle">
+				<div class="topMiddleLinks">
+					<ul id="menu" class="menu">
+     <li class="backbg"><a href="#" title="Manage"><span>Manage</span></a>
+      <ul>
+         <li><span><a href="/school/manage/classes" class="headingsubmenu">Classes</a></span></li>
+       </ul>
+     </li>
+    <li class="backbg"><a href="#" title="Create"><span>Create</span></a>
+      <ul>
+         <li><span><a href="/school/students/new" class="headingsubmenu">Students</a></span></li>
+         <li><span><a href="/school/teachers/new" class="headingsubmenu">Teachers</a></span></li>
+         <li><span><a href="/school/classes/new" class="headingsubmenu">Class</a></span></li>
+       </ul>
+    </li>
+						<li class="backbg1"><a href="#" title="Students"><span>Students</span></a>
+						<li class="backbg1"><a href="#" title="Attendance"><span>Attendance</span></a>
+						<li class="backbg1"><a href="#" title="Reports"><span>Reports</span></a>
+                        
+					</ul>
+				</div>
+			</div>
+			<div class="spacer"></div>
+		</div>
