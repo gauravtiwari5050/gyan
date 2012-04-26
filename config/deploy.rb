@@ -35,31 +35,21 @@ ssh_options[:auth_methods] = "publickey"
      run "cp #{production_mail_config} #{release_path}/config/initializers/setup_mail.rb"
      run "cp #{production_config} #{release_path}/config/environments/production.rb"
    end
-
+   before "deploy:update_code"  do
+    run "cd #{current_path} && rake sunspot:solr:stop RAILS_ENV=production"
+   end
    after "deploy:update_code" , "deploy:copy_database_configuration" 
+   after "deploy:update_code" do 
+    run "ln -nfs #{shared_path}/solr #{release_path}/solr"
+    run "ls -al #{release_path}/solr/pids/"
+    run "cd #{release_path} && rake sunspot:solr:start RAILS_ENV=production"
+   end
  end
 before "deploy:restart", "delayed_job:stop"
 after  "deploy:restart", "delayed_job:start"
 after "deploy:stop",  "delayed_job:stop"
 after "deploy:start", "delayed_job:start"
 
-after "deploy:stop" do
-  run "cd #{release_path}; RAILS_ENV=production rake sunspot:solr:stop"
-end
-before "deploy:start" do
-  run "cd #{release_path}; RAILS_ENV=production rake sunspot:solr:start"
-  run "cd #{release_path}; RAILS_ENV=production rake sunspot:reindex"
-end
 
-before "deploy:restart" do
-  run "cd #{release_path}; RAILS_ENV=production rake sunspot:solr:stop"
-end
-after "deploy:restart" do
-  run "cd #{release_path}; RAILS_ENV=production rake sunspot:solr:start"
-  run "cd #{release_path}; RAILS_ENV=production rake sunspot:reindex"
-end
 
-after 'deploy:update_code' do
-  run "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
-end
 
