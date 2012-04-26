@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     request.accepts.sort! { |x, y| ajax_request_types.include?(y.to_s) ? 1 : -1 } if request.xhr?
   end
 
-  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present
+  helper_method :get_all_courses_for_institute,:get_all_courses_for_teacher,:get_all_courses_for_user,:get_home_for_user,:get_user_type,:get_programs_hash_for_institute,:join_channel,:join_collaboration,:current_user,:get_current_institute,:get_user_by_user_id,:get_students_for_course,:get_instructors_for_course,:is_user_profile_complete,:get_institute_base_url,:get_course_groups_for_user,:get_department_link_for_user,:is_student_present,:get_thumbnail_from_video
 
   def md5_hash(content)
   require 'digest/md5'
@@ -657,6 +657,22 @@ class ApplicationController < ActionController::Base
     else
       return true
     end
+
+  end
+  def get_thumbnail_from_video(url)
+    logger.info 'parsing youtube url ' + url
+    #youtube videos only
+    thumbnail_url = ""
+    if !url.nil?
+      split = url.split("/")
+      if split.size != 5
+        raise 'Error parsing youtube video url'
+      end
+      youtube_id = split[4]
+      thumbnail_url = "http://img.youtube.com/vi/" + youtube_id +"/hqdefault.jpg"
+    end
+
+    return thumbnail_url
 
   end
 

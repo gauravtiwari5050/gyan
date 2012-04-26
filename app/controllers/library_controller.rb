@@ -24,5 +24,12 @@ class LibraryController < ApplicationController
   end
 
   def home
+    @content_videos = nil
+    if !params[:search].nil?
+      @search = ContentVideo.search do
+        fulltext params[:search]
+      end
+      @content_videos = @search.results
+    end
   end
 end

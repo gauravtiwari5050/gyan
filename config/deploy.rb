@@ -43,6 +43,23 @@ after  "deploy:restart", "delayed_job:start"
 after "deploy:stop",  "delayed_job:stop"
 after "deploy:start", "delayed_job:start"
 
+after "deploy:stop" do
+  run "cd #{release_path}; RAILS_ENV=production rake sunspot:solr:stop"
+end
+before "deploy:start" do
+  run "cd #{release_path}; RAILS_ENV=production rake sunspot:solr:start"
+  run "cd #{release_path}; RAILS_ENV=production rake sunspot:reindex"
+end
+
+before "deploy:restart" do
+  run "cd #{release_path}; RAILS_ENV=production rake sunspot:solr:stop"
+end
+after "deploy:restart" do
+  run "cd #{release_path}; RAILS_ENV=production rake sunspot:solr:start"
+  run "cd #{release_path}; RAILS_ENV=production rake sunspot:reindex"
+end
+
 after 'deploy:update_code' do
   run "cd #{release_path}; RAILS_ENV=production rake assets:precompile"
 end
+
