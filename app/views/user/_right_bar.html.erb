@@ -2,4 +2,7 @@
               <p>Quick Links</p>
               <ul>
                 <li><%= link_to "Send message", '/users/'+@user.id.to_s+'/message/new' %></li>
+                <% if current_user.user_type != 'STUDENT' %>
+                  <li><%= link_to "Send SMS Alert", '/users/'+@user.id.to_s+'/sms_alert/new' %></li>
+                <% end %>
               </ul>
