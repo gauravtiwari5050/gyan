@@ -169,6 +169,8 @@ GyanV1::Application.routes.draw do
   #helper routes
   match 'search/users' => 'user#search_json'
   match 'users/:user_id/profile' => 'user#profile' 
+  match 'users/:user_id/sms_alert/new' => 'user#sms_alert_new' 
+  match 'users/:user_id/sms_alert/create' => 'user#sms_alert_create' 
   match 'users/:user_id/message/new' => 'user#message_new' 
   match 'users/:user_id/message/create' => 'user#message_create' ,:via => :post 
   match 'users/:user_id/message/done' => 'user#message_done' 
@@ -176,6 +178,8 @@ GyanV1::Application.routes.draw do
   match 'users/:user_id/profile/resetpass_update' => 'user#resetpass_update' ,:via => :post 
   match 'users/:user_id/contact/edit' => 'user#edit_contact'  
   match 'users/:user_id/contact/update' => 'user#update_contact' ,:via => :put 
+  match 'users/:user_id/parent_contact/edit' => 'user#edit_parent_contact'  
+  match 'users/:user_id/parent_contact/update' => 'user#update_parent_contact' ,:via => :put 
   match 'inbox' => 'user#inbox_index'
   match 'inbox/sent' => 'user#inbox_sent_index'
   match 'inbox/compose' => 'user#inbox_compose'

@@ -1,0 +1,42 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+<h2> Edit Parent details </h2>
+<%= form_for(@parent_contact_detail,:html =>{:class => 'form-stacked',:multipart => true},:url => 'update' ,:method => :put) do |f| %>
+  <%= render :template => "shared/notices" %>
+  <%= render :template => "shared/form-errors",:locals => {:form => @parent_contact_detail} %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit 'Submit details',:class => 'btn btn-large btn-primary'%>
+  </div>
+<% end %>
+<% end -%>
+<% content_for :breadcrumb do -%>
+  <li class="active">
+   <span class="divider">/</span>
+   <i class="icon-edit"></i>
+   Edit Parent details
+  </li>
+
+  <% end -%>

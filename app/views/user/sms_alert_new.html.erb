@@ -1,0 +1,135 @@
+<% content_for :left_bar do -%>
+  <%= render 'left_bar' %>
+<% end -%>
+<% content_for :top_bar do -%>
+  <%= render :template => "shared/top_bar" %>
+<% end -%>
+<% content_for :right_bar do -%>
+  <%= render 'right_bar' %>
+<% end -%>
+<% content_for :main_content do -%>
+  <table class="table bordered">
+    <thead>
+      <th>
+        Type of Alert
+      </th>
+      <th>
+        Message
+      </th>
+    </thead>
+    <tbody>
+        <tr>
+         <td>
+          Attendance Reminder
+         </td>
+         <td>
+           Please note that your ward <%=@user.username%> has not come to school on </p>
+            </br>
+            <%= form_tag('create',:method => :put) do -%>
+            <%= text_field_tag :attendance_absent_date,nil,:class=> "datepicker" %> (Provide date)
+            </br>
+            Kindly call up the school       ( Ph no: ) and inform us the reason.
+            </br>
+            </br>
+            <%= submit_tag 'Send Reminder',:class => 'btn btn-primary'%>
+            <% end -%>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          Fees Reminder
+         </td>
+         <td>
+         Please note that a fee payment for your  ward <%=@user.username%>
+         <p>
+         </br>
+            <%= form_tag('create',:method => :put) do -%>
+              Rs <%= text_field_tag :fees_remaining_amount %> (Provide Amount)
+            </br>
+            is pending
+            </br>
+            </br>
+            <%= submit_tag 'Send Reminder',:class => 'btn btn-primary'%>
+            <% end -%>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          Exam Reminder
+         </td>
+         <td>
+            <%= form_tag('create',:method => :put) do -%>
+                 Please note that the  
+                </br>
+                </br>
+                    <%= text_field_tag :exams_name %> (Provide exam name)
+                </br>
+                </br>
+                 for your ward are going to start from 
+                </br>
+                </br>
+                  <%= text_field_tag :exam_start_date,nil,:class=> "datepicker" %> (Provide date)
+                </br>
+                </br>
+                <%= submit_tag 'Send Reminder',:class => 'btn btn-primary'%>
+             <% end -%>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          Results Reminder
+         </td>
+         <td>
+            <%= form_tag('create',:method => :put) do -%>
+              Please note that the  answer papers  for 
+              <%=collection_select(:course,:course_id,get_all_courses_for_user,:id,:name)%>
+              have been provided to the ward
+                </br>
+                </br>
+               <%= submit_tag 'Send Reminder',:class => 'btn btn-primary'%>
+           <% end -%>
+         </td>
+        </tr>
+        <tr>
+         <td>
+          Vaction Reminder
+         </td>
+         <td>
+            <%= form_tag('create',:method => :put) do -%>
+               Please note that school will remain closed on/during 
+                </br>
+                </br>
+                  <%= text_field_tag :vaction_start_date,nil,:class=> "datepicker" %> (Provide date)
+                </br>
+               to 
+                </br>
+                  <%= text_field_tag :vactation_end_date,nil,:class=> "datepicker" %> (Provide reason)
+                </br>
+               due to 
+                </br>
+                    <%= text_field_tag :vaction_reason %> (Provide exam name)
+                </br>
+                </br>
+            <%= submit_tag 'Send Reminder',:class => 'btn btn-primary'%>
+           <% end -%>
+         </td>
+        </tr>
+    </tbody>
+    </tbody>
+    </tbody>
+    </tbody>
+  </table>
+  <script>
+  $(function() {
+  $( ".datepicker" ).datepicker();
+  });
+  </script>
+<% end -%>
+<% content_for :breadcrumb do -%>
+  <li class="active">
+   <span class="divider">/</span>
+   <i class="icon-pencil"></i>
+   New Message
+  </li>
+
+  <% end -%>

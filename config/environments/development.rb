@@ -35,6 +35,9 @@ GyanV1::Application.configure do
   config.mvayoo_user = 'gaurav2gaurav@gmail.com'
   config.mvayoo_pass = 'Allahabad1!'
   config.mvayoo_id = 'TEST SMS'
+  config.sms_easy_userid = 'CLASS'
+  config.sms_easy_pass = '816Rbo92'
+  config.sms_easy_senderid = 'CCLASS'
 
   # Do not compress assets
   config.assets.compress = false

@@ -24,6 +24,11 @@ class UserController < ApplicationController
     @message.facebook = false
   end
 
+  def sms_alert_new
+    @user = User.find(:first,:conditions => {:id => params[:user_id],:institute_id => get_institute_id})
+    
+  end
+
   def message_create
     @user = User.find(:first,:conditions => {:id => params[:user_id],:institute_id => get_institute_id})
     @message = Message.new(params[:message])
@@ -42,6 +47,17 @@ class UserController < ApplicationController
     end
 
 
+  end
+
+  def sms_alert_create
+    @user = User.find(:first,:conditions => {:id => params[:user_id],:institute_id => get_institute_id})
+    logger.info params.inspect
+    if !params[:attendance_absent_date].nil?
+      
+      sms_msg = "Please note that your ward " + @user.username + " has not come to school on " + params[:attendance_absent_date] + " .Kindly call up the school ( Ph no: ) and inform us the reason."
+      logger.info sms_msg
+      Delayed::Job.enqueue(SmsAlertJob.new(sms_msg,@user.parent_contact_detail.phone))
+    end
   end
 
   def message_done
@@ -85,6 +101,15 @@ class UserController < ApplicationController
     
   end
 
+  def edit_parent_contact
+    @user = User.find(:first,:conditions => {:id => params[:user_id],:institute_id => get_institute_id})
+    @parent_contact_detail = @user.parent_contact_detail
+    if @parent_contact_detail.nil?
+      @parent_contact_detail = ParentContactDetail.new
+    end
+    
+  end
+
   def update_contact
     @user = User.find(:first,:conditions => {:id => params[:user_id],:institute_id => get_institute_id})
     @contact_detail = @user.contact_detail
@@ -101,6 +126,26 @@ class UserController < ApplicationController
         format.html{redirect_to('/users/'+@user.id.to_s+'/contact/edit', :notice => 'Contact details were successfully  updated.')}
       else
         format.html {render :action => "edit_contact"}
+      end
+    end
+    
+  end
+  def update_parent_contact
+    @user = User.find(:first,:conditions => {:id => params[:user_id],:institute_id => get_institute_id})
+    @parent_contact_detail = @user.parent_contact_detail
+    success =  true
+    if @parent_contact_detail.nil?
+      @parent_contact_detail = ParentContactDetail.new(params[:parent_contact_detail])
+      @parent_contact_detail.user_id = @user.id
+      success =  @parent_contact_detail.save
+    else
+      success = @parent_contact_detail.update_attributes(params[:parent_contact_detail]) 
+    end
+    respond_to do |format|
+      if success == true
+        format.html{redirect_to('/users/'+@user.id.to_s+'/parent_contact/edit', :notice => 'Contact details were successfully  updated.')}
+      else
+        format.html {render :action => "edit_parent_contact"}
       end
     end
     
